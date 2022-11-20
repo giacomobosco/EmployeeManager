@@ -12,13 +12,9 @@ public class Person {
         this.firstName = firstName;
         this.lastName = lastName;
 
-        if (cellNumber.matches("[0-9]+") && cellNumber.length() > 2)
-            this.cellNumber = cellNumber;
-        else
-            throw new IllegalArgumentException("Cell number must be only numbers");
+        if(checkCell(cellNumber)) this.cellNumber = cellNumber;
 
-        if (email.contains("@")) this.email = email;
-        else throw new IllegalArgumentException("Email must contains @");
+        if(checkEmail(email)) this.email = email;
     }
 
     public String getFirstName() {
@@ -38,15 +34,22 @@ public class Person {
     }
 
     public void setCellNumber(String cellNumber) {
-        if (cellNumber.matches("[0-9]+") && cellNumber.length() > 2)
-            this.cellNumber = cellNumber;
-        else
-            throw new IllegalArgumentException("Cell number must be only numbers");
+        if(checkCell(cellNumber)) this.cellNumber = cellNumber;
     }
 
     public void setEmail(String email) {
 
-        if (email.contains("@")) this.email = email;
+        if(checkEmail(email)) this.email = email;
+    }
+
+    private boolean checkEmail(String email){
+        if (email.contains("@")) return true;
         else throw new IllegalArgumentException("Email must contains @");
+    }
+
+    private boolean checkCell(String cellNumber){
+
+        if (cellNumber.matches("[0-9]+") && cellNumber.length() > 2) return true;
+        else throw new IllegalArgumentException("Cell number must be only numbers");
     }
 }

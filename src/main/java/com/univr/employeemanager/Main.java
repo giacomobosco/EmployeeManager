@@ -1,8 +1,15 @@
 package com.univr.employeemanager;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +26,8 @@ public class Main extends Application {
 
     private static Stage stage;
 
+
+
     @Override
     public void start(Stage primaryStage) throws IOException{
 
@@ -26,7 +35,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         primaryStage.setTitle("Login");
-        primaryStage.setScene(new Scene(root, 1270, 720));
+        primaryStage.setScene(new Scene(root, 300, 500));
 
 
         primaryStage.show();
@@ -36,6 +45,8 @@ public class Main extends Application {
         Parent pane = FXMLLoader.load(getClass().getResource(fxml));
         stage.getScene().setRoot(pane);
     }
+
+
 
     public static void main(String[] args) {
         launch(args);
