@@ -24,14 +24,14 @@ public class Employee extends Person {
 
     ;
 
-    private String birthPlace;
-    private Date birthDate;
-    private String address;
+    private String birthPlace = null;
+    private Date birthDate = null;
+    private String address = null;
     private TreeSet<Job> formerJobs = new TreeSet<>();
     private TreeSet<Language> spokenLanguage = new TreeSet<>();
     private TreeSet<License> licenses = new TreeSet<>();
     private Boolean car = false;
-    private Person emergency;
+    private Person emergency = null;
 
     public Employee(String firstName,
                     String lastName,

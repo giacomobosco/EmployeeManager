@@ -9,7 +9,7 @@ public class Person {
 
     public Person(String firstName, String lastName, String cellNumber, String email) {
 
-        this.firstName = firstName;
+         this.firstName = firstName;
         this.lastName = lastName;
 
         if(checkCell(cellNumber)) this.cellNumber = cellNumber;

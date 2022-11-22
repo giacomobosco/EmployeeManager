@@ -33,6 +33,7 @@
 -->
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -42,6 +43,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -49,7 +51,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.MenuController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -94,14 +96,7 @@
       <items>
         <AnchorPane>
           <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
-              <font>
-                <Font size="18.0" fx:id="x1" />
-              </font>
-              <textFill>
-                <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
-              </textFill>
-            </Label>
+                  <TextArea fx:id="textField" layoutX="10.0" layoutY="14.0" prefHeight="524.0" prefWidth="200.0" />
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
@@ -113,7 +108,8 @@
                             <TableColumn fx:id="nameField" prefWidth="75.0" text="Name" />
                             <TableColumn fx:id="jobField" prefWidth="75.0" text="Job" />
                               <TableColumn fx:id="birthDateField" prefWidth="75.0" text="Birth Date" />
-                              <TableColumn fx:id="birthPlaceField" prefWidth="75.0" text="Birth Place" />
+                              <TableColumn fx:id="birthPlaceField" prefWidth="75.0" text="Address" />
+                              <TableColumn fx:id="languageField" prefWidth="75.0" text="Language" />
                           </columns>
                         </TableView>
               </children>
@@ -122,7 +118,10 @@
         </ScrollPane>
         <AnchorPane>
           <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                  <Button fx:id="newButton" layoutX="63.0" layoutY="37.0" mnemonicParsing="false" onAction="#newButtonPress" prefHeight="27.0" prefWidth="95.0" text="New" />
+                  <Button fx:id="editButton" disable="true" layoutX="62.0" layoutY="87.0" mnemonicParsing="false" onAction="#editButtonPress" prefHeight="27.0" prefWidth="95.0" text="Edit" />
+                  <Button fx:id="deleteButton" disable="true" layoutX="63.0" layoutY="142.0" mnemonicParsing="false" onAction="#deleteButtonPress" prefHeight="27.0" prefWidth="95.0" text="Delete" />
+                  <Button fx:id="detailsButton" disable="true" layoutX="62.0" layoutY="195.0" mnemonicParsing="false" onAction="#detailsButtonPress" text="Show details" />
           </children>
         </AnchorPane>
       </items>
