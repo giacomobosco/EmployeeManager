@@ -22,6 +22,8 @@ public class MenuController {
     @FXML
     private TableColumn nameField, jobField, birthDateField, birthPlaceField, languageField;
 
+    public MenuController(){}
+
     @FXML
     protected void newButtonPress(ActionEvent e) throws IOException {
         Date date = new Date(13, 2, 2000);

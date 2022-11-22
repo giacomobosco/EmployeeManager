@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="533.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.EmployeeController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="399.0" prefWidth="639.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6f3ff" height="323.0" layoutX="361.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" width="519.0" />
+            <TextField fx:id="cellNumberField" layoutX="13.0" layoutY="105.0" prefHeight="27.0" prefWidth="218.0" promptText="Cell Number" />
+            <TextField fx:id="emailField" layoutX="14.0" layoutY="147.0" prefHeight="27.0" prefWidth="218.0" promptText="Email" />
+            <TextField fx:id="birthPlaceField" layoutX="14.0" layoutY="190.0" prefHeight="27.0" prefWidth="218.0" promptText="Birth Place" />
+            <DatePicker fx:id="birthDateField" layoutX="14.0" layoutY="232.0" prefHeight="27.0" prefWidth="218.0" promptText="Birth Date" />
+            <TextField fx:id="addressField" layoutX="14.0" layoutY="272.0" prefHeight="27.0" prefWidth="218.0" promptText="Address" />
+            <ComboBox fx:id="spokenLanguageSelector" layoutX="14.0" layoutY="327.0" prefHeight="27.0" prefWidth="167.0" promptText="Spoken Languages" />
+            <Button fx:id="spokenLanguageAddButton" layoutX="189.0" layoutY="327.0" mnemonicParsing="false" onAction="#SpokenLanguageAddButtonPress" text="Add" />
+            <TextField fx:id="firstNameField" layoutX="14.0" layoutY="18.0" prefHeight="27.0" prefWidth="218.0" promptText="First Name" />
+            <TextField fx:id="lastNameField" layoutX="14.0" layoutY="63.0" prefHeight="27.0" prefWidth="218.0" promptText="Last Name" />
+            <ListView fx:id="spokenLanguageDisplay" layoutX="13.0" layoutY="365.0" prefHeight="115.0" prefWidth="298.0" />
+            <Button fx:id="spokenLanguageRemoveButton" layoutX="239.0" layoutY="327.0" mnemonicParsing="false" onAction="#SpokenLanguageRemoveButtonPress" text="Remove" />
+            <CheckBox fx:id="hasCar" layoutX="261.0" layoutY="194.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Has Car" />
+            <VBox layoutX="261.0" layoutY="18.0" prefHeight="156.0" prefWidth="100.0">
+               <children>
+                  <Label text="Licenses" />
+                  <CheckBox fx:id="licenseA" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="A" />
+                  <CheckBox fx:id="licenseB" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="B" />
+                  <CheckBox fx:id="licenseC" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="C" />
+                  <CheckBox fx:id="licenseD" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="D" />
+                  <CheckBox fx:id="licenseE" layoutX="10.0" layoutY="67.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="E" />
+               </children>
+            </VBox>
+            <AnchorPane layoutX="370.0" layoutY="18.0" prefHeight="306.0" prefWidth="506.0">
+               <children>
+                  <Button fx:id="addJobButton" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#AddJobButtonPress" text="Add Job" />
+                  <Button fx:id="removeJobButton" layoutX="402.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveJobButtonPress" text="Remove Job" />
+                  <TableView layoutX="18.0" layoutY="53.0" prefHeight="245.0" prefWidth="474.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="Tasks" />
+                      <TableColumn prefWidth="75.0" text="Begin" />
+                        <TableColumn prefWidth="75.0" text="End" />
+                        <TableColumn prefWidth="75.0" text="Company name" />
+                        <TableColumn prefWidth="75.0" text="Daily pay" />
+                        <TableColumn prefWidth="75.0" text="Job Place" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="26.0" layoutY="12.0" prefHeight="5.0" prefWidth="52.0" text="Jobs">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <TextField fx:id="EmergencyFirstNameField" layoutX="391.0" layoutY="381.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency First Name" />
+            <TextField fx:id="EmergencyLastNameField" layoutX="391.0" layoutY="432.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Last Name" />
+            <TextField fx:id="EmergencyCellNumberField" layoutX="641.0" layoutY="381.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Cell Number" />
+            <TextField fx:id="EmergencyEmailField" layoutX="641.0" layoutY="432.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Email" />
+            <Label layoutX="413.0" layoutY="351.0" prefHeight="18.0" prefWidth="125.0" text="Emergency person" />
+      </children>
+    </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="cancelButton" layoutX="815.0" layoutY="13.0" mnemonicParsing="false" onAction="#CancelButtonPress" text="Cancel" />
+            <Button fx:id="saveButton" layoutX="743.0" layoutY="13.0" mnemonicParsing="false" onAction="#SaveButtonPress" text="Save" />
+            <Label fx:id="errorField" layoutX="12.0" layoutY="17.0" prefHeight="18.0" prefWidth="671.0" textFill="RED" />
+         </children>
+      </AnchorPane>
+  </children>
+</VBox>

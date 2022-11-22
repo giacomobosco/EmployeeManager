@@ -14,15 +14,11 @@ public class Employee extends Person {
         PORTOGUESE,
         JAPANESE,
         GERMAN
-    }
-
-    ;
+    };
 
     enum License {
-        A, B, C, D, E
-    }
-
-    ;
+        A, B, C, D, E, NONE
+    };
 
     private String birthPlace = null;
     private Date birthDate = null;
