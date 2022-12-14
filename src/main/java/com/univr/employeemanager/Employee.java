@@ -1,5 +1,9 @@
 package com.univr.employeemanager;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.*;
 
 public class Employee extends Person {
@@ -21,8 +25,9 @@ public class Employee extends Person {
     };
 
     private String birthPlace = null;
-    private Date birthDate = null;
-    private String address = null;
+    private Date birthDate;
+    private SimpleStringProperty birthDateString;
+    private SimpleStringProperty address;
     private TreeSet<Job> formerJobs = new TreeSet<>();
     private TreeSet<Language> spokenLanguage = new TreeSet<>();
     private TreeSet<License> licenses = new TreeSet<>();
@@ -42,7 +47,8 @@ public class Employee extends Person {
         super(firstName, lastName, cellNumber, email);
         this.birthPlace = birthPlace;
         this.birthDate = birthDate;
-        this.address = address;
+        this.birthDateString = new SimpleStringProperty(this.birthDate.toString());
+        this.address = new SimpleStringProperty(address);
         this.car = car;
         this.emergency = emergency;
     }
@@ -56,7 +62,11 @@ public class Employee extends Person {
     }
 
     public String getAddress() {
-        return address;
+        return address.get();
+    }
+
+    public String getBirthDateString() {
+        return birthDateString.get();
     }
 
     public TreeSet<Job> getFormerJobs() {
@@ -84,11 +94,12 @@ public class Employee extends Person {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address.set(address);
     }
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+        this.birthDateString.set(birthDate.toString());
     }
 
     public void setFormerJob(Job formerJob) {

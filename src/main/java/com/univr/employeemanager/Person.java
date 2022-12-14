@@ -1,45 +1,47 @@
 package com.univr.employeemanager;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Person {
 
-    private String firstName;
-    private String lastName;
-    private String cellNumber = null;
-    private String email;
+    private SimpleStringProperty firstName;
+    private SimpleStringProperty lastName;
+    private SimpleStringProperty cellNumber = null;
+    private SimpleStringProperty email;
 
     public Person(String firstName, String lastName, String cellNumber, String email) {
 
-         this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
 
-        if(checkCell(cellNumber)) this.cellNumber = cellNumber;
+        if(checkCell(cellNumber)) this.cellNumber = new SimpleStringProperty(cellNumber);
 
-        if(checkEmail(email)) this.email = email;
+        if(checkEmail(email)) this.email = new SimpleStringProperty(email);
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstName.get();
     }
 
     public String getLastName() {
-        return lastName;
+        return lastName.get();
     }
 
     public String getCellNumber() {
-        return cellNumber;
+        return cellNumber.get();
     }
 
     public String getEmail() {
-        return email;
+        return email.get();
     }
 
     public void setCellNumber(String cellNumber) {
-        if(checkCell(cellNumber)) this.cellNumber = cellNumber;
+        if(checkCell(cellNumber)) this.cellNumber.set(cellNumber);
     }
 
     public void setEmail(String email) {
 
-        if(checkEmail(email)) this.email = email;
+        if(checkEmail(email)) this.email.set(email);
     }
 
     private boolean checkEmail(String email){

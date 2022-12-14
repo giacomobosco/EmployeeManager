@@ -106,10 +106,10 @@
                         <TableView fx:id="mainTable" layoutX="6.0" layoutY="-2.0" prefHeight="546.0" prefWidth="443.0">
                           <columns>
                             <TableColumn fx:id="nameField" prefWidth="75.0" text="Name" />
-                            <TableColumn fx:id="jobField" prefWidth="75.0" text="Job" />
-                              <TableColumn fx:id="birthDateField" prefWidth="75.0" text="Birth Date" />
-                              <TableColumn fx:id="birthPlaceField" prefWidth="75.0" text="Address" />
-                              <TableColumn fx:id="languageField" prefWidth="75.0" text="Language" />
+                            <TableColumn fx:id="lastNameField" prefWidth="75.0" text="Last Name" />
+                            <TableColumn fx:id="birthDateField" prefWidth="75.0" text="Birth Date" />
+                            <TableColumn fx:id="addressField" prefWidth="75.0" text="Address" />
+                            <TableColumn fx:id="cellNumberField" prefWidth="75.0" text="Cell Number" />
                           </columns>
                         </TableView>
               </children>

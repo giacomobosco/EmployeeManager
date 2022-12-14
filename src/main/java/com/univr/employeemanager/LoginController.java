@@ -31,7 +31,7 @@ public class LoginController {
         display.setTextFill(Color.rgb(255,0,0));
         if(username.getText().isBlank() || password.getText().isBlank())
             display.setText("Username o password vuoti");
-        if (username.getText().equals("user") && password.getText().equals("password")){
+        if (username.getText().equals("") && password.getText().equals("")){
             Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);

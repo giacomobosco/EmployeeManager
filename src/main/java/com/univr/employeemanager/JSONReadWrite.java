@@ -1,9 +1,9 @@
 package com.univr.employeemanager;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,42 +12,51 @@ import java.util.TreeSet;
 
 public class JSONReadWrite {
 
-    private Gson gson;
+    private final Gson gson;
+    private FileWriter fileWriter = null;
+    private FileReader fileReader = null;
+    private final String path;
 
-    public JSONReadWrite(){
-        gson = new Gson();
-    };
+    public JSONReadWrite(String filePath){
 
-    public void write(Person person) throws IOException {
+        gson = new GsonBuilder().serializeNulls().create();
+        this.path = filePath;
+    }
 
-        FileWriter fileWriter = new FileWriter("src/main/java/com/univr/employeemanager/data.json");
-        gson.toJson(person, fileWriter);
+    public void write(Employee person) throws IOException {
+
+        TreeSet<Employee> previousSet = readSet();
+
+        previousSet.add(person);
+
+        fileWriter = new FileWriter(path);
+        gson.toJson(previousSet, fileWriter);
         fileWriter.close();
     }
 
-    public void write(TreeSet<Person> people) throws IOException {
-        FileWriter fileWriter = new FileWriter("src/main/java/com/univr/employeemanager/data.json");
-        gson.toJson(people, fileWriter);
+    public void write(TreeSet<Employee> people) throws IOException {
+
+        TreeSet<Employee> previousSet = readSet();
+
+        previousSet.addAll(people);
+
+        fileWriter = new FileWriter(path);
+        gson.toJson(previousSet, fileWriter);
         fileWriter.close();
     }
 
-    public Person read() throws IOException {
+    public TreeSet<Employee> readSet() throws IOException {
 
-        FileReader fileReader = new FileReader("src/main/java/com/univr/employeemanager/data.json");
-        Person person = gson.fromJson(fileReader, Person.class);
-        fileReader.close();
-        return person;
-    }
-
-    public TreeSet<Person> readSet() throws IOException {
-        FileReader fileReader = new FileReader("src/main/java/com/univr/employeemanager/data.json");
-
-        Type type = new TypeToken<TreeSet<Person>>() {
+        fileReader = new FileReader(path);
+        Type type = new TypeToken<TreeSet<Employee>>() {
         }.getType();
 
-        TreeSet<Person> result = gson.fromJson(fileReader, type);
+        TreeSet<Employee> result = gson.fromJson(fileReader, type);
 
         fileReader.close();
+
+        if(result == null)
+            result = new TreeSet<>();
 
         return result;
     }
