@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.TreeSet;
 
-public class JSONReadWrite {
+public class JSONReadWrite{
 
     private final Gson gson;
     private FileWriter fileWriter = null;
@@ -23,22 +23,22 @@ public class JSONReadWrite {
         this.path = filePath;
     }
 
-    public void write(Employee person) throws IOException {
+    public void write(Employee employee) throws IOException {
 
         TreeSet<Employee> previousSet = readSet();
 
-        previousSet.add(person);
+        previousSet.add(employee);
 
         fileWriter = new FileWriter(path);
         gson.toJson(previousSet, fileWriter);
         fileWriter.close();
     }
 
-    public void write(TreeSet<Employee> people) throws IOException {
+    public void write(TreeSet<Employee> employees) throws IOException {
 
         TreeSet<Employee> previousSet = readSet();
 
-        previousSet.addAll(people);
+        previousSet.addAll(employees);
 
         fileWriter = new FileWriter(path);
         gson.toJson(previousSet, fileWriter);
