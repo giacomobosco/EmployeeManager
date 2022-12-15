@@ -45,6 +45,21 @@ public class JSONReadWrite {
         fileWriter.close();
     }
 
+    public void remove(Employee employee) throws IOException {
+        TreeSet<Employee> previousSet = readSet();
+
+        previousSet.remove(employee);
+
+        fileWriter = new FileWriter(path);
+        gson.toJson(previousSet, fileWriter);
+        fileWriter.close();
+    }
+
+    public void eraseJSON() throws IOException {
+        fileWriter = new FileWriter(path);
+        fileWriter.close();
+    }
+
     public TreeSet<Employee> readSet() throws IOException {
 
         fileReader = new FileReader(path);

@@ -2,47 +2,47 @@ package com.univr.employeemanager;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Person {
+public class Person implements Comparable<Person>{
 
-    private SimpleStringProperty firstName;
-    private SimpleStringProperty lastName;
-    private SimpleStringProperty cellNumber = null;
-    private SimpleStringProperty email;
+    private String firstName;
+    private String lastName;
+    private String cellNumber = null;
+    private String email;
 
     public Person(String firstName, String lastName, String cellNumber, String email) {
 
-        if(checkName(firstName)) this.firstName = new SimpleStringProperty(firstName);
+        if(checkName(firstName)) this.firstName = firstName;
 
-        if(checkName(lastName)) this.lastName = new SimpleStringProperty(lastName);
+        if(checkName(lastName)) this.lastName = lastName;
 
-        if(checkCell(cellNumber)) this.cellNumber = new SimpleStringProperty(cellNumber);
+        if(checkCell(cellNumber)) this.cellNumber = cellNumber;
 
-        if(checkEmail(email)) this.email = new SimpleStringProperty(email);
+        if(checkEmail(email)) this.email = email;
     }
 
     public String getFirstName() {
-        return firstName.get();
+        return firstName;
     }
 
     public String getLastName() {
-        return lastName.get();
+        return lastName;
     }
 
     public String getCellNumber() {
-        return cellNumber.get();
+        return cellNumber;
     }
 
     public String getEmail() {
-        return email.get();
+        return email;
     }
 
     public void setCellNumber(String cellNumber) {
-        if(checkCell(cellNumber)) this.cellNumber.set(cellNumber);
+        if(checkCell(cellNumber)) this.cellNumber = cellNumber;
     }
 
     public void setEmail(String email) {
 
-        if(checkEmail(email)) this.email.set(email);
+        if(checkEmail(email)) this.email = email;
     }
 
     private boolean checkEmail(String email){
@@ -59,5 +59,14 @@ public class Person {
     private boolean checkName(String name){
         if (name.matches("[a-zA-Z]+") && name.length() > 0) return true;
         else throw new IllegalArgumentException("Name must contain only alphabets");
+    }
+
+    @Override
+    public int compareTo(Person person) {
+
+        int ret = this.lastName.compareTo(person.lastName);
+        if (ret == 0)
+            ret = this.firstName.compareTo(person.firstName);
+        return ret;
     }
 }

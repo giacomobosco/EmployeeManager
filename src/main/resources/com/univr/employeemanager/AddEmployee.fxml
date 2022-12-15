@@ -77,9 +77,9 @@
                <children>
                   <Button fx:id="addJobButton" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#AddJobButtonPress" text="Add Job" />
                   <Button fx:id="removeJobButton" layoutX="402.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveJobButtonPress" text="Remove Job" />
-                  <TableView layoutX="18.0" layoutY="53.0" prefHeight="245.0" prefWidth="474.0">
+                  <TableView fx:id="jobTable" layoutX="18.0" layoutY="53.0" prefHeight="245.0" prefWidth="474.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Tasks" />
+                      <TableColumn fx:id="taskColoumn" prefWidth="75.0" text="Tasks" />
                       <TableColumn prefWidth="75.0" text="Begin" />
                         <TableColumn prefWidth="75.0" text="End" />
                         <TableColumn prefWidth="75.0" text="Company name" />
