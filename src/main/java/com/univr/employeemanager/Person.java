@@ -11,8 +11,9 @@ public class Person {
 
     public Person(String firstName, String lastName, String cellNumber, String email) {
 
-        this.firstName = new SimpleStringProperty(firstName);
-        this.lastName = new SimpleStringProperty(lastName);
+        if(checkName(firstName)) this.firstName = new SimpleStringProperty(firstName);
+
+        if(checkName(lastName)) this.lastName = new SimpleStringProperty(lastName);
 
         if(checkCell(cellNumber)) this.cellNumber = new SimpleStringProperty(cellNumber);
 
@@ -53,5 +54,10 @@ public class Person {
 
         if (cellNumber.matches("[0-9]+") && cellNumber.length() > 2) return true;
         else throw new IllegalArgumentException("Cell number must be only numbers");
+    }
+
+    private boolean checkName(String name){
+        if (name.matches("[a-zA-Z]+") && name.length() > 0) return true;
+        else throw new IllegalArgumentException("Name must contain only alphabets");
     }
 }
