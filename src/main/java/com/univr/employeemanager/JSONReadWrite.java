@@ -25,7 +25,7 @@ public class JSONReadWrite{
 
     public void write(Employee employee) throws IOException {
 
-        TreeSet<Employee> previousSet = readSet();
+        TreeSet<Employee> previousSet = readJSON();
 
         previousSet.add(employee);
 
@@ -36,7 +36,7 @@ public class JSONReadWrite{
 
     public void write(TreeSet<Employee> employees) throws IOException {
 
-        TreeSet<Employee> previousSet = readSet();
+        TreeSet<Employee> previousSet = readJSON();
 
         previousSet.addAll(employees);
 
@@ -46,7 +46,8 @@ public class JSONReadWrite{
     }
 
     public void remove(Employee employee) throws IOException {
-        TreeSet<Employee> previousSet = readSet();
+
+        TreeSet<Employee> previousSet = readJSON();
 
         previousSet.remove(employee);
 
@@ -56,11 +57,12 @@ public class JSONReadWrite{
     }
 
     public void eraseJSON() throws IOException {
+
         fileWriter = new FileWriter(path);
         fileWriter.close();
     }
 
-    public TreeSet<Employee> readSet() throws IOException {
+    public TreeSet<Employee> readJSON() throws IOException {
 
         fileReader = new FileReader(path);
         Type type = new TypeToken<TreeSet<Employee>>() {
