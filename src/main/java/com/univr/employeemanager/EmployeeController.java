@@ -36,15 +36,42 @@ public class EmployeeController{
     JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
     public EmployeeController() throws IOException {
+
     }
 
-    public void updateField(Employee e)
+    public void updateField(Employee e,boolean b)
     {
         cellNumberField.setText(e.getCellNumber());
         emailField.setText(e.getEmail());
         birthPlaceField.setText(e.getBirthplace());
         firstNameField.setText(e.getFirstName());
         lastNameField.setText(e.getLastName());
+
+        if(e.getFormerJobs()!=null)
+        {
+
+
+        }
+
+        if(!b)
+        {
+            cellNumberField.setDisable(true);
+            emailField.setDisable(true);
+            birthDateField.setDisable(true);
+            firstNameField.setDisable(true);
+            lastNameField.setDisable(true);
+            saveButton.setDisable(true);
+        }
+        else
+        {
+            cellNumberField.setDisable(false);
+            emailField.setDisable(false);
+            birthDateField.setDisable(false);
+            firstNameField.setDisable(false);
+            lastNameField.setDisable(false);
+            saveButton.setDisable(false);
+
+        }
     }
 
     public void SpokenLanguageAddButtonPress(ActionEvent actionEvent) {
