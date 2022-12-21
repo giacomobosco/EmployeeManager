@@ -1,8 +1,11 @@
 package com.univr.employeemanager;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,27 +22,71 @@ import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class MenuController implements Initializable {
+public class MenuController implements Initializable,EventHandler<ActionEvent> {
 
     @FXML
     private Button newButton, editButton, deleteButton, detailsButton;
     @FXML
     private TextArea textField;
     @FXML
-    private TableColumn <Employee, String> addressField, nameField, lastNameField, birthDateField, cellNumberField;
+    private TableColumn nameField, lastNameField, birthDateField, cellNumberField, addressField;
     @FXML
     private TableView<Employee> mainTable;
-    @FXML
-    private Label display;
+
     private ObservableList<Employee> people;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     private JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
-    private JSONReadWrite temp = new JSONReadWrite("src/main/java/com/univr/employeemanager/temp.json");
-    public MenuController() {
+    @FXML
+    protected void newButtonPress(ActionEvent e) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    protected void editButtonPress(ActionEvent e) throws IOException{
+
+        Employee employee=mainTable.getSelectionModel().getSelectedItem();
+        System.out.print(employee);
+
+        if(employee!=null)
+        {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
+            root=loader.load();
+
+            EmployeeController scena=loader.getController();
+            scena.updateField(employee);
+
+
+            stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
+
+    }
+    @FXML
+    protected void deleteButtonPress(ActionEvent e){
+    }
+    @FXML
+    protected void detailsButtonPress(ActionEvent e){
+
+
+    }
+
+    public void textAreaClicked(MouseEvent mouseEvent) {
+        mainTable.getSelectionModel().clearSelection();
+        detailsButton.setDisable(true);
+        deleteButton.setDisable(true);
+        editButton.setDisable(true);
     }
 
     @Override
@@ -49,29 +96,20 @@ public class MenuController implements Initializable {
         deleteButton.setDisable(true);
         editButton.setDisable(true);
 
-        mainTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue!=null)
-            {
-                System.out.print("evento tabella click\n");
-                detailsButton.setDisable(false);
-                deleteButton.setDisable(false);
-                editButton.setDisable(false);
-            }
+       mainTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+           if(newValue!=null)
+           {
+               System.out.print("evento tabella click\n");
+               detailsButton.setDisable(false);
+               deleteButton.setDisable(false);
+               editButton.setDisable(false);
+           }
 
-        });
+       });
 
-        try {
-            Employee manto1 = new Employee("Franci", "Manto", "a casa sua", new Date(100, 7, 16), "casa sua", "@", "234", false, new Person("Giacomo", "Bosco", "478294", "a@b"));
-
-            manto1.setSpokenLanguage(Employee.Language.ITALIAN);
-            manto1.setSpokenLanguage(Employee.Language.ENGLISH);
-
-            data.write(manto1);
-            Employee manto2 = new Employee("Franci", "Mano", "a casa sua", new Date(100, 7, 16), "casa sua", "@", "234", true,null);
-            data.write(manto2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        people = FXCollections.observableArrayList(
+                new Employee("Franci", "Manto", "a casa sua", new Date(100, 7, 16), "casa sua", "@", "234", null,null),
+                new Employee("dio", "povero", "a casa mia", new Date(2000, 7, 16), "casa sua", "@fr", "234", null,null));
 
         nameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         lastNameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
@@ -79,84 +117,16 @@ public class MenuController implements Initializable {
         cellNumberField.setCellValueFactory(new PropertyValueFactory<Employee, String>("cellNumber"));
         addressField.setCellValueFactory(new PropertyValueFactory<Employee, String>("address"));
 
-        try {
-            updateTable();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
-    public void textAreaClicked(MouseEvent mouseEvent) {
-        mainTable.getSelectionModel().clearSelection();
-        detailsButton.setDisable(true);
-        deleteButton.setDisable(true);
-        editButton.setDisable(true);
-    }
-
-    @FXML
-    protected void newButtonPress(ActionEvent e) throws IOException {
-
-        temp.eraseJSON();
-
-        Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-    }
-    @FXML
-    protected void editButtonPress(ActionEvent e) throws IOException {
-
-        Employee selected = mainTable.getSelectionModel().getSelectedItem();
-
-        if(selected != null)
-        {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
-            root = loader.load();
-
-            EmployeeController employeeController = loader.getController();
-            employeeController.updateField(selected);
-
-            stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-
-    }
-    @FXML
-    protected void deleteButtonPress(ActionEvent e) throws IOException {
-
-        Employee selected = mainTable.getSelectionModel().getSelectedItem();
-        if (selected != null){
-            //il messaggio di errore viene rimosso
-            display.setVisible(false);
-
-            data.remove(selected);
-            updateTable();
-        }
-    }
-    @FXML
-    protected void detailsButtonPress(ActionEvent e) throws IOException {
-
-        Employee selected = mainTable.getSelectionModel().getSelectedItem();
-
-        if (selected != null){
-            temp.eraseJSON();
-            temp.write(selected);
-            Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
-            stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-    }
-
-    private void updateTable() throws IOException {
-
-        people = FXCollections.observableArrayList(data.readJSON());
         mainTable.setItems(people);
+
+
     }
+
+    @Override
+    public void handle(ActionEvent actionEvent) {
+
+    }
+
+
+
 }

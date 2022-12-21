@@ -51,9 +51,20 @@ public class JSONReadWrite{
 
         previousSet.addAll(employees);
 
-        fileWriter = new FileWriter(path);
-        gson.toJson(previousSet, fileWriter);
-        fileWriter.close();
+        fileReader=new FileReader(path);
+        char[] buffer=new char[100];
+
+        if(fileReader.read(buffer)==-1)                            //se il file json è vuoto
+        {
+            fileWriter = new FileWriter(path);
+            gson.toJson(previousSet, fileWriter);
+            fileWriter.close();
+        }
+        else
+        {
+
+        }
+
     }
 
     public void remove(Employee employee) throws IOException {
