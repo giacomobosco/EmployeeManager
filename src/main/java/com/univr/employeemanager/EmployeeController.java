@@ -107,11 +107,12 @@ public class EmployeeController{
     public void SaveButtonPress(ActionEvent actionEvent) throws IOException {
 
         errorField.setText("");
+
         boolean exceptions = false;
         Employee person = null;
 
         try{
-                    person = new Employee(
+            person = new Employee(
                     firstNameField.getText(),
                     lastNameField.getText(),
                     birthPlaceField.getText(),
@@ -125,9 +126,9 @@ public class EmployeeController{
                             emergencyCellNumberField.getText(),
                             emergencyEmailField.getText()));
 
-                    LocalDate localDate = birthDateField.getValue();
-                    Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-                    person.setBirthDate(Date.from(instant));
+            LocalDate localDate = birthDateField.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            person.setBirthDate(Date.from(instant));
 
         } catch (IllegalArgumentException e){
             errorField.setText(e.getMessage());
