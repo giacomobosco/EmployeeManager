@@ -34,10 +34,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -56,14 +54,10 @@
             <TextField fx:id="birthPlaceField" layoutX="14.0" layoutY="190.0" prefHeight="27.0" prefWidth="218.0" promptText="Birth Place" />
             <DatePicker fx:id="birthDateField" layoutX="14.0" layoutY="232.0" prefHeight="27.0" prefWidth="218.0" promptText="Birth Date" />
             <TextField fx:id="addressField" layoutX="14.0" layoutY="272.0" prefHeight="27.0" prefWidth="218.0" promptText="Address" />
-            <ComboBox fx:id="spokenLanguageSelector" layoutX="14.0" layoutY="327.0" prefHeight="27.0" prefWidth="167.0" promptText="Spoken Languages" />
-            <Button fx:id="spokenLanguageAddButton" layoutX="189.0" layoutY="327.0" mnemonicParsing="false" onAction="#SpokenLanguageAddButtonPress" text="Add" />
             <TextField fx:id="firstNameField" layoutX="14.0" layoutY="18.0" prefHeight="27.0" prefWidth="218.0" promptText="First Name" />
             <TextField fx:id="lastNameField" layoutX="14.0" layoutY="63.0" prefHeight="27.0" prefWidth="218.0" promptText="Last Name" />
-            <ListView fx:id="spokenLanguageDisplay" layoutX="13.0" layoutY="365.0" prefHeight="115.0" prefWidth="298.0" />
-            <Button fx:id="spokenLanguageRemoveButton" layoutX="239.0" layoutY="327.0" mnemonicParsing="false" onAction="#SpokenLanguageRemoveButtonPress" text="Remove" />
-            <CheckBox fx:id="hasCar" layoutX="261.0" layoutY="194.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Has Car" />
-            <VBox layoutX="261.0" layoutY="18.0" prefHeight="156.0" prefWidth="100.0">
+            <CheckBox fx:id="hasCar" layoutX="261.0" layoutY="194.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Has car?" />
+            <VBox layoutX="261.0" layoutY="18.0" prefHeight="131.0" prefWidth="100.0">
                <children>
                   <Label text="Licenses" />
                   <CheckBox fx:id="licenseA" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="A" />
@@ -77,9 +71,9 @@
                <children>
                   <Button fx:id="addJobButton" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#AddJobButtonPress" text="Add Job" />
                   <Button fx:id="removeJobButton" layoutX="402.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveJobButtonPress" text="Remove Job" />
-                  <TableView layoutX="18.0" layoutY="53.0" prefHeight="245.0" prefWidth="474.0">
+                  <TableView fx:id="jobTable" layoutX="18.0" layoutY="53.0" prefHeight="245.0" prefWidth="474.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Tasks" />
+                      <TableColumn fx:id="taskColoumn" prefWidth="75.0" text="Tasks" />
                       <TableColumn prefWidth="75.0" text="Begin" />
                         <TableColumn prefWidth="75.0" text="End" />
                         <TableColumn prefWidth="75.0" text="Company name" />
@@ -94,11 +88,29 @@
                   </Label>
                </children>
             </AnchorPane>
-            <TextField fx:id="EmergencyFirstNameField" layoutX="391.0" layoutY="381.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency First Name" />
-            <TextField fx:id="EmergencyLastNameField" layoutX="391.0" layoutY="432.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Last Name" />
-            <TextField fx:id="EmergencyCellNumberField" layoutX="641.0" layoutY="381.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Cell Number" />
-            <TextField fx:id="EmergencyEmailField" layoutX="641.0" layoutY="432.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Email" />
+            <TextField fx:id="emergencyFirstNameField" layoutX="391.0" layoutY="381.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency First Name" />
+            <TextField fx:id="emergencyLastNameField" layoutX="391.0" layoutY="432.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Last Name" />
+            <TextField fx:id="emergencyCellNumberField" layoutX="641.0" layoutY="381.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Cell Number" />
+            <TextField fx:id="emergencyEmailField" layoutX="641.0" layoutY="432.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Email" />
             <Label layoutX="413.0" layoutY="351.0" prefHeight="18.0" prefWidth="125.0" text="Emergency person" />
+            <VBox layoutX="22.0" layoutY="315.0" prefHeight="134.0" prefWidth="100.0">
+               <children>
+                  <Label text="Languages" />
+                  <CheckBox fx:id="italian" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Italian" />
+                  <CheckBox fx:id="english" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="English" />
+                  <CheckBox fx:id="french" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="French" />
+                  <CheckBox fx:id="spanish" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Spanish" />
+                  <CheckBox fx:id="arabic" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Arabic" />
+               </children>
+            </VBox>
+            <VBox layoutX="131.0" layoutY="331.0" prefHeight="104.0" prefWidth="100.0">
+               <children>
+                  <CheckBox fx:id="chinese" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Chinese" />
+                  <CheckBox fx:id="portoguese" mnemonicParsing="false" prefHeight="19.0" prefWidth="94.0" text="Portoguese" />
+                  <CheckBox fx:id="japanese" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Japanese" />
+                  <CheckBox fx:id="german" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="German" />
+               </children>
+            </VBox>
       </children>
     </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">

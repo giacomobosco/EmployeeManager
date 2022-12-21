@@ -1,6 +1,9 @@
 package com.univr.employeemanager;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Employee extends Person {
@@ -23,8 +26,8 @@ public class Employee extends Person {
 
     private String birthPlace = null;
     private Date birthDate;
-    private SimpleStringProperty birthDateString;
-    private SimpleStringProperty address;
+    private String birthDateString;
+    private String address;
     private TreeSet<Job> formerJobs = new TreeSet<>();
     private TreeSet<Language> spokenLanguage = new TreeSet<>();
     private TreeSet<License> licenses = new TreeSet<>();
@@ -44,8 +47,10 @@ public class Employee extends Person {
         super(firstName, lastName, cellNumber, email);
         this.birthPlace = birthPlace;
         this.birthDate = birthDate;
-        this.birthDateString = new SimpleStringProperty(this.birthDate.toString());
-        this.address = new SimpleStringProperty(address);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        this.birthDateString = formatter.format(birthDate);
+        System.out.println(birthDateString);
+        this.address = address;
         this.car = car;
         this.emergency = emergency;
     }
@@ -59,11 +64,11 @@ public class Employee extends Person {
     }
 
     public String getAddress() {
-        return address.get();
+        return address;
     }
 
     public String getBirthDateString() {
-        return birthDateString.get();
+        return birthDateString;
     }
 
     public TreeSet<Job> getFormerJobs() {
@@ -91,12 +96,13 @@ public class Employee extends Person {
     }
 
     public void setAddress(String address) {
-        this.address.set(address);
+        this.address = address;
     }
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-        this.birthDateString.set(birthDate.toString());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        this.birthDateString = formatter.format(birthDate);
     }
 
     public void setFormerJob(Job formerJob) {
