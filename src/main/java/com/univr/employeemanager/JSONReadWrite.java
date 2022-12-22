@@ -29,20 +29,9 @@ public class JSONReadWrite{
 
         previousSet.add(employee);
 
-        fileReader=new FileReader(path);
-        char[] buffer=new char[100];
-
-        if(fileReader.read(buffer)==-1)                            //se il file json è vuoto
-        {
-            fileWriter = new FileWriter(path);
-            gson.toJson(previousSet, fileWriter);
-            fileWriter.close();
-        }
-        else
-        {
-
-        }
-
+        fileWriter = new FileWriter(path);
+        gson.toJson(previousSet, fileWriter);
+        fileWriter.close();
     }
 
     public void write(TreeSet<Employee> employees) throws IOException {

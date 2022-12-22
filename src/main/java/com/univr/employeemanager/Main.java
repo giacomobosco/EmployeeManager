@@ -2,9 +2,6 @@ package com.univr.employeemanager;
 
 import javafx.application.Application;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -43,6 +40,4 @@ public class Main extends Application {
         launch(args);
 
     }
-
-
 }
