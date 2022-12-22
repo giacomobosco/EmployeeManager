@@ -23,6 +23,13 @@ public class LoginController {
     private Stage stage;
     private Scene scene;
 
+    /**
+     * It checks if the username and password fields are empty, if they are it displays an error message, if they aren't it
+     * checks if the username and password are correct, if they are it loads the next scene, if they aren't it displays an
+     * error message
+     *
+     * @param e the event that triggered the method
+     */
     @FXML
     protected void loginButtonPress(ActionEvent e) throws IOException {
         display.setTextFill(Color.rgb(255,0,0));

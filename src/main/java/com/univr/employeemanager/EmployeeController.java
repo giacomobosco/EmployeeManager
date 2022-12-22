@@ -132,6 +132,11 @@ public class EmployeeController implements Initializable {
 
     }
 
+    /**
+     * When the Add Job button is pressed, the AddJob.fxml file is loaded and the scene is changed to the AddJob.fxml file
+     *
+     * @param actionEvent This is the event that is triggered when the button is pressed.
+     */
     @FXML
     public void AddJobButtonPress(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddJob.fxml"));
@@ -145,6 +150,13 @@ public class EmployeeController implements Initializable {
     public void RemoveJobButtonPress(ActionEvent actionEvent) {
     }
 
+    /**
+     * When the Cancel button is pressed, the scene is changed to the Menu scene
+     *
+     * @param actionEvent This is the event that is triggered when the button is pressed.
+     */
+    // The above code is the controller for the AddEmployee.fxml file. It is the code that is executed when the user
+    // presses the Save or Cancel buttons.
     @FXML
     public void CancelButtonPress(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));

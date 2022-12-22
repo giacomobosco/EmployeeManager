@@ -40,6 +40,12 @@ public class MenuController implements Initializable {
     public MenuController() {
     }
 
+    /**
+     * It initializes the table and the buttons, and it sets the listeners for the table
+     *
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resource bundle that was specified in the FXML file.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -84,6 +90,11 @@ public class MenuController implements Initializable {
         }
     }
 
+    /**
+     * When the user clicks on the text area, the selection in the table is cleared, and the buttons are disabled
+     *
+     * @param mouseEvent The mouse event that triggered the method.
+     */
     @FXML
     public void textAreaClicked(MouseEvent mouseEvent) {
         mainTable.getSelectionModel().clearSelection();
@@ -92,6 +103,11 @@ public class MenuController implements Initializable {
         editButton.setDisable(true);
     }
 
+    /**
+     * It loads the AddEmployee.fxml file into the scene, and then sets the scene to the stage
+     *
+     * @param e The event that triggered the method.
+     */
     @FXML
     protected void newButtonPress(ActionEvent e) throws IOException {
 
@@ -102,6 +118,12 @@ public class MenuController implements Initializable {
         stage.show();
 
     }
+    /**
+     * It loads the AddEmployee.fxml file, gets the controller for that file, and then calls the updateField function in
+     * the controller, passing in the selected employee and a boolean value
+     *
+     * @param e The event that triggered the method.
+     */
     @FXML
     protected void editButtonPress(ActionEvent e) throws IOException {
 
@@ -122,6 +144,11 @@ public class MenuController implements Initializable {
         }
 
     }
+    /**
+     * It deletes the selected employee from the table
+     *
+     * @param e the event that triggered the method
+     */
     @FXML
     protected void deleteButtonPress(ActionEvent e) throws IOException {
 
@@ -134,6 +161,12 @@ public class MenuController implements Initializable {
             updateTable();
         }
     }
+    /**
+     * When the details button is pressed, the selected employee is passed to the AddEmployeeController, which then updates
+     * the fields in the AddEmployee.fxml file
+     *
+     * @param e The event that triggered the method.
+     */
     @FXML
     protected void detailsButtonPress(ActionEvent e) throws IOException {
 

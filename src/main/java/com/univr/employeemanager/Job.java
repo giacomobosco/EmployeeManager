@@ -12,6 +12,7 @@ public class Job implements Comparable<Job>{
     private String jobPlace;
     private Integer dailyPay;
 
+    // A constructor.
     public Job(Date begin, Date end, String companyName, ArrayList<String> tasks, String jobPlace, Integer dailyPay) {
         this.begin = begin;
 
@@ -24,6 +25,7 @@ public class Job implements Comparable<Job>{
         this.dailyPay = dailyPay;
     }
 
+    // A constructor that calls another constructor.
     public Job(Date begin, Date end, String companyName, String job, String jobPlace, Integer dailyPay){
         this(begin, end, companyName, new ArrayList<String>(), jobPlace, dailyPay);
         this.tasks.add(job);
