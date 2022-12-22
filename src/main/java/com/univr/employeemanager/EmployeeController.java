@@ -113,6 +113,7 @@ public class EmployeeController implements Initializable {
         //disabilito o no i campi e il tasto salva
         if(editable==true)
         {
+
             saveButton.setDisable(false);
             saveButton.setDisable(false);
             cellNumberField.setDisable(false);
