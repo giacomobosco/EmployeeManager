@@ -19,7 +19,7 @@ public class JSONReadWrite{
 
     public JSONReadWrite(String filePath){
 
-        gson = new GsonBuilder().serializeNulls().create();
+        gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         this.path = filePath;
     }
 

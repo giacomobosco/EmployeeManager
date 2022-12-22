@@ -49,7 +49,7 @@ public class Employee extends Person {
         this.birthDate = birthDate;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         this.birthDateString = formatter.format(birthDate);
-        System.out.println(birthDateString);
+        //System.out.println(birthDateString);
         this.address = address;
         this.car = car;
         this.emergency = emergency;
@@ -107,8 +107,8 @@ public class Employee extends Person {
 
     public void setFormerJob(Job formerJob) {
 
-        if (formerJob.getBegin().compareTo(birthDate) < 0)
-            throw new IllegalArgumentException("Job begin date is grater then birth date");
+       // if (formerJob.getBegin().compareTo(birthDate) < 0)
+         //   throw new IllegalArgumentException("Job begin date is grater then birth date");
         this.formerJobs.add(formerJob);
 
     }

@@ -23,11 +23,10 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EmployeeController implements Initializable {
-
     @FXML
-    public TableView jobTable;
+    private TableView<Job> jobTable;
     @FXML
-    public Label errorField;
+    private Label errorField;
     @FXML
     private TextField firstNameField, lastNameField, addressField, birthPlaceField, emailField, cellNumberField, emergencyEmailField, emergencyCellNumberField, emergencyLastNameField, emergencyFirstNameField;
     @FXML
@@ -42,7 +41,6 @@ public class EmployeeController implements Initializable {
     @FXML
     private TableColumn<Job, Date> beginField;
 
-    private ObservableList<Job> jobs;
     private Employee previousEmployee = null;
     private Stage stage;
     private Scene scene;
@@ -55,8 +53,10 @@ public class EmployeeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
-        beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+        //taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
+        //beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+        companyField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
+        jobPlaceField.setCellValueFactory(new PropertyValueFactory<Job,String>("jobPlace"));
 
     }
 
@@ -100,7 +100,7 @@ public class EmployeeController implements Initializable {
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
-        jobs = FXCollections.observableArrayList(e.getFormerJobs());
+        ObservableList<Job> jobs = FXCollections.observableArrayList(e.getFormerJobs());
         System.out.print("\n"+e.getFormerJobs().toString());
         jobTable.setItems(jobs);
 
