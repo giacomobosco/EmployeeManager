@@ -25,8 +25,9 @@ import java.util.ResourceBundle;
 public class EmployeeController implements Initializable {
 
     @FXML
+    public TableView jobTable;
+    @FXML
     public Label errorField;
-
     @FXML
     private TextField firstNameField, lastNameField, addressField, birthPlaceField, emailField, cellNumberField, emergencyEmailField, emergencyCellNumberField, emergencyLastNameField, emergencyFirstNameField;
     @FXML
@@ -41,14 +42,11 @@ public class EmployeeController implements Initializable {
     @FXML
     private TableColumn<Job, Date> beginField;
 
-    @FXML
-    public TableView<Job> jobTable;
-
-
     private ObservableList<Job> jobs;
     private Employee previousEmployee = null;
     private Stage stage;
     private Scene scene;
+
 
     JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
@@ -62,7 +60,7 @@ public class EmployeeController implements Initializable {
 
     }
 
-    public void updateField(Employee e,boolean editable) {
+    public void updateField(Employee e, boolean editable) {
 
         previousEmployee = e;
 
@@ -102,18 +100,14 @@ public class EmployeeController implements Initializable {
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
-        jobs=FXCollections.observableArrayList(e.getFormerJobs());
+        jobs = FXCollections.observableArrayList(e.getFormerJobs());
         System.out.print("\n"+e.getFormerJobs().toString());
         jobTable.setItems(jobs);
-
-
-
 
         //se sono arrivato a questa finestra tramite detailButton o tramite editButton
         //disabilito o no i campi e il tasto salva
         if(editable==true)
         {
-
             saveButton.setDisable(false);
             saveButton.setDisable(false);
             cellNumberField.setDisable(false);
@@ -187,6 +181,22 @@ public class EmployeeController implements Initializable {
             Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
             person.setBirthDate(Date.from(instant));
 
+            if(italian.isSelected()) person.setSpokenLanguage(Employee.Language.ITALIAN);
+            if(english.isSelected()) person.setSpokenLanguage(Employee.Language.ENGLISH);
+            if(french.isSelected()) person.setSpokenLanguage(Employee.Language.FRENCH);
+            if(spanish.isSelected()) person.setSpokenLanguage(Employee.Language.SPANISH);
+            if(portoguese.isSelected()) person.setSpokenLanguage(Employee.Language.PORTOGUESE);
+            if(arabic.isSelected()) person.setSpokenLanguage(Employee.Language.ARABIC);
+            if(chinese.isSelected()) person.setSpokenLanguage(Employee.Language.CHINESE);
+            if(japanese.isSelected()) person.setSpokenLanguage(Employee.Language.JAPANESE);
+            if(german.isSelected()) person.setSpokenLanguage(Employee.Language.GERMAN);
+
+            if(licenseA.isSelected()) person.setLicense(Employee.License.A);
+            if(licenseB.isSelected()) person.setLicense(Employee.License.B);
+            if(licenseC.isSelected()) person.setLicense(Employee.License.C);
+            if(licenseD.isSelected()) person.setLicense(Employee.License.D);
+            if(licenseE.isSelected()) person.setLicense(Employee.License.E);
+
         } catch (IllegalArgumentException e){
             errorField.setText(e.getMessage());
             exceptions = true;
@@ -203,6 +213,4 @@ public class EmployeeController implements Initializable {
             }
         }
     }
-
-
 }
