@@ -1,7 +1,6 @@
 module com.univr.employeemanager {
     requires javafx.controls;
     requires javafx.fxml;
-    requires json;
     requires com.google.gson;
 
 
