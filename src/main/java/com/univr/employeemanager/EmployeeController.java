@@ -130,6 +130,22 @@ public class EmployeeController{
             Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
             person.setBirthDate(Date.from(instant));
 
+            if(italian.isSelected()) person.setSpokenLanguage(Employee.Language.ITALIAN);
+            if(english.isSelected()) person.setSpokenLanguage(Employee.Language.ENGLISH);
+            if(french.isSelected()) person.setSpokenLanguage(Employee.Language.FRENCH);
+            if(spanish.isSelected()) person.setSpokenLanguage(Employee.Language.SPANISH);
+            if(portoguese.isSelected()) person.setSpokenLanguage(Employee.Language.PORTOGUESE);
+            if(arabic.isSelected()) person.setSpokenLanguage(Employee.Language.ARABIC);
+            if(chinese.isSelected()) person.setSpokenLanguage(Employee.Language.CHINESE);
+            if(japanese.isSelected()) person.setSpokenLanguage(Employee.Language.JAPANESE);
+            if(german.isSelected()) person.setSpokenLanguage(Employee.Language.GERMAN);
+
+            if(licenseA.isSelected()) person.setLicense(Employee.License.A);
+            if(licenseB.isSelected()) person.setLicense(Employee.License.B);
+            if(licenseC.isSelected()) person.setLicense(Employee.License.C);
+            if(licenseD.isSelected()) person.setLicense(Employee.License.D);
+            if(licenseE.isSelected()) person.setLicense(Employee.License.E);
+
         } catch (IllegalArgumentException e){
             errorField.setText(e.getMessage());
             exceptions = true;
