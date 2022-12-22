@@ -19,7 +19,7 @@ public class JSONReadWrite{
 
     public JSONReadWrite(String filePath){
 
-        gson = new GsonBuilder().serializeNulls().create();
+        gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();     //cosi il file non è solo su 1 riga
         this.path = filePath;
     }
 
@@ -31,34 +31,6 @@ public class JSONReadWrite{
 
         fileWriter = new FileWriter(path);
         gson.toJson(previousSet, fileWriter);
-        fileWriter.close();
-    }
-
-    public void write(TreeSet<Employee> employees) throws IOException {
-
-        TreeSet<Employee> previousSet = readJSON();
-
-        previousSet.addAll(employees);
-
-        fileWriter = new FileWriter(path);
-        gson.toJson(previousSet, fileWriter);
-        fileWriter.close();
-    }
-
-    public void remove(Employee employee) throws IOException {
-
-        TreeSet<Employee> previousSet = readJSON();
-
-        previousSet.remove(employee);
-
-        fileWriter = new FileWriter(path);
-        gson.toJson(previousSet, fileWriter);
-        fileWriter.close();
-    }
-
-    public void eraseJSON() throws IOException {
-
-        fileWriter = new FileWriter(path);
         fileWriter.close();
     }
 
@@ -77,5 +49,35 @@ public class JSONReadWrite{
 
         return result;
     }
+
+    /*public void write(TreeSet<Employee> employees) throws IOException {
+
+        TreeSet<Employee> previousSet = readJSON();
+
+        previousSet.addAll(employees);
+
+        fileWriter = new FileWriter(path);
+        gson.toJson(previousSet, fileWriter);
+        fileWriter.close();
+    }*/
+
+    public void remove(Employee employee) throws IOException {
+
+        TreeSet<Employee> previousSet = readJSON();
+
+        previousSet.remove(employee);
+
+        fileWriter = new FileWriter(path);
+        gson.toJson(previousSet, fileWriter);
+        fileWriter.close();
+    }
+
+    public void eraseJSON() throws IOException {
+
+        fileWriter = new FileWriter(path);
+        fileWriter.close();
+    }
+
+
 
 }

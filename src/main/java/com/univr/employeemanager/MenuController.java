@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -61,10 +62,21 @@ public class MenuController implements Initializable {
         });
 
         try {
-            Employee manto1 = new Employee("Franci", "Manto", "a casa sua", new Date(100, 7, 16), "casa sua", "@", "234", false, new Person("Giacomo", "Bosco", "478294", "a@b"));
+            Employee manto1 = new Employee("Franci", "Manto", "a casa sua", new Date(1999, 7, 16), "casa sua", "@", "234", false,
+                    new Person("Giacomo", "Bosco", "478294", "a@b"));
+
+            try{
+                Job job1= new Job(new Date(2000,4,1),new Date(2001,3,3),"adicom","lavoro","casa",100);
+                manto1.setFormerJob(job1);
+            }
+            catch (IllegalArgumentException e)
+            {
+                System.out.print("non settato");
+            }
 
             manto1.setSpokenLanguage(Employee.Language.ITALIAN);
             manto1.setSpokenLanguage(Employee.Language.ENGLISH);
+
 
             data.write(manto1);
             Employee manto2 = new Employee("Franci", "Mano", "a casa sua", new Date(100, 7, 16), "casa sua", "@", "234", true,null);
@@ -117,7 +129,7 @@ public class MenuController implements Initializable {
             root = loader.load();
 
             EmployeeController employeeController = loader.getController();
-            employeeController.updateField(selected);
+            employeeController.updateField(selected,true);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -132,7 +144,7 @@ public class MenuController implements Initializable {
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
         if (selected != null){
             //il messaggio di errore viene rimosso
-            display.setVisible(false);
+            //display.setVisible(false);
 
             data.remove(selected);
             updateTable();
@@ -143,15 +155,21 @@ public class MenuController implements Initializable {
 
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
 
-        if (selected != null){
-            temp.eraseJSON();
-            temp.write(selected);
-            Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
+        if(selected != null)
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
+            root = loader.load();
+
+            EmployeeController employeeController = loader.getController();
+            employeeController.updateField(selected,false);
+
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         }
+
+
     }
 
     private void updateTable() throws IOException {

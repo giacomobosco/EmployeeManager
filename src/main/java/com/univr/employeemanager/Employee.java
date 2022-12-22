@@ -72,7 +72,10 @@ public class Employee extends Person {
     }
 
     public TreeSet<Job> getFormerJobs() {
+
+        System.out.print("\nemployee 76"+formerJobs.toString());
         return formerJobs;
+
     }
 
     public TreeSet<Language> getSpokenLanguage() {
@@ -107,8 +110,9 @@ public class Employee extends Person {
 
     public void setFormerJob(Job formerJob) {
 
+
         if (formerJob.getBegin().compareTo(birthDate) < 0)
-            throw new IllegalArgumentException("Job begin date is grater then birth date");
+            throw new IllegalArgumentException("Job begin date is grater than birth date");
         this.formerJobs.add(formerJob);
 
     }

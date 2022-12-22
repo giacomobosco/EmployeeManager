@@ -44,7 +44,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="533.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.EmployeeController">
+<VBox prefHeight="533.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.EmployeeController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="399.0" prefWidth="639.0" VBox.vgrow="ALWAYS">
       <children>
@@ -73,12 +73,12 @@
                   <Button fx:id="removeJobButton" layoutX="402.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveJobButtonPress" text="Remove Job" />
                   <TableView fx:id="jobTable" layoutX="18.0" layoutY="53.0" prefHeight="245.0" prefWidth="474.0">
                     <columns>
-                      <TableColumn fx:id="taskColoumn" prefWidth="75.0" text="Tasks" />
-                      <TableColumn prefWidth="75.0" text="Begin" />
-                        <TableColumn prefWidth="75.0" text="End" />
-                        <TableColumn prefWidth="75.0" text="Company name" />
-                        <TableColumn prefWidth="75.0" text="Daily pay" />
-                        <TableColumn prefWidth="75.0" text="Job Place" />
+                      <TableColumn fx:id="taskField" prefWidth="75.0" text="Tasks" />
+                      <TableColumn fx:id="beginField" prefWidth="75.0" text="Begin" />
+                        <TableColumn fx:id="endField" prefWidth="75.0" text="End" />
+                        <TableColumn fx:id="companyField" prefWidth="75.0" text="Company name" />
+                        <TableColumn fx:id="payField" prefWidth="75.0" text="Daily pay" />
+                        <TableColumn fx:id="jobPlaceField" prefWidth="75.0" text="Job Place" />
                     </columns>
                   </TableView>
                   <Label layoutX="26.0" layoutY="12.0" prefHeight="5.0" prefWidth="52.0" text="Jobs">
