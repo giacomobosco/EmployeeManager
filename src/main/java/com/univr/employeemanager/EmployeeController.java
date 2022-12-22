@@ -1,22 +1,28 @@
 package com.univr.employeemanager;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.ResourceBundle;
 
-public class EmployeeController{
+public class EmployeeController implements Initializable {
 
     @FXML
     public TableView jobTable;
@@ -31,16 +37,30 @@ public class EmployeeController{
     @FXML
     private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
 
+    @FXML
+    private TableColumn<Job,String> taskField,endField,companyField,payField,jobPlaceField;
+    @FXML
+    private TableColumn<Job, Date> beginField;
+
+    private ObservableList<Job> jobs;
     private Employee previousEmployee = null;
     private Stage stage;
     private Scene scene;
+
 
     JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
     public EmployeeController() throws IOException {
     }
 
-    public void updateField(Employee e) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
+        beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+
+    }
+
+    public void updateField(Employee e, boolean editable) {
 
         previousEmployee = e;
 
@@ -79,6 +99,37 @@ public class EmployeeController{
         licenseC.setSelected(e.getLicenses().contains(Employee.License.C));
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
+
+        jobs = FXCollections.observableArrayList(e.getFormerJobs());
+        System.out.print("\n"+e.getFormerJobs().toString());
+        jobTable.setItems(jobs);
+
+        //se sono arrivato a questa finestra tramite detailButton o tramite editButton
+        //disabilito o no i campi e il tasto salva
+        if(editable==true)
+        {
+            saveButton.setDisable(false);
+            saveButton.setDisable(false);
+            cellNumberField.setDisable(false);
+            emailField.setDisable(false);
+            birthPlaceField.setDisable(false);
+            birthDateField.setDisable(false);
+            addressField.setDisable(false);
+            firstNameField.setDisable(false);
+            lastNameField.setDisable(false);
+        }
+        else
+        {
+            saveButton.setDisable(true);
+            cellNumberField.setDisable(true);
+            emailField.setDisable(true);
+            birthPlaceField.setDisable(true);
+            birthDateField.setDisable(true);
+            addressField.setDisable(true);
+            firstNameField.setDisable(true);
+            lastNameField.setDisable(true);
+        }
+
     }
 
     @FXML

@@ -123,11 +123,6 @@ public class Employee extends Person {
         this.spokenLanguage.add(spokenLanguage);
     }
 
-    public void removeLicense(License license) {
-
-        this.licenses.remove(license);
-    }
-
     public void setLicense(License license) {
 
         this.licenses.add(license);

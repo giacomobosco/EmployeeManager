@@ -32,13 +32,11 @@ public class MenuController implements Initializable {
     @FXML
     private Label display;
     private ObservableList<Employee> people;
-
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     private JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
-    private JSONReadWrite temp = new JSONReadWrite("src/main/java/com/univr/employeemanager/temp.json");
+
     public MenuController() {
     }
 
@@ -97,8 +95,6 @@ public class MenuController implements Initializable {
     @FXML
     protected void newButtonPress(ActionEvent e) throws IOException {
 
-        temp.eraseJSON();
-
         Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -117,7 +113,7 @@ public class MenuController implements Initializable {
             root = loader.load();
 
             EmployeeController employeeController = loader.getController();
-            employeeController.updateField(selected);
+            employeeController.updateField(selected, true);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -144,9 +140,13 @@ public class MenuController implements Initializable {
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
 
         if (selected != null){
-            temp.eraseJSON();
-            temp.write(selected);
-            Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
+            root = loader.load();
+
+            EmployeeController employeeController = loader.getController();
+            employeeController.updateField(selected,false);
+
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
