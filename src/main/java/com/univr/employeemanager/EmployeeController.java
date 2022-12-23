@@ -37,9 +37,17 @@ public class EmployeeController implements Initializable {
     private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
 
     @FXML
-    private TableColumn<Job,String> taskField,endField,companyField,payField,jobPlaceField;
+    private TableColumn<Job,String> taskField;
     @FXML
-    private TableColumn<Job, Date> beginField;
+    private TableColumn<Job, CustomDate> endField;
+    @FXML
+    private TableColumn<Job,String> companyField;
+    @FXML
+    private TableColumn<Job, Integer> payField;
+    @FXML
+    private TableColumn<Job,String> jobPlaceField;
+    @FXML
+    private TableColumn<Job, CustomDate> beginField;
 
     private Employee previousEmployee = null;
     private Stage stage;
@@ -53,10 +61,12 @@ public class EmployeeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
-        //beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+        taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
+        beginField.setCellValueFactory(new PropertyValueFactory<Job,CustomDate>("begin"));
+        endField.setCellValueFactory(new PropertyValueFactory<Job,CustomDate>("end"));
         companyField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
         jobPlaceField.setCellValueFactory(new PropertyValueFactory<Job,String>("jobPlace"));
+        payField.setCellValueFactory(new PropertyValueFactory<Job,Integer>("DailyPay"));
 
     }
 
@@ -101,7 +111,8 @@ public class EmployeeController implements Initializable {
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
         ObservableList<Job> jobs = FXCollections.observableArrayList(e.getFormerJobs());
-        System.out.print("\n"+e.getFormerJobs().toString());
+
+       // System.out.print("\nemployee controller: "+e.getFormerJobs().toString());
         jobTable.setItems(jobs);
 
         //se sono arrivato a questa finestra tramite detailButton o tramite editButton

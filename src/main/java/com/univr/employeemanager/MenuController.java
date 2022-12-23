@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -59,21 +60,25 @@ public class MenuController implements Initializable {
         });
 
         try {
-            Employee manto1 = new Employee("Franci", "Manto", "a casa sua",
-                    new Date(2005, 7, 16), "casa sua", "@", "234", false,
+            Employee manto1 = new Employee("frenci", "Manto", "a casa sua",
+                    new Date((2000-1900), 7, 16), "casa sua", "@", "234", false,
                     new Person("Giacomo", "Bosco", "478294", "a@b"));
 
             manto1.setSpokenLanguage(Employee.Language.ITALIAN);
             manto1.setSpokenLanguage(Employee.Language.ENGLISH);
 
-            Job g1=new Job(new Date(1999,2,2),new Date(2001,3,3),
+            Job g1=new Job(new Date((2003-1900),2,2),new Date((2006-1900),3,3),
                     "adcom","idraulico","qui",110);
 
+            Job g2=new Job(new Date((2004-1900),2,2),new Date((2007-1900),3,3),
+                    "cazzi","idraulico","qui",110);
+
             manto1.setFormerJob(g1);
+            manto1.setFormerJob(g2);
 
             data.write(manto1);
             Employee manto2 = new Employee("Franci", "bosco", "a casa sua",
-                    new Date(100, 5, 16), "casa sua", "@", "234", true,null);
+                    new Date((1000-1900), 5, 16), "casa sua", "@", "234", true,null);
             data.write(manto2);
         } catch (IOException e) {
             throw new RuntimeException(e);

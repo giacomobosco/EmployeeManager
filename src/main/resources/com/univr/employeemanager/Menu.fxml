@@ -51,7 +51,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.MenuController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.MenuController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -97,6 +97,7 @@
                 <AnchorPane>
                     <children>
                         <TextArea fx:id="textField" layoutX="10.0" layoutY="14.0" onMouseClicked="#textAreaClicked" prefHeight="524.0" prefWidth="200.0" />
+                  <Label fx:id="display" layoutX="96.0" layoutY="498.0" text="Label" />
                     </children>
                 </AnchorPane>
                 <ScrollPane prefHeight="-1.0" prefWidth="-1.0">

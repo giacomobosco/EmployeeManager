@@ -107,9 +107,11 @@ public class Employee extends Person {
 
     public void setFormerJob(Job formerJob) {
 
-       // if (formerJob.getBegin().compareTo(birthDate) < 0)
-         //   throw new IllegalArgumentException("Job begin date is grater then birth date");
-        this.formerJobs.add(formerJob);
+        if (formerJob.getBegin().compareTo(birthDate) < 0)
+            throw new IllegalArgumentException("Job begin date is grater then birth date");
+
+        if(!this.formerJobs.add(formerJob))
+            System.out.print("\nsetFormerJob: job not added");
 
     }
 

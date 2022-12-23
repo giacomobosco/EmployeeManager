@@ -27,7 +27,10 @@ public class JSONReadWrite{
 
         TreeSet<Employee> previousSet = readJSON();
 
-        previousSet.add(employee);
+        if(!previousSet.add(employee))
+        {
+            System.out.print("\njson write: employee not added");
+        }
 
         fileWriter = new FileWriter(path);
         gson.toJson(previousSet, fileWriter);
