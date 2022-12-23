@@ -61,12 +61,12 @@ public class EmployeeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
+        taskField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         beginField.setCellValueFactory(new PropertyValueFactory<Job,CustomDate>("begin"));
         endField.setCellValueFactory(new PropertyValueFactory<Job,CustomDate>("end"));
-        companyField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
-        jobPlaceField.setCellValueFactory(new PropertyValueFactory<Job,String>("jobPlace"));
-        payField.setCellValueFactory(new PropertyValueFactory<Job,Integer>("DailyPay"));
+        companyField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
+        jobPlaceField.setCellValueFactory(new PropertyValueFactory<>("jobPlace"));
+        payField.setCellValueFactory(new PropertyValueFactory<>("DailyPay"));
 
     }
 

@@ -32,7 +32,6 @@ public class MenuController implements Initializable {
     private TableView<Employee> mainTable;
     @FXML
     private Label display;
-    private ObservableList<Employee> people;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -59,36 +58,13 @@ public class MenuController implements Initializable {
 
         });
 
-        try {
-            Employee manto1 = new Employee("frenci", "Manto", "a casa sua",
-                    new Date((2000-1900), 7, 16), "casa sua", "@", "234", false,
-                    new Person("Giacomo", "Bosco", "478294", "a@b"));
 
-            manto1.setSpokenLanguage(Employee.Language.ITALIAN);
-            manto1.setSpokenLanguage(Employee.Language.ENGLISH);
 
-            Job g1=new Job(new Date((2003-1900),2,2),new Date((2006-1900),3,3),
-                    "adcom","idraulico","qui",110);
-
-            Job g2=new Job(new Date((2004-1900),2,2),new Date((2007-1900),3,3),
-                    "cazzi","idraulico","qui",110);
-
-            manto1.setFormerJob(g1);
-            manto1.setFormerJob(g2);
-
-            data.write(manto1);
-            Employee manto2 = new Employee("Franci", "bosco", "a casa sua",
-                    new Date((1000-1900), 5, 16), "casa sua", "@", "234", true,null);
-            data.write(manto2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        nameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
-        lastNameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        birthDateField.setCellValueFactory(new PropertyValueFactory<Employee, String>("birthDateString"));
-        cellNumberField.setCellValueFactory(new PropertyValueFactory<Employee, String>("cellNumber"));
-        addressField.setCellValueFactory(new PropertyValueFactory<Employee, String>("address"));
+        nameField.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameField.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        birthDateField.setCellValueFactory(new PropertyValueFactory<>("birthDateString"));
+        cellNumberField.setCellValueFactory(new PropertyValueFactory<>("cellNumber"));
+        addressField.setCellValueFactory(new PropertyValueFactory<>("address"));
 
         try {
             updateTable();
@@ -169,7 +145,7 @@ public class MenuController implements Initializable {
 
     private void updateTable() throws IOException {
 
-        people = FXCollections.observableArrayList(data.readJSON());
+        ObservableList<Employee> people = FXCollections.observableArrayList(data.readJSON());
         mainTable.setItems(people);
     }
 }
