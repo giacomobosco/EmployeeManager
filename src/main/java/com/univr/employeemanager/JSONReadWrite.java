@@ -19,7 +19,7 @@ public class JSONReadWrite{
 
     public JSONReadWrite(String filePath){
 
-        gson = new GsonBuilder().serializeNulls().create();
+        gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         this.path = filePath;
     }
 
@@ -32,7 +32,10 @@ public class JSONReadWrite{
 
         TreeSet<Employee> previousSet = readJSON();
 
-        previousSet.add(employee);
+        if(!previousSet.add(employee))
+        {
+            System.out.print("\njson write: employee not added");
+        }
 
         fileWriter = new FileWriter(path);
         gson.toJson(previousSet, fileWriter);
@@ -50,9 +53,20 @@ public class JSONReadWrite{
 
         previousSet.addAll(employees);
 
-        fileWriter = new FileWriter(path);
-        gson.toJson(previousSet, fileWriter);
-        fileWriter.close();
+        fileReader=new FileReader(path);
+        char[] buffer=new char[100];
+
+        if(fileReader.read(buffer)==-1)                            //se il file json è vuoto
+        {
+            fileWriter = new FileWriter(path);
+            gson.toJson(previousSet, fileWriter);
+            fileWriter.close();
+        }
+        else
+        {
+
+        }
+
     }
 
     /**

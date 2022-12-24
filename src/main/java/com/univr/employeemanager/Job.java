@@ -1,9 +1,10 @@
 package com.univr.employeemanager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Job implements Comparable<Job>{
+public class Job implements Comparable<Job> {
 
     private Date begin;
     private Date end;
@@ -12,11 +13,10 @@ public class Job implements Comparable<Job>{
     private String jobPlace;
     private Integer dailyPay;
 
-    // A constructor.
     public Job(Date begin, Date end, String companyName, ArrayList<String> tasks, String jobPlace, Integer dailyPay) {
         this.begin = begin;
 
-        if(this.begin.compareTo(end) < 0) this.end = end;
+        if (this.begin.compareTo(end) < 0) this.end = end;
         else throw new IllegalArgumentException("End date must be after begin date");
 
         this.companyName = companyName;
@@ -25,8 +25,7 @@ public class Job implements Comparable<Job>{
         this.dailyPay = dailyPay;
     }
 
-    // A constructor that calls another constructor.
-    public Job(Date begin, Date end, String companyName, String job, String jobPlace, Integer dailyPay){
+    public Job(Date begin, Date end, String companyName, String job, String jobPlace, Integer dailyPay) {
         this(begin, end, companyName, new ArrayList<String>(), jobPlace, dailyPay);
         this.tasks.add(job);
     }
@@ -44,11 +43,10 @@ public class Job implements Comparable<Job>{
     }
 
     public Integer getDuration() {
-        if(end != null) {
-            Integer duration = (int)(end.getTime() - begin.getTime());
+        if (end != null) {
+            Integer duration = (int) (end.getTime() - begin.getTime());
             return duration;
-        }
-        else return -1;
+        } else return -1;
     }
 
     public String getCompanyName() {
@@ -69,7 +67,7 @@ public class Job implements Comparable<Job>{
 
     public void setEnd(Date end) {
 
-        if(this.begin.compareTo(end) > 0) throw new IllegalArgumentException("End date must be after begin date");
+        if (this.begin.compareTo(end) > 0) throw new IllegalArgumentException("End date must be after begin date");
         this.end = end;
     }
 
@@ -78,7 +76,7 @@ public class Job implements Comparable<Job>{
     }
 
     public void setDailyPay(Integer dailyPay) {
-        if(dailyPay < 0) throw new IllegalArgumentException("daily pay must be greater or equal to 0");
+        if (dailyPay < 0) throw new IllegalArgumentException("daily pay must be greater or equal to 0");
         this.dailyPay = dailyPay;
     }
 
@@ -94,6 +92,20 @@ public class Job implements Comparable<Job>{
 
     @Override
     public int compareTo(Job job) {
-        return this.begin.compareTo(job.begin);
+        if(this.begin.compareTo(job.begin)!=0)
+            return this.begin.compareTo(job.begin);
+        else
+            return this.companyName.compareTo(job.companyName);
+    }
+}
+
+class CustomDate extends java.sql.Date {
+
+    public CustomDate(long date) {
+        super(date);
+    }
+    @Override
+    public String toString() {
+        return new SimpleDateFormat("dd/MM/yyyy").format(this);
     }
 }

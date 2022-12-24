@@ -23,11 +23,10 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EmployeeController implements Initializable {
-
     @FXML
-    public TableView jobTable;
+    private TableView<Job> jobTable;
     @FXML
-    public Label errorField;
+    private Label errorField;
     @FXML
     private TextField firstNameField, lastNameField, addressField, birthPlaceField, emailField, cellNumberField, emergencyEmailField, emergencyCellNumberField, emergencyLastNameField, emergencyFirstNameField;
     @FXML
@@ -38,11 +37,18 @@ public class EmployeeController implements Initializable {
     private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
 
     @FXML
-    private TableColumn<Job,String> taskField,endField,companyField,payField,jobPlaceField;
+    private TableColumn<Job,String> taskField;
     @FXML
-    private TableColumn<Job, Date> beginField;
+    private TableColumn<Job, CustomDate> endField;
+    @FXML
+    private TableColumn<Job,String> companyField;
+    @FXML
+    private TableColumn<Job, Integer> payField;
+    @FXML
+    private TableColumn<Job,String> jobPlaceField;
+    @FXML
+    private TableColumn<Job, CustomDate> beginField;
 
-    private ObservableList<Job> jobs;
     private Employee previousEmployee = null;
     private Stage stage;
     private Scene scene;
@@ -55,8 +61,12 @@ public class EmployeeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
-        //beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+        taskField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
+        beginField.setCellValueFactory(new PropertyValueFactory<Job,CustomDate>("begin"));
+        endField.setCellValueFactory(new PropertyValueFactory<Job,CustomDate>("end"));
+        companyField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
+        jobPlaceField.setCellValueFactory(new PropertyValueFactory<>("jobPlace"));
+        payField.setCellValueFactory(new PropertyValueFactory<>("DailyPay"));
 
     }
 
@@ -100,8 +110,9 @@ public class EmployeeController implements Initializable {
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
-        jobs = FXCollections.observableArrayList(e.getFormerJobs());
-        System.out.print("\n"+e.getFormerJobs().toString());
+        ObservableList<Job> jobs = FXCollections.observableArrayList(e.getFormerJobs());
+
+       // System.out.print("\nemployee controller: "+e.getFormerJobs().toString());
         jobTable.setItems(jobs);
 
         //se sono arrivato a questa finestra tramite detailButton o tramite editButton
@@ -132,11 +143,6 @@ public class EmployeeController implements Initializable {
 
     }
 
-    /**
-     * When the Add Job button is pressed, the AddJob.fxml file is loaded and the scene is changed to the AddJob.fxml file
-     *
-     * @param actionEvent This is the event that is triggered when the button is pressed.
-     */
     @FXML
     public void AddJobButtonPress(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddJob.fxml"));
@@ -150,13 +156,6 @@ public class EmployeeController implements Initializable {
     public void RemoveJobButtonPress(ActionEvent actionEvent) {
     }
 
-    /**
-     * When the Cancel button is pressed, the scene is changed to the Menu scene
-     *
-     * @param actionEvent This is the event that is triggered when the button is pressed.
-     */
-    // The above code is the controller for the AddEmployee.fxml file. It is the code that is executed when the user
-    // presses the Save or Cancel buttons.
     @FXML
     public void CancelButtonPress(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
