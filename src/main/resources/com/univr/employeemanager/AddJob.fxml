@@ -48,7 +48,7 @@
                <children>
                   <Button fx:id="addTaskButton" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#AddTaskButtonPress" text="Add Task" />
                   <Button fx:id="removeTaskButton" layoutX="402.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveTaskButtonPress" text="Remove Task" />
-                  <TableView layoutX="18.0" layoutY="53.0" prefHeight="245.0" prefWidth="474.0">
+                  <TableView fx:id="jobTable" layoutX="18.0" layoutY="53.0" prefHeight="245.0" prefWidth="474.0">
                     <columns>
                       <TableColumn prefWidth="473.6380741482558" text="Tasks" />
                     </columns>

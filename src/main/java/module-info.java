@@ -3,6 +3,7 @@ module com.univr.employeemanager {
     requires javafx.fxml;
     requires com.google.gson;
     requires java.sql;
+    requires java.desktop;
 
 
     opens com.univr.employeemanager to javafx.fxml, com.google.gson;

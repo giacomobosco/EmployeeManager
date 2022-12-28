@@ -1,5 +1,7 @@
 package com.univr.employeemanager;
 
+import javafx.collections.ObservableList;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
