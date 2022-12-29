@@ -49,7 +49,7 @@ public class Employee extends Person {
         this.birthDate = birthDate;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         this.birthDateString = formatter.format(birthDate);
-        System.out.println(birthDateString);
+       // System.out.println(birthDateString);
         this.address = address;
         this.car = car;
         this.emergency = emergency;
@@ -73,7 +73,6 @@ public class Employee extends Person {
 
     public TreeSet<Job> getFormerJobs() {
 
-        System.out.print("\nemployee 76"+formerJobs.toString());
         return formerJobs;
 
     }

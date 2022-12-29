@@ -16,16 +16,32 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class MenuController implements Initializable {
 
+    //oggetti usati per la ricerca
+    //---------------------------------------------------
+    @FXML
+    private RadioButton ORenable,ANDenable;
+    @FXML
+    private CheckBox hasLicenseEnable,hasCarEnable,birthFromEnable,birthToEnable;
+    @FXML
+    private DatePicker birthFromDate;
+    @FXML
+    private DatePicker birthToDate;
+    @FXML
+    private Button searchButton,restoreButton;
+    //----------------------------------------------------
+
     @FXML
     private Button newButton, editButton, deleteButton, detailsButton;
-    @FXML
-    private TextArea textField;
     @FXML
     private TableColumn <Employee, String> addressField, nameField, lastNameField, birthDateField, cellNumberField;
     @FXML
@@ -61,35 +77,16 @@ public class MenuController implements Initializable {
 
         });
 
-        try {
-            Employee manto1 = new Employee("Franci", "Manto", "a casa sua", new Date(1999, 7, 16), "casa sua", "@", "234", false,
-                    new Person("Giacomo", "Bosco", "478294", "a@b"));
-
-            try{
-                Job job1= new Job(new Date(2000,4,1),new Date(2001,3,3),"adicom","lavoro","casa",100);
-                manto1.setFormerJob(job1);
-            }
-            catch (IllegalArgumentException e)
-            {
-                System.out.print("non settato");
-            }
-
-            manto1.setSpokenLanguage(Employee.Language.ITALIAN);
-            manto1.setSpokenLanguage(Employee.Language.ENGLISH);
-
-
-            data.write(manto1);
-            Employee manto2 = new Employee("Franci", "Mano", "a casa sua", new Date(100, 7, 16), "casa sua", "@", "234", true,null);
-            data.write(manto2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         nameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         lastNameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
         birthDateField.setCellValueFactory(new PropertyValueFactory<Employee, String>("birthDateString"));
         cellNumberField.setCellValueFactory(new PropertyValueFactory<Employee, String>("cellNumber"));
         addressField.setCellValueFactory(new PropertyValueFactory<Employee, String>("address"));
+
+        birthFromDate.setDisable(false);
+        birthFromEnable.setDisable(true);
+        birthToEnable.setDisable(true);
 
         try {
             updateTable();
@@ -171,10 +168,136 @@ public class MenuController implements Initializable {
 
 
     }
-
     private void updateTable() throws IOException {
 
         people = FXCollections.observableArrayList(data.readJSON());
         mainTable.setItems(people);
+    }
+
+    //metodi usati per la ricerca
+    //------------------------------------------------------------------------
+
+    TreeSet<Employee> result=new TreeSet<>();
+    TreeSet<Employee> hasCarResult =new TreeSet<>();
+    TreeSet<Employee> hasLicenseResult=new TreeSet<>();
+    TreeSet<Employee> birthDateResult=new TreeSet<>();
+
+    public void ORbuttonPress(ActionEvent actionEvent) {
+
+        ANDenable.setSelected(false);
+        searchButton.setDisable(false);
+    }
+
+    public void ANDbuttonPress(ActionEvent actionEvent) {
+
+        ORenable.setSelected(false);
+        searchButton.setDisable(false);
+    }
+
+    public void searchButtonPress(ActionEvent actionEvent) {
+
+        if(this.result!=null)
+            result.clear();
+
+        //ricerca in or: aggiungo al treeset risultato, tutti i treeset delle ricerche singole
+        //il treeset si occuperà di non avere ripetizioni (vedi compareTo di Person)
+        if(ORenable.isSelected())
+        {
+            result.addAll(hasCarResult);
+            result.addAll(hasLicenseResult);
+
+        }
+
+        //ricerca in AND: aggiungo al treeset risultato, tutti i treeset delle ricerche singole
+        //infine elimino dal risultato tutti gli elementi che non sono in comune con ogni treeset di singola ricerca
+        //difatto eseguendo un intersezione, quindi un AND
+        if(ANDenable.isSelected())
+        {
+            result.addAll(hasCarResult);
+            result.addAll(hasLicenseResult);
+
+            if(hasCarEnable.isSelected())
+                result.retainAll(hasCarResult);
+            if(hasLicenseEnable.isSelected())
+                result.retainAll(hasLicenseResult);
+        }
+
+        people= FXCollections.observableArrayList(result);
+        mainTable.setItems(people);
+
+
+    }
+
+    public void restoreButtonPress(ActionEvent actionEvent) throws IOException {
+        people = FXCollections.observableArrayList(data.readJSON());
+        mainTable.setItems(people);
+        result.clear();
+
+        hasCarResult.clear();
+        hasLicenseResult.clear();
+        hasCarEnable.setSelected(false);
+        hasLicenseEnable.setSelected(false);
+    }
+
+    //stream di employee, filtro quelli che non hanno il set licenze vuoto
+    //quindi li aggiungo al set risultato di questa ricerca
+    public void hasLicenseEnablePress(ActionEvent actionEvent) {
+        people.stream()
+                .filter(p -> !p.getLicenses().isEmpty())
+                    .forEach(p->hasLicenseResult.add(p));
+    }
+
+    //stream di employee, filtro quelli che hanno una macchina
+    //quindi li aggiungo al set risultato di questa ricerca
+    public void hasCarEnablePress(ActionEvent actionEvent) {
+
+        people.stream()
+                .filter(p -> p.hasCar())
+                    .forEach(p-> hasCarResult.add(p));
+
+    }
+
+
+    public void birthFromEnablePress(ActionEvent actionEvent) {
+
+
+        //se anche la data di fine è selezionata
+        if(birthToEnable.isSelected())
+        {
+
+            //devo convertire il formato dei datepicker da LocalDate a Date
+           // Date dateFrom= Date.from(birthFromDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+           // Date dateTo= Date.from(birthToDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            people.stream()
+
+           // System.out.print("\nfrom "+dateFrom);
+           // System.out.print("\nto   "+dateTo);
+
+        }
+
+    }
+
+    public void birthToEnablePress(ActionEvent actionEvent) {
+
+
+    }
+
+    //permetto di abilitare le date solo se hanno un valore dentro
+    public void birthFromDatePress(ActionEvent actionEvent) {
+
+        if(birthFromDate.getValue()!=null)
+            birthFromEnable.setDisable(false);
+        else
+            birthFromEnable.setDisable(true);
+
+
+    }
+
+    public void birthToDatePress(ActionEvent actionEvent) {
+        if(birthToDate.getValue()!=null)
+            birthToEnable.setDisable(false);
+        else
+            birthToEnable.setDisable(true);
+
     }
 }

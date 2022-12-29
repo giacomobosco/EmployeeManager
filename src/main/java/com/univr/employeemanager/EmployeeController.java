@@ -38,7 +38,15 @@ public class EmployeeController implements Initializable {
     private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
 
     @FXML
-    private TableColumn<Job,String> taskField,endField,companyField,payField,jobPlaceField;
+    private TableColumn<Job,String> taskField;
+    @FXML
+    private TableColumn<Job, Date> endField;
+    @FXML
+    private TableColumn<Job,String> companyField;
+    @FXML
+    private TableColumn<Job,String> payField;
+    @FXML
+    private TableColumn<Job,String> jobPlaceField;
     @FXML
     private TableColumn<Job, Date> beginField;
 
@@ -55,8 +63,12 @@ public class EmployeeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
+        taskField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+        endField.setCellValueFactory(new PropertyValueFactory<Job,Date>("end"));
+        companyField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
+        jobPlaceField.setCellValueFactory(new PropertyValueFactory<>("jobPlace"));
+        payField.setCellValueFactory(new PropertyValueFactory<>("DailyPay"));
 
     }
 
@@ -101,7 +113,7 @@ public class EmployeeController implements Initializable {
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
         jobs = FXCollections.observableArrayList(e.getFormerJobs());
-        System.out.print("\n"+e.getFormerJobs().toString());
+        //System.out.print("\n"+e.getFormerJobs().toString());
         jobTable.setItems(jobs);
 
         //se sono arrivato a questa finestra tramite detailButton o tramite editButton
@@ -203,6 +215,8 @@ public class EmployeeController implements Initializable {
         }
 
         if(!exceptions){
+
+            System.out.print("SAVED "+person.toString());
 
             if(previousEmployee == null) {
                 data.write(person);
