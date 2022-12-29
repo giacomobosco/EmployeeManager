@@ -31,7 +31,7 @@ public class MenuController implements Initializable {
     @FXML
     private RadioButton ORenable,ANDenable;
     @FXML
-    private CheckBox hasLicenseEnable,hasCarEnable,birthFromEnable,birthToEnable;
+    private CheckBox hasLicenseEnable,hasCarEnable,birthIntervalEnable;
     @FXML
     private DatePicker birthFromDate;
     @FXML
@@ -43,7 +43,9 @@ public class MenuController implements Initializable {
     @FXML
     private Button newButton, editButton, deleteButton, detailsButton;
     @FXML
-    private TableColumn <Employee, String> addressField, nameField, lastNameField, birthDateField, cellNumberField;
+    private TableColumn <Employee, String> addressField, nameField, lastNameField, cellNumberField;
+    @FXML
+    private TableColumn<Employee,LocalDate>birthDateField;
     @FXML
     private TableView<Employee> mainTable;
     @FXML
@@ -65,6 +67,11 @@ public class MenuController implements Initializable {
         detailsButton.setDisable(true);
         deleteButton.setDisable(true);
         editButton.setDisable(true);
+        ORenable.setSelected(true);
+
+        birthFromDate.setDisable(false);
+        birthIntervalEnable.setDisable(true);
+
 
         mainTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!=null)
@@ -80,13 +87,9 @@ public class MenuController implements Initializable {
 
         nameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         lastNameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        birthDateField.setCellValueFactory(new PropertyValueFactory<Employee, String>("birthDateString"));
+        birthDateField.setCellValueFactory(new PropertyValueFactory<Employee, LocalDate>("birthDate"));
         cellNumberField.setCellValueFactory(new PropertyValueFactory<Employee, String>("cellNumber"));
         addressField.setCellValueFactory(new PropertyValueFactory<Employee, String>("address"));
-
-        birthFromDate.setDisable(false);
-        birthFromEnable.setDisable(true);
-        birthToEnable.setDisable(true);
 
         try {
             updateTable();
@@ -205,6 +208,7 @@ public class MenuController implements Initializable {
         {
             result.addAll(hasCarResult);
             result.addAll(hasLicenseResult);
+            result.addAll(birthDateResult);
 
         }
 
@@ -215,11 +219,14 @@ public class MenuController implements Initializable {
         {
             result.addAll(hasCarResult);
             result.addAll(hasLicenseResult);
+            result.addAll(birthDateResult);
 
             if(hasCarEnable.isSelected())
                 result.retainAll(hasCarResult);
             if(hasLicenseEnable.isSelected())
                 result.retainAll(hasLicenseResult);
+            if(birthIntervalEnable.isSelected())
+                result.retainAll(birthDateResult);
         }
 
         people= FXCollections.observableArrayList(result);
@@ -235,13 +242,19 @@ public class MenuController implements Initializable {
 
         hasCarResult.clear();
         hasLicenseResult.clear();
+        birthDateResult.clear();
         hasCarEnable.setSelected(false);
         hasLicenseEnable.setSelected(false);
+        birthIntervalEnable.setSelected(false);
     }
 
     //stream di employee, filtro quelli che non hanno il set licenze vuoto
     //quindi li aggiungo al set risultato di questa ricerca
     public void hasLicenseEnablePress(ActionEvent actionEvent) {
+
+        if(hasLicenseResult!=null)
+            hasLicenseResult.clear();
+
         people.stream()
                 .filter(p -> !p.getLicenses().isEmpty())
                     .forEach(p->hasLicenseResult.add(p));
@@ -251,6 +264,9 @@ public class MenuController implements Initializable {
     //quindi li aggiungo al set risultato di questa ricerca
     public void hasCarEnablePress(ActionEvent actionEvent) {
 
+        if(hasCarResult!=null)
+            hasCarResult.clear();
+
         people.stream()
                 .filter(p -> p.hasCar())
                     .forEach(p-> hasCarResult.add(p));
@@ -258,46 +274,51 @@ public class MenuController implements Initializable {
     }
 
 
-    public void birthFromEnablePress(ActionEvent actionEvent) {
+    public void birthIntervalEnablePress(ActionEvent actionEvent) {
 
+        if(birthDateResult!=null)
+            birthDateResult.clear();
 
-        //se anche la data di fine è selezionata
-        if(birthToEnable.isSelected())
+        //se la data di fine e di inizio contengono data valida
+        if(birthFromDate!=null&&birthToDate!=null)
         {
+            System.out.print("\nsearching from: "+birthFromDate.getValue());
+            System.out.print("\nto              "+birthToDate.getValue());
 
-            //devo convertire il formato dei datepicker da LocalDate a Date
-           // Date dateFrom= Date.from(birthFromDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-           // Date dateTo= Date.from(birthToDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             people.stream()
-
-           // System.out.print("\nfrom "+dateFrom);
-           // System.out.print("\nto   "+dateTo);
+                    .filter(p->p.getBirthDate().isAfter(birthFromDate.getValue())&&p.getBirthDate().isBefore(birthToDate.getValue()))
+                    .forEach(p->birthDateResult.add(p));
 
         }
 
+        System.out.print("\ndate stream result:");
+        for (Employee d:birthDateResult
+        ) {
+            System.out.print("\n"+d.getBirthDate()+" "+d.getFirstName());
+        }
+
+        System.out.print("\n");
+
     }
 
-    public void birthToEnablePress(ActionEvent actionEvent) {
 
-
-    }
 
     //permetto di abilitare le date solo se hanno un valore dentro
     public void birthFromDatePress(ActionEvent actionEvent) {
 
-        if(birthFromDate.getValue()!=null)
-            birthFromEnable.setDisable(false);
+        if(birthFromDate.getValue()!=null&&birthToDate.getValue()!=null)
+            birthIntervalEnable.setDisable(false);
         else
-            birthFromEnable.setDisable(true);
+            birthIntervalEnable.setDisable(true);
 
 
     }
-
     public void birthToDatePress(ActionEvent actionEvent) {
-        if(birthToDate.getValue()!=null)
-            birthToEnable.setDisable(false);
+        if(birthToDate.getValue()!=null&&birthFromDate.getValue()!=null)
+            birthIntervalEnable.setDisable(false);
         else
-            birthToEnable.setDisable(true);
+            birthIntervalEnable.setDisable(true);
 
     }
+
 }

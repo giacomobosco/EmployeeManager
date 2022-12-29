@@ -82,10 +82,7 @@ public class EmployeeController implements Initializable {
         firstNameField.setText(e.getFirstName());
         lastNameField.setText(e.getLastName());
         addressField.setText(e.getAddress());
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(e.getBirthDateString(), formatter);
-        birthDateField.setValue(localDate);
+        birthDateField.setValue(e.getBirthDate());
 
         if (e.getEmergency() != null) {
             emergencyFirstNameField.setText(e.getEmergency().getFirstName());
@@ -179,7 +176,7 @@ public class EmployeeController implements Initializable {
                     firstNameField.getText(),
                     lastNameField.getText(),
                     birthPlaceField.getText(),
-                    new Date(),
+                    birthDateField.getValue(),
                     addressField.getText(),
                     emailField.getText(),
                     cellNumberField.getText(),
@@ -189,9 +186,9 @@ public class EmployeeController implements Initializable {
                             emergencyCellNumberField.getText(),
                             emergencyEmailField.getText()));
 
-            LocalDate localDate = birthDateField.getValue();
-            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-            person.setBirthDate(Date.from(instant));
+            //LocalDate localDate = birthDateField.getValue();
+            //Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            //person.setBirthDate(Date.from(instant));
 
             if(italian.isSelected()) person.setSpokenLanguage(Employee.Language.ITALIAN);
             if(english.isSelected()) person.setSpokenLanguage(Employee.Language.ENGLISH);
@@ -211,6 +208,7 @@ public class EmployeeController implements Initializable {
 
         } catch (IllegalArgumentException e){
             errorField.setText(e.getMessage());
+            e.printStackTrace();
             exceptions = true;
         }
 

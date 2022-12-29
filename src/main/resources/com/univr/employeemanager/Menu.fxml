@@ -102,10 +102,9 @@
                   <RadioButton fx:id="ANDenable" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#ANDbuttonPress" text="AND" />
                   <CheckBox fx:id="hasLicenseEnable" layoutX="26.0" layoutY="91.0" mnemonicParsing="false" onAction="#hasLicenseEnablePress" text="Has License" />
                   <CheckBox fx:id="hasCarEnable" layoutX="27.0" layoutY="126.0" mnemonicParsing="false" onAction="#hasCarEnablePress" text="Has Car" />
-                  <DatePicker fx:id="birthFromDate" layoutX="47.0" layoutY="170.0" onAction="#birthFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth from" />
-                  <CheckBox fx:id="birthFromEnable" layoutX="26.0" layoutY="174.0" mnemonicParsing="false" onAction="#birthFromEnablePress" />
-                  <DatePicker fx:id="birthToDate" layoutX="47.0" layoutY="207.0" onAction="#birthToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth to" />
-                  <CheckBox fx:id="birthToEnable" layoutX="26.0" layoutY="211.0" mnemonicParsing="false" onAction="#birthToEnablePress" />
+                  <DatePicker fx:id="birthFromDate" layoutX="47.0" layoutY="165.0" onAction="#birthFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth from" />
+                  <CheckBox fx:id="birthIntervalEnable" layoutX="19.0" layoutY="188.0" mnemonicParsing="false" onAction="#birthIntervalEnablePress" />
+                  <DatePicker fx:id="birthToDate" layoutX="47.0" layoutY="202.0" onAction="#birthToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth to" />
                   <Button fx:id="searchButton" layoutX="22.0" layoutY="490.0" mnemonicParsing="false" onAction="#searchButtonPress" style="-fx-background-color: green;" text="search" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />

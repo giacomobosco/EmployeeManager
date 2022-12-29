@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="tabella jobs">
+    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="inizio ricerca">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Job.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Menu.fxml" afterDir="false" />
     </list>
@@ -89,7 +90,9 @@
       <workItem from="1671701989361" duration="2142000" />
       <workItem from="1672224062907" duration="2787000" />
       <workItem from="1672235187227" duration="10361000" />
-      <workItem from="1672305610184" duration="1253000" />
+      <workItem from="1672305610184" duration="6606000" />
+      <workItem from="1672313908560" duration="70000" />
+      <workItem from="1672315426277" duration="6299000" />
     </task>
     <task id="LOCAL-00001" summary="tabella jobs">
       <created>1671702992826</created>
@@ -112,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671703162463</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="inizio ricerca">
+      <created>1672306982596</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1672306982596</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,6 +142,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="inizio tabella jobs" />
     <MESSAGE value="tabella jobs" />
-    <option name="LAST_COMMIT_MESSAGE" value="tabella jobs" />
+    <MESSAGE value="inizio ricerca" />
+    <option name="LAST_COMMIT_MESSAGE" value="inizio ricerca" />
   </component>
 </project>

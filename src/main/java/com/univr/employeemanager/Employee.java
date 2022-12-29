@@ -25,8 +25,8 @@ public class Employee extends Person {
     };
 
     private String birthPlace = null;
-    private Date birthDate;
-    private String birthDateString;
+    private LocalDate birthDate;
+    //private String birthDateString;
     private String address;
     private TreeSet<Job> formerJobs = new TreeSet<>();
     private TreeSet<Language> spokenLanguage = new TreeSet<>();
@@ -37,29 +37,31 @@ public class Employee extends Person {
     public Employee(String firstName,
                     String lastName,
                     String birthPlace,
-                    Date birthDate,
+                    LocalDate birthDate,
                     String address,
                     String email,
                     String cellNumber,
                     Boolean car,
                     Person emergency) {
 
+
         super(firstName, lastName, cellNumber, email);
         this.birthPlace = birthPlace;
         this.birthDate = birthDate;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        this.birthDateString = formatter.format(birthDate);
-       // System.out.println(birthDateString);
+
+        //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        //this.birthDateString = formatter.format(birthDate);
         this.address = address;
         this.car = car;
         this.emergency = emergency;
+
     }
 
     public String getBirthplace() {
         return birthPlace;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -67,9 +69,9 @@ public class Employee extends Person {
         return address;
     }
 
-    public String getBirthDateString() {
+   /* public String getBirthDateString() {
         return birthDateString;
-    }
+    }*/
 
     public TreeSet<Job> getFormerJobs() {
 
@@ -101,14 +103,13 @@ public class Employee extends Person {
         this.address = address;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        this.birthDateString = formatter.format(birthDate);
+        //this.birthDateString = formatter.format(birthDate);
     }
 
     public void setFormerJob(Job formerJob) {
-
 
         if (formerJob.getBegin().compareTo(birthDate) < 0)
             throw new IllegalArgumentException("Job begin date is grater than birth date");
