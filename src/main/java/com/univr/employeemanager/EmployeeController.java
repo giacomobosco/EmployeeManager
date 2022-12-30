@@ -160,7 +160,6 @@ public class EmployeeController implements Initializable {
     public void RemoveJobButtonPress(ActionEvent actionEvent) {
     }
 
-    //cancelButton
     @FXML
     public void CancelButtonPress(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
