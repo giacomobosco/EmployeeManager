@@ -13,6 +13,9 @@
       "cellNumber": "234",
       "email": "@lk"
     },
+    "periodFrom": null,
+    "periodTo": null,
+    "considerYear": false,
     "firstName": "manoie",
     "lastName": "casseruoli",
     "cellNumber": "39476",
@@ -32,6 +35,9 @@
       "cellNumber": "45678",
       "email": "@lkij"
     },
+    "periodFrom": null,
+    "periodTo": null,
+    "considerYear": false,
     "firstName": "carolino",
     "lastName": "castagni",
     "cellNumber": "346987",
@@ -43,14 +49,19 @@
     "address": "er",
     "formerJobs": [],
     "spokenLanguage": [],
-    "licenses": [],
-    "car": false,
+    "licenses": [
+      "A"
+    ],
+    "car": true,
     "emergency": {
       "firstName": "aaa",
       "lastName": "bbb",
       "cellNumber": "2345",
       "email": "@"
     },
+    "periodFrom": null,
+    "periodTo": null,
+    "considerYear": false,
     "firstName": "frenci",
     "lastName": "manto",
     "cellNumber": "232",

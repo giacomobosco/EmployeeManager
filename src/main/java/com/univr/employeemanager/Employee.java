@@ -34,6 +34,9 @@ public class Employee extends Person {
     private Boolean car = false;
     private Person emergency = null;
 
+    private LocalDate periodFrom,periodTo;
+    private boolean considerYear;
+
     public Employee(String firstName,
                     String lastName,
                     String birthPlace,
@@ -90,9 +93,27 @@ public class Employee extends Person {
     public Boolean hasCar() {
         return car;
     }
+    public Boolean considerYear(){return this.considerYear;}
 
     public Person getEmergency() {
         return emergency;
+    }
+
+    public LocalDate[] getAvailablePeriod()
+    {
+        return new LocalDate[]{periodFrom,periodTo};
+    }
+
+
+
+
+    public void setAvailablePeriod(LocalDate l1,LocalDate l2)
+    {
+        if(l1.isAfter(l2))
+            throw new IllegalArgumentException("period from is grater than period to");
+
+        this.periodFrom=l1;
+        this.periodTo=l2;
     }
 
     public void setBirthPlace(String birthPlace) {
@@ -105,7 +126,7 @@ public class Employee extends Person {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+       // SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         //this.birthDateString = formatter.format(birthDate);
     }
 
@@ -134,5 +155,9 @@ public class Employee extends Person {
 
     public void setCar(Boolean car) {
         this.car = car;
+    }
+
+    public void setConsiderYear(Boolean year){
+        this.considerYear=year;
     }
 }

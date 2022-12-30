@@ -236,8 +236,7 @@ public class MenuController implements Initializable {
     }
 
     public void restoreButtonPress(ActionEvent actionEvent) throws IOException {
-        people = FXCollections.observableArrayList(data.readJSON());
-        mainTable.setItems(people);
+        updateTable();
         result.clear();
 
         hasCarResult.clear();

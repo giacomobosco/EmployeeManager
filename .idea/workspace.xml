@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="inizio ricerca">
+    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="aggiunta ricerca per data&#10;cambiata classe Date to LocalDate in tutto il progetto">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Job.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/AddEmployee.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/AddEmployee.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +19,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -92,7 +93,9 @@
       <workItem from="1672235187227" duration="10361000" />
       <workItem from="1672305610184" duration="6606000" />
       <workItem from="1672313908560" duration="70000" />
-      <workItem from="1672315426277" duration="6299000" />
+      <workItem from="1672315426277" duration="6342000" />
+      <workItem from="1672390152650" duration="5769000" />
+      <workItem from="1672396297150" duration="282000" />
     </task>
     <task id="LOCAL-00001" summary="tabella jobs">
       <created>1671702992826</created>
@@ -122,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672306982596</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="aggiunta ricerca per data&#10;cambiata classe Date to LocalDate in tutto il progetto">
+      <created>1672322004434</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1672322004434</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +153,7 @@
     <MESSAGE value="inizio tabella jobs" />
     <MESSAGE value="tabella jobs" />
     <MESSAGE value="inizio ricerca" />
-    <option name="LAST_COMMIT_MESSAGE" value="inizio ricerca" />
+    <MESSAGE value="aggiunta ricerca per data&#10;cambiata classe Date to LocalDate in tutto il progetto" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunta ricerca per data&#10;cambiata classe Date to LocalDate in tutto il progetto" />
   </component>
 </project>

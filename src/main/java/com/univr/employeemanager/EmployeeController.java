@@ -31,9 +31,9 @@ public class EmployeeController implements Initializable {
     @FXML
     private TextField firstNameField, lastNameField, addressField, birthPlaceField, emailField, cellNumberField, emergencyEmailField, emergencyCellNumberField, emergencyLastNameField, emergencyFirstNameField;
     @FXML
-    private DatePicker birthDateField;
+    private DatePicker birthDateField,periodFromField,periodToField;
     @FXML
-    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german;
+    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german,yearConsidered;
     @FXML
     private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
 
@@ -108,6 +108,12 @@ public class EmployeeController implements Initializable {
         licenseC.setSelected(e.getLicenses().contains(Employee.License.C));
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
+
+        if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
+        {
+            periodFromField.setValue(e.getAvailablePeriod()[0]);
+            periodToField.setValue(e.getAvailablePeriod()[1]);
+        }
 
         jobs = FXCollections.observableArrayList(e.getFormerJobs());
         //System.out.print("\n"+e.getFormerJobs().toString());
@@ -205,6 +211,10 @@ public class EmployeeController implements Initializable {
             if(licenseC.isSelected()) person.setLicense(Employee.License.C);
             if(licenseD.isSelected()) person.setLicense(Employee.License.D);
             if(licenseE.isSelected()) person.setLicense(Employee.License.E);
+
+            if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
+                person.setAvailablePeriod(periodFromField.getValue(),periodToField.getValue());
+            if(yearConsidered.isSelected()) person.setConsiderYear(true);
 
         } catch (IllegalArgumentException e){
             errorField.setText(e.getMessage());
