@@ -25,8 +25,8 @@ public class Employee extends Person {
     };
 
     private String birthPlace = null;
-    private Date birthDate;
-    private String birthDateString;
+    private LocalDate birthDate;
+    //private String birthDateString;
     private String address;
     private TreeSet<Job> formerJobs = new TreeSet<>();
     private TreeSet<Language> spokenLanguage = new TreeSet<>();
@@ -34,32 +34,37 @@ public class Employee extends Person {
     private Boolean car = false;
     private Person emergency = null;
 
+    private LocalDate periodFrom,periodTo;
+    private boolean considerYear;
+
     public Employee(String firstName,
                     String lastName,
                     String birthPlace,
-                    Date birthDate,
+                    LocalDate birthDate,
                     String address,
                     String email,
                     String cellNumber,
                     Boolean car,
                     Person emergency) {
 
+
         super(firstName, lastName, cellNumber, email);
         this.birthPlace = birthPlace;
         this.birthDate = birthDate;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        this.birthDateString = formatter.format(birthDate);
-        //System.out.println(birthDateString);
+
+        //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        //this.birthDateString = formatter.format(birthDate);
         this.address = address;
         this.car = car;
         this.emergency = emergency;
+
     }
 
     public String getBirthplace() {
         return birthPlace;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -67,12 +72,14 @@ public class Employee extends Person {
         return address;
     }
 
-    public String getBirthDateString() {
+   /* public String getBirthDateString() {
         return birthDateString;
-    }
+    }*/
 
     public TreeSet<Job> getFormerJobs() {
+
         return formerJobs;
+
     }
 
     public TreeSet<Language> getSpokenLanguage() {
@@ -86,9 +93,27 @@ public class Employee extends Person {
     public Boolean hasCar() {
         return car;
     }
+    public Boolean considerYear(){return this.considerYear;}
 
     public Person getEmergency() {
         return emergency;
+    }
+
+    public LocalDate[] getAvailablePeriod()
+    {
+        return new LocalDate[]{periodFrom,periodTo};
+    }
+
+
+
+
+    public void setAvailablePeriod(LocalDate l1,LocalDate l2)
+    {
+        if(l1.isAfter(l2))
+            throw new IllegalArgumentException("period from is grater than period to");
+
+        this.periodFrom=l1;
+        this.periodTo=l2;
     }
 
     public void setBirthPlace(String birthPlace) {
@@ -99,19 +124,17 @@ public class Employee extends Person {
         this.address = address;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        this.birthDateString = formatter.format(birthDate);
+       // SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        //this.birthDateString = formatter.format(birthDate);
     }
 
     public void setFormerJob(Job formerJob) {
 
         if (formerJob.getBegin().compareTo(birthDate) < 0)
-            throw new IllegalArgumentException("Job begin date is grater then birth date");
-
-        if(!this.formerJobs.add(formerJob))
-            System.out.print("\nsetFormerJob: job not added");
+            throw new IllegalArgumentException("Job begin date is grater than birth date");
+        this.formerJobs.add(formerJob);
 
     }
 
@@ -132,5 +155,9 @@ public class Employee extends Person {
 
     public void setCar(Boolean car) {
         this.car = car;
+    }
+
+    public void setConsiderYear(Boolean year){
+        this.considerYear=year;
     }
 }

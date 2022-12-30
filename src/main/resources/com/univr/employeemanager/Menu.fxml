@@ -34,16 +34,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -51,7 +53,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.MenuController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.MenuController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -95,10 +97,25 @@
         <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <items>
                 <AnchorPane>
-                    <children>
-                        <TextArea fx:id="textField" layoutX="10.0" layoutY="14.0" onMouseClicked="#textAreaClicked" prefHeight="524.0" prefWidth="200.0" />
-                  <Label fx:id="display" layoutX="96.0" layoutY="498.0" text="Label" />
-                    </children>
+               <children>
+                  <RadioButton fx:id="ORenable" layoutX="24.0" layoutY="46.0" mnemonicParsing="false" onAction="#ORbuttonPress" text="OR" />
+                  <RadioButton fx:id="ANDenable" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#ANDbuttonPress" text="AND" />
+                  <CheckBox fx:id="hasLicenseEnable" layoutX="26.0" layoutY="91.0" mnemonicParsing="false" onAction="#hasLicenseEnablePress" text="Has License" />
+                  <CheckBox fx:id="hasCarEnable" layoutX="27.0" layoutY="126.0" mnemonicParsing="false" onAction="#hasCarEnablePress" text="Has Car" />
+                  <DatePicker fx:id="birthFromDate" layoutX="47.0" layoutY="165.0" onAction="#birthFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth from" />
+                  <CheckBox fx:id="birthIntervalEnable" layoutX="19.0" layoutY="188.0" mnemonicParsing="false" onAction="#birthIntervalEnablePress" />
+                  <DatePicker fx:id="birthToDate" layoutX="47.0" layoutY="202.0" onAction="#birthToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth to" />
+                  <Button fx:id="searchButton" layoutX="22.0" layoutY="490.0" mnemonicParsing="false" onAction="#searchButtonPress" style="-fx-background-color: green;" text="search" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="restoreButton" layoutX="138.0" layoutY="490.0" mnemonicParsing="false" onAction="#restoreButtonPress" text="restore">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
                 </AnchorPane>
                 <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
                     <content>

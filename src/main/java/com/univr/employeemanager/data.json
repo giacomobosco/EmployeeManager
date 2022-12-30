@@ -1,114 +1,70 @@
 [
   {
-    "birthPlace": "",
-    "birthDate": "Dec 4, 2020, 12:00:00 AM",
-    "birthDateString": "04/12/2020",
-    "address": "des",
-    "formerJobs": [],
-    "spokenLanguage": [
-      "CHINESE"
-    ],
-    "licenses": [],
-    "car": false,
-    "emergency": {
-      "firstName": "wef",
-      "lastName": "rhy",
-      "cellNumber": "333",
-      "email": "@a"
-    },
-    "firstName": "evpoim",
-    "lastName": "EWOIM",
-    "cellNumber": "555",
-    "email": "@@@"
-  },
-  {
-    "birthPlace": "a casa sua",
-    "birthDate": "Aug 16, 2000, 12:00:00 AM",
-    "birthDateString": "16/08/2000",
-    "address": "casa sua",
-    "formerJobs": [
-      {
-        "begin": "Mar 2, 2003, 12:00:00 AM",
-        "end": "Apr 3, 2006, 12:00:00 AM",
-        "companyName": "adcom",
-        "tasks": [
-          "idraulico"
-        ],
-        "jobPlace": "qui",
-        "dailyPay": 110
-      },
-      {
-        "begin": "Mar 2, 2004, 12:00:00 AM",
-        "end": "Apr 3, 2007, 12:00:00 AM",
-        "companyName": "cazzi",
-        "tasks": [
-          "idraulico"
-        ],
-        "jobPlace": "qui",
-        "dailyPay": 110
-      }
-    ],
-    "spokenLanguage": [
-      "ENGLISH",
-      "ITALIAN"
-    ],
-    "licenses": [],
-    "car": false,
-    "emergency": {
-      "firstName": "Giacomo",
-      "lastName": "Bosco",
-      "cellNumber": "478294",
-      "email": "a@b"
-    },
-    "firstName": "frenci",
-    "lastName": "Manto",
-    "cellNumber": "234",
-    "email": "@"
-  },
-  {
-    "birthPlace": "verona",
-    "birthDate": "Dec 8, 2017, 12:00:00 AM",
-    "birthDateString": "08/12/2017",
-    "address": "via",
-    "formerJobs": [],
-    "spokenLanguage": [
-      "ITALIAN",
-      "GERMAN"
-    ],
-    "licenses": [
-      "A",
-      "B"
-    ],
-    "car": true,
-    "emergency": {
-      "firstName": "frenci",
-      "lastName": "gesus",
-      "cellNumber": "1234",
-      "email": "@hot"
-    },
-    "firstName": "ciao",
-    "lastName": "bbb",
-    "cellNumber": "1234",
-    "email": "@gmail"
-  },
-  {
-    "birthPlace": "a casa sua",
-    "birthDate": "Jun 10, 1000, 12:10:04 AM",
-    "birthDateString": "10/06/1000",
-    "address": "casa sua",
+    "birthPlace": "li",
+    "birthDate": "6-lug-2022",
+    "address": "ergre",
     "formerJobs": [],
     "spokenLanguage": [],
     "licenses": [],
     "car": true,
     "emergency": {
-      "firstName": "feqwefw",
-      "lastName": "trtgtr",
-      "cellNumber": "456",
+      "firstName": "aaa",
+      "lastName": "bbb",
+      "cellNumber": "234",
+      "email": "@lk"
+    },
+    "periodFrom": null,
+    "periodTo": null,
+    "considerYear": false,
+    "firstName": "manoiefr",
+    "lastName": "casseruoli",
+    "cellNumber": "39476",
+    "email": "@"
+  },
+  {
+    "birthPlace": "ovunque",
+    "birthDate": "11-dic-2020",
+    "address": "dfg",
+    "formerJobs": [],
+    "spokenLanguage": [],
+    "licenses": [],
+    "car": false,
+    "emergency": {
+      "firstName": "sdf",
+      "lastName": "gtt",
+      "cellNumber": "45678",
+      "email": "@lkij"
+    },
+    "periodFrom": null,
+    "periodTo": null,
+    "considerYear": false,
+    "firstName": "carolino",
+    "lastName": "castagni",
+    "cellNumber": "346987",
+    "email": "tgfuh@gmail"
+  },
+  {
+    "birthPlace": "uqi",
+    "birthDate": "7-gen-2016",
+    "address": "er",
+    "formerJobs": [],
+    "spokenLanguage": [],
+    "licenses": [
+      "A"
+    ],
+    "car": true,
+    "emergency": {
+      "firstName": "aaa",
+      "lastName": "bbb",
+      "cellNumber": "2345",
       "email": "@"
     },
-    "firstName": "Franci",
-    "lastName": "bosco",
-    "cellNumber": "349957",
-    "email": "@"
+    "periodFrom": null,
+    "periodTo": null,
+    "considerYear": false,
+    "firstName": "frenci",
+    "lastName": "manto",
+    "cellNumber": "232",
+    "email": "@@@"
   }
 ]

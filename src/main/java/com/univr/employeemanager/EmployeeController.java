@@ -23,32 +23,34 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EmployeeController implements Initializable {
+
     @FXML
-    private TableView<Job> jobTable;
+    public TableView jobTable;
     @FXML
-    private Label errorField;
+    public Label errorField;
     @FXML
     private TextField firstNameField, lastNameField, addressField, birthPlaceField, emailField, cellNumberField, emergencyEmailField, emergencyCellNumberField, emergencyLastNameField, emergencyFirstNameField;
     @FXML
-    private DatePicker birthDateField;
+    private DatePicker birthDateField,periodFromField,periodToField;
     @FXML
-    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german;
+    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german,yearConsidered;
     @FXML
     private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
 
     @FXML
     private TableColumn<Job,String> taskField;
     @FXML
-    private TableColumn<Job, CustomDate> endField;
+    private TableColumn<Job, Date> endField;
     @FXML
     private TableColumn<Job,String> companyField;
     @FXML
-    private TableColumn<Job, Integer> payField;
+    private TableColumn<Job,String> payField;
     @FXML
     private TableColumn<Job,String> jobPlaceField;
     @FXML
-    private TableColumn<Job, CustomDate> beginField;
+    private TableColumn<Job, Date> beginField;
 
+    private ObservableList<Job> jobs;
     private Employee previousEmployee = null;
     private Stage stage;
     private Scene scene;
@@ -62,8 +64,8 @@ public class EmployeeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         taskField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
-        beginField.setCellValueFactory(new PropertyValueFactory<Job,CustomDate>("begin"));
-        endField.setCellValueFactory(new PropertyValueFactory<Job,CustomDate>("end"));
+        beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+        endField.setCellValueFactory(new PropertyValueFactory<Job,Date>("end"));
         companyField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         jobPlaceField.setCellValueFactory(new PropertyValueFactory<>("jobPlace"));
         payField.setCellValueFactory(new PropertyValueFactory<>("DailyPay"));
@@ -80,10 +82,7 @@ public class EmployeeController implements Initializable {
         firstNameField.setText(e.getFirstName());
         lastNameField.setText(e.getLastName());
         addressField.setText(e.getAddress());
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(e.getBirthDateString(), formatter);
-        birthDateField.setValue(localDate);
+        birthDateField.setValue(e.getBirthDate());
 
         if (e.getEmergency() != null) {
             emergencyFirstNameField.setText(e.getEmergency().getFirstName());
@@ -110,9 +109,14 @@ public class EmployeeController implements Initializable {
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
-        ObservableList<Job> jobs = FXCollections.observableArrayList(e.getFormerJobs());
+        if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
+        {
+            periodFromField.setValue(e.getAvailablePeriod()[0]);
+            periodToField.setValue(e.getAvailablePeriod()[1]);
+        }
 
-       // System.out.print("\nemployee controller: "+e.getFormerJobs().toString());
+        jobs = FXCollections.observableArrayList(e.getFormerJobs());
+        //System.out.print("\n"+e.getFormerJobs().toString());
         jobTable.setItems(jobs);
 
         //se sono arrivato a questa finestra tramite detailButton o tramite editButton
@@ -178,7 +182,7 @@ public class EmployeeController implements Initializable {
                     firstNameField.getText(),
                     lastNameField.getText(),
                     birthPlaceField.getText(),
-                    new Date(),
+                    birthDateField.getValue(),
                     addressField.getText(),
                     emailField.getText(),
                     cellNumberField.getText(),
@@ -188,9 +192,9 @@ public class EmployeeController implements Initializable {
                             emergencyCellNumberField.getText(),
                             emergencyEmailField.getText()));
 
-            LocalDate localDate = birthDateField.getValue();
-            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-            person.setBirthDate(Date.from(instant));
+            //LocalDate localDate = birthDateField.getValue();
+            //Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            //person.setBirthDate(Date.from(instant));
 
             if(italian.isSelected()) person.setSpokenLanguage(Employee.Language.ITALIAN);
             if(english.isSelected()) person.setSpokenLanguage(Employee.Language.ENGLISH);
@@ -208,12 +212,19 @@ public class EmployeeController implements Initializable {
             if(licenseD.isSelected()) person.setLicense(Employee.License.D);
             if(licenseE.isSelected()) person.setLicense(Employee.License.E);
 
+            if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
+                person.setAvailablePeriod(periodFromField.getValue(),periodToField.getValue());
+            if(yearConsidered.isSelected()) person.setConsiderYear(true);
+
         } catch (IllegalArgumentException e){
             errorField.setText(e.getMessage());
+            e.printStackTrace();
             exceptions = true;
         }
 
         if(!exceptions){
+
+            System.out.print("SAVED "+person.toString());
 
             if(previousEmployee == null) {
                 data.write(person);
