@@ -4,24 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="aggiunta ricerca per data&#10;cambiata classe Date to LocalDate in tutto il progetto">
+    <list default="true" id="36abf273-e459-4394-a8ce-1714cdb38f76" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/AddEmployee.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/AddEmployee.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="master" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -34,7 +29,7 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="2JEq7mzaJMfW1ZEnihGs7sSjV8x" />
+  <component name="ProjectId" id="2JdCSbv2PMHgDALdTSF8fOwoOFZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -48,15 +43,16 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/frenc/Desktop/narcisistic&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/frenc/Desktop&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.44342107&quot;
   }
 }</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.univr.employeemanager.Main" />
       <module name="EmployeeManager" />
       <extension name="coverage">
@@ -72,67 +68,19 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="tabella jobs" />
-      <created>1671653426990</created>
+      <changelist id="36abf273-e459-4394-a8ce-1714cdb38f76" name="Changes" comment="" />
+      <created>1672398574880</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1671653426990</updated>
-      <workItem from="1671653429384" duration="620000" />
-      <workItem from="1671693018919" duration="704000" />
-      <workItem from="1671694501248" duration="1246000" />
-      <workItem from="1671701989361" duration="2142000" />
-      <workItem from="1672224062907" duration="2787000" />
-      <workItem from="1672235187227" duration="10361000" />
-      <workItem from="1672305610184" duration="6606000" />
-      <workItem from="1672313908560" duration="70000" />
-      <workItem from="1672315426277" duration="6342000" />
-      <workItem from="1672390152650" duration="5769000" />
-      <workItem from="1672396297150" duration="282000" />
+      <updated>1672398574880</updated>
+      <workItem from="1672398577035" duration="240000" />
     </task>
-    <task id="LOCAL-00001" summary="tabella jobs">
-      <created>1671702992826</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1671702992826</updated>
-    </task>
-    <task id="LOCAL-00002" summary="tabella jobs">
-      <created>1671703147774</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1671703147774</updated>
-    </task>
-    <task id="LOCAL-00003" summary="tabella jobs">
-      <created>1671703162463</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1671703162463</updated>
-    </task>
-    <task id="LOCAL-00004" summary="inizio ricerca">
-      <created>1672306982596</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1672306982596</updated>
-    </task>
-    <task id="LOCAL-00005" summary="aggiunta ricerca per data&#10;cambiata classe Date to LocalDate in tutto il progetto">
-      <created>1672322004434</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1672322004434</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,12 +96,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="inizio tabella jobs" />
-    <MESSAGE value="tabella jobs" />
-    <MESSAGE value="inizio ricerca" />
-    <MESSAGE value="aggiunta ricerca per data&#10;cambiata classe Date to LocalDate in tutto il progetto" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiunta ricerca per data&#10;cambiata classe Date to LocalDate in tutto il progetto" />
   </component>
 </project>
