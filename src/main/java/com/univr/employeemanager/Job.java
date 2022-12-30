@@ -1,21 +1,22 @@
 package com.univr.employeemanager;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Job implements Comparable<Job>{
 
-    private Date begin;
-    private Date end;
+    private LocalDate begin;
+    private LocalDate end;
     private String companyName;
     private ArrayList<String> tasks = new ArrayList<>();
     private String jobPlace;
     private Integer dailyPay;
 
-    public Job(Date begin, Date end, String companyName, ArrayList<String> tasks, String jobPlace, Integer dailyPay) {
+    public Job(LocalDate begin, LocalDate end, String companyName, ArrayList<String> tasks, String jobPlace, Integer dailyPay) {
         this.begin = begin;
 
-        if(this.begin.compareTo(end) < 0) this.end = end;
+        if(this.begin.isAfter(end)) this.end = end;
         else throw new IllegalArgumentException("End date must be after begin date");
 
         this.companyName = companyName;
@@ -24,16 +25,16 @@ public class Job implements Comparable<Job>{
         this.dailyPay = dailyPay;
     }
 
-    public Job(Date begin, Date end, String companyName, String job, String jobPlace, Integer dailyPay){
+    public Job(LocalDate begin, LocalDate end, String companyName, String job, String jobPlace, Integer dailyPay){
         this(begin, end, companyName, new ArrayList<String>(), jobPlace, dailyPay);
         this.tasks.add(job);
     }
 
-    public Date getBegin() {
+    public LocalDate getBegin() {
         return begin;
     }
 
-    public Date getEnd() {
+    public LocalDate getEnd() {
         return end;
     }
 
@@ -41,10 +42,10 @@ public class Job implements Comparable<Job>{
         return dailyPay;
     }
 
+    //in teoria converte la data in numero di giorni a partire dal 1970/1/1
     public Integer getDuration() {
         if(end != null) {
-            Integer duration = (int)(end.getTime() - begin.getTime());
-            return duration;
+            return (Integer) (int)(end.toEpochDay() - begin.toEpochDay());
         }
         else return -1;
     }
@@ -65,10 +66,11 @@ public class Job implements Comparable<Job>{
         this.companyName = companyName;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(LocalDate end) {
 
-        if(this.begin.compareTo(end) > 0) throw new IllegalArgumentException("End date must be after begin date");
-        this.end = end;
+        if(this.begin.isAfter(end)) throw new IllegalArgumentException("End date must be after begin date");
+        else
+            this.end = end;
     }
 
     public void setJobPlace(String jobPlace) {
