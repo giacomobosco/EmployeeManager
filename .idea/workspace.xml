@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d60d74be-406f-442d-9552-098ff5207aea" name="Changes" comment="somthing new">
+    <list default="true" id="d60d74be-406f-442d-9552-098ff5207aea" name="Changes" comment="Job constructor (to finish)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Job.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JobController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/AddJob.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/AddJob.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +86,8 @@
       <option name="presentableId" value="Default" />
       <updated>1671888017036</updated>
       <workItem from="1671888027761" duration="10868000" />
-      <workItem from="1672230665776" duration="5709000" />
+      <workItem from="1672230665776" duration="6589000" />
+      <workItem from="1672339360370" duration="9606000" />
     </task>
     <task id="LOCAL-00001" summary="somthing new">
       <created>1671967827869</created>
@@ -98,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671967827869</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Job constructor (to finish)">
+      <created>1672248809963</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1672248809963</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +122,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="somthing new" />
-    <option name="LAST_COMMIT_MESSAGE" value="somthing new" />
+    <MESSAGE value="Job constructor (to finish)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Job constructor (to finish)" />
   </component>
 </project>

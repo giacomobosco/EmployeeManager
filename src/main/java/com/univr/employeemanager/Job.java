@@ -1,7 +1,5 @@
 package com.univr.employeemanager;
 
-import javafx.collections.ObservableList;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +13,7 @@ public class Job implements Comparable<Job> {
     private String jobPlace;
     private Integer dailyPay;
 
-    public Job(Date begin, Date end, String companyName, ArrayList<String> tasks, String jobPlace, Integer dailyPay) {
+    public Job(Date begin, Date end, String companyName, /*ArrayList<String> tasks*/ String jobPlace, Integer dailyPay) {
         this.begin = begin;
 
         if (this.begin.compareTo(end) < 0) this.end = end;
@@ -24,11 +22,11 @@ public class Job implements Comparable<Job> {
         this.companyName = companyName;
         this.tasks = tasks;
         this.jobPlace = jobPlace;
-        this.dailyPay = dailyPay;
+        this.dailyPay = this.dailyPay;
     }
 
-    public Job(Date begin, Date end, String companyName, String job, String jobPlace, Integer dailyPay) {
-        this(begin, end, companyName, new ArrayList<String>(), jobPlace, dailyPay);
+    public Job(Date begin, Date end, String companyName, String job, String jobPlace ,Integer dailyPay) {
+        this(begin, end, companyName, /*new ArrayList<String>(),*/ jobPlace, dailyPay);
         this.tasks.add(job);
     }
 
