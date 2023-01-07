@@ -1,0 +1,73 @@
+[
+  {
+    "birthPlace": "li",
+    "birthDate": "6-lug-2022",
+    "periodFrom": null,
+    "periodTo": null,
+    "birthDateString": null,
+    "address": "ergre",
+    "formerJobs": [],
+    "spokenLanguage": [],
+    "licenses": [],
+    "car": true,
+    "emergency": {
+      "firstName": "aaa",
+      "lastName": "bbb",
+      "cellNumber": "234",
+      "email": "@lk"
+    },
+    "considerYear": false,
+    "firstName": "manoiefr",
+    "lastName": "casseruoli",
+    "cellNumber": "39476",
+    "email": "@"
+  },
+  {
+    "birthPlace": "ovunque",
+    "birthDate": "11-dic-2020",
+    "periodFrom": null,
+    "periodTo": null,
+    "birthDateString": null,
+    "address": "dfg",
+    "formerJobs": [],
+    "spokenLanguage": [],
+    "licenses": [],
+    "car": false,
+    "emergency": {
+      "firstName": "sd",
+      "lastName": "gtt",
+      "cellNumber": "45678",
+      "email": "@lkij"
+    },
+    "considerYear": false,
+    "firstName": "carolino",
+    "lastName": "castagni",
+    "cellNumber": "346987",
+    "email": "tgfuh@gmail"
+  },
+  {
+    "birthPlace": "uqi",
+    "birthDate": "7-gen-2016",
+    "periodFrom": null,
+    "periodTo": null,
+    "birthDateString": null,
+    "address": "er",
+    "formerJobs": [],
+    "spokenLanguage": [],
+    "licenses": [
+      "A"
+    ],
+    "car": true,
+    "emergency": {
+      "firstName": "aaa",
+      "lastName": "bbb",
+      "cellNumber": "2345",
+      "email": "@"
+    },
+    "considerYear": false,
+    "firstName": "frenci",
+    "lastName": "manto",
+    "cellNumber": "232",
+    "email": "@@@"
+  }
+]

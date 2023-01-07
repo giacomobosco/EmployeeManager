@@ -2,17 +2,16 @@ package com.univr.employeemanager;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.TreeSet;
-import java.util.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.TreeSet;
 
 public class JSONReadWrite{
 
@@ -21,28 +20,22 @@ public class JSONReadWrite{
     private FileReader fileReader = null;
     private final String path;
 
+
+
+
     public JSONReadWrite(String filePath){
 
-        // Crea il TypeAdapter per le date
-        TypeAdapter<LocalDate> dateTypeAdapter = new TypeAdapter<LocalDate>() {
+        GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls();
 
-            private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        //inserisco questi decifratori per interpretare correttamente il formato LocalDate dal gson (sono implementati in fondo)
 
-            @Override
-            public void write(JsonWriter out, LocalDate value) throws IOException {
-                out.value(value.format(FORMATTER));
-            }
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
+        //gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
+        //gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
 
-            @Override
-            public LocalDate read(JsonReader in) throws IOException {
-                return LocalDate.parse(in.nextString(), FORMATTER);
-            }
-        };
+        gson=gsonBuilder.setPrettyPrinting().create();       //cosi il file non è solo su 1 riga
 
-        gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, dateTypeAdapter)
-                .serializeNulls()
-                .create();
         this.path = filePath;
     }
 
@@ -54,34 +47,6 @@ public class JSONReadWrite{
 
         fileWriter = new FileWriter(path);
         gson.toJson(previousSet, fileWriter);
-        fileWriter.close();
-    }
-
-    public void write(TreeSet<Employee> employees) throws IOException {
-
-        TreeSet<Employee> previousSet = readJSON();
-
-        previousSet.addAll(employees);
-
-        fileWriter = new FileWriter(path);
-        gson.toJson(previousSet, fileWriter);
-        fileWriter.close();
-    }
-
-    public void remove(Employee employee) throws IOException {
-
-        TreeSet<Employee> previousSet = readJSON();
-
-        previousSet.remove(employee);
-
-        fileWriter = new FileWriter(path);
-        gson.toJson(previousSet, fileWriter);
-        fileWriter.close();
-    }
-
-    public void eraseJSON() throws IOException {
-
-        fileWriter = new FileWriter(path);
         fileWriter.close();
     }
 
@@ -101,4 +66,61 @@ public class JSONReadWrite{
         return result;
     }
 
+
+    public void remove(Employee employee) throws IOException {
+
+        TreeSet<Employee> previousSet = readJSON();
+
+        previousSet.remove(employee);
+
+        fileWriter = new FileWriter(path);
+        gson.toJson(previousSet, fileWriter);
+        fileWriter.close();
+    }
+
+    public void eraseJSON() throws IOException {
+
+        fileWriter = new FileWriter(path);
+        fileWriter.close();
+    }
+
+
 }
+
+
+//questa classi permettono al gson di scrivere e interpretare correttamente il formato LocalDate del DatePicker
+class LocalDateSerializer implements JsonSerializer <LocalDate> {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
+
+    @Override
+    public JsonElement serialize(LocalDate localDate, Type srcType, JsonSerializationContext context) {
+        return new JsonPrimitive(formatter.format(localDate));
+    }
+}
+class LocalDateDeserializer implements JsonDeserializer < LocalDate > {
+    @Override
+    public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext context)
+            throws JsonParseException {
+        return LocalDate.parse(json.getAsString(), DateTimeFormatter.ofPattern("d-MMM-yyyy").withLocale(Locale.ITALIAN));
+    }
+}
+
+
+/*
+class LocalDateTimeSerializer implements JsonSerializer <LocalDateTime> {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss");
+
+    @Override
+    public JsonElement serialize(LocalDateTime localDateTime, Type srcType, JsonSerializationContext context) {
+        return new JsonPrimitive(formatter.format(localDateTime));
+    }
+}
+class LocalDateTimeDeserializer implements JsonDeserializer < LocalDateTime > {
+    @Override
+    public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+            throws JsonParseException {
+        return LocalDateTime.parse(json.getAsString(),
+                DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss").withLocale(Locale.ENGLISH));
+    }
+}
+*/

@@ -108,6 +108,7 @@ public class MenuController implements Initializable {
         stage.show();
 
     }
+
     @FXML
     protected void editButtonPress(ActionEvent e) throws IOException {
 

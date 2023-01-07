@@ -150,7 +150,4 @@ public class Employee extends Person {
         this.car = car;
     }
 
-    public void setConsiderYear(Boolean year){
-        this.considerYear=year;
-    }
 }

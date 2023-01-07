@@ -1,8 +1,5 @@
 package com.univr.employeemanager;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,37 +25,56 @@ import java.util.ResourceBundle;
 public class EmployeeController implements Initializable {
 
     @FXML
-    private TableView<Job> jobTable;
+    public TableView jobTable;
     @FXML
-    private Label errorField;
+    public Label errorField;
     @FXML
     private TextField firstNameField, lastNameField, addressField, birthPlaceField, emailField, cellNumberField, emergencyEmailField, emergencyCellNumberField, emergencyLastNameField, emergencyFirstNameField;
     @FXML
-    private DatePicker birthDateField;
+    private DatePicker birthDateField,periodFromField,periodToField;
     @FXML
-    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german;
+    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german,yearConsidered;
     @FXML
-    private Button addJobButton, removeJobButton, saveButton, cancelButton;
+    private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
+
     @FXML
-    private TableColumn<Job,String> taskField,companyField,payField,jobPlaceField;
+    private TableColumn<Job,String> taskField;
     @FXML
-    private TableColumn<Job, Date> beginField, endField;
+    private TableColumn<Job, Date> endField;
+    @FXML
+    private TableColumn<Job,String> companyField;
+    @FXML
+    private TableColumn<Job,String> payField;
+    @FXML
+    private TableColumn<Job,String> jobPlaceField;
+    @FXML
+    private TableColumn<Job, Date> beginField;
+
     private ObservableList<Job> jobs;
-    private Employee employee, previousEmployee = null;
+    private Employee previousEmployee = null;
     private Stage stage;
     private Scene scene;
-    private Parent root;
+
 
     JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public EmployeeController() throws IOException {
     }
 
-    public void updateField(Employee e,  boolean editable) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        taskField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
+        beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+        endField.setCellValueFactory(new PropertyValueFactory<Job,Date>("end"));
+        companyField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
+        jobPlaceField.setCellValueFactory(new PropertyValueFactory<>("jobPlace"));
+        payField.setCellValueFactory(new PropertyValueFactory<>("DailyPay"));
 
-        employee = e;
-        this.previousEmployee = previousEmployee;
+    }
+
+    public void updateField(Employee e, boolean editable) {
+
+        previousEmployee = e;
 
         cellNumberField.setText(e.getCellNumber());
         emailField.setText(e.getEmail());
@@ -94,14 +109,19 @@ public class EmployeeController implements Initializable {
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
-        taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
-        beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+        if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
+        {
+            periodFromField.setValue(e.getAvailablePeriod()[0]);
+            periodToField.setValue(e.getAvailablePeriod()[1]);
+        }
 
-        updateTable();
+        jobs = FXCollections.observableArrayList(e.getFormerJobs());
+        //System.out.print("\n"+e.getFormerJobs().toString());
+        jobTable.setItems(jobs);
 
         //se sono arrivato a questa finestra tramite detailButton o tramite editButton
         //disabilito o no i campi e il tasto salva
-        if(editable)
+        if(editable==true)
         {
             saveButton.setDisable(false);
             saveButton.setDisable(false);
@@ -129,44 +149,15 @@ public class EmployeeController implements Initializable {
 
     @FXML
     public void AddJobButtonPress(ActionEvent actionEvent) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
-        root = loader.load();
-
-        JobController jobController = loader.getController();
-        jobController.updateField(null, employee, previousEmployee);
-
-        stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("AddJob.fxml"));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Add Job");
-        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 
     @FXML
     public void RemoveJobButtonPress(ActionEvent actionEvent) {
-    }
-
-    public void EditJobButtonPress(ActionEvent actionEvent) throws IOException {
-
-        Job selected = jobTable.getSelectionModel().getSelectedItem();
-
-        if(selected != null) {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
-            root = loader.load();
-
-            JobController jobController = loader.getController();
-            jobController.updateField(selected, employee, previousEmployee);
-
-            stage = new Stage();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Edit Job");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
-        }
     }
 
     @FXML
@@ -201,6 +192,9 @@ public class EmployeeController implements Initializable {
                             emergencyCellNumberField.getText(),
                             emergencyEmailField.getText()));
 
+            //LocalDate localDate = birthDateField.getValue();
+            //Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            //person.setBirthDate(Date.from(instant));
 
             if(italian.isSelected()) person.setSpokenLanguage(Employee.Language.ITALIAN);
             if(english.isSelected()) person.setSpokenLanguage(Employee.Language.ENGLISH);
@@ -218,12 +212,18 @@ public class EmployeeController implements Initializable {
             if(licenseD.isSelected()) person.setLicense(Employee.License.D);
             if(licenseE.isSelected()) person.setLicense(Employee.License.E);
 
+            if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
+                person.setAvailablePeriod(periodFromField.getValue(),periodToField.getValue());
+
         } catch (IllegalArgumentException e){
             errorField.setText(e.getMessage());
+            e.printStackTrace();
             exceptions = true;
         }
 
         if(!exceptions){
+
+            System.out.print("SAVED "+person.toString());
 
             if(previousEmployee == null) {
                 data.write(person);
@@ -232,27 +232,6 @@ public class EmployeeController implements Initializable {
                 data.remove(previousEmployee);
                 data.write(person);
             }
-        }
-    }
-
-    private void updateTable(){
-        jobs = FXCollections.observableArrayList(employee.getFormerJobs());
-        jobTable.setItems(jobs);
-    }
-
-    public class SharedJob {
-        private final ObjectProperty<Job> sharedJob = new SimpleObjectProperty<>();
-
-        public Job getSharedJob() {
-            return sharedJob.get();
-        }
-
-        public void setSharedJob(Job value) {
-            sharedJob.set(value);
-        }
-
-        public ObjectProperty<Job> sharedJobProperty() {
-            return sharedJob;
         }
     }
 }
