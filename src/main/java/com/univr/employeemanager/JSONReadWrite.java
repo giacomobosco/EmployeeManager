@@ -1,14 +1,18 @@
 package com.univr.employeemanager;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.TreeSet;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class JSONReadWrite{
 
@@ -19,7 +23,26 @@ public class JSONReadWrite{
 
     public JSONReadWrite(String filePath){
 
-        gson = new GsonBuilder().serializeNulls().create();
+        // Crea il TypeAdapter per le date
+        TypeAdapter<LocalDate> dateTypeAdapter = new TypeAdapter<LocalDate>() {
+
+            private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            @Override
+            public void write(JsonWriter out, LocalDate value) throws IOException {
+                out.value(value.format(FORMATTER));
+            }
+
+            @Override
+            public LocalDate read(JsonReader in) throws IOException {
+                return LocalDate.parse(in.nextString(), FORMATTER);
+            }
+        };
+
+        gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, dateTypeAdapter)
+                .serializeNulls()
+                .create();
         this.path = filePath;
     }
 

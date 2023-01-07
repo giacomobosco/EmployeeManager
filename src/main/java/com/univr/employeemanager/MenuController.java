@@ -2,6 +2,7 @@ package com.univr.employeemanager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,17 +17,34 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.TreeSet;
 
 public class MenuController implements Initializable {
 
+    //oggetti usati per la ricerca
+    //---------------------------------------------------
+    @FXML
+    private RadioButton ORenable,ANDenable;
+    @FXML
+    private CheckBox hasLicenseEnable,hasCarEnable,birthIntervalEnable;
+    @FXML
+    private DatePicker birthFromDate;
+    @FXML
+    private DatePicker birthToDate;
+    @FXML
+    private Button searchButton,restoreButton;
     @FXML
     private Button newButton, editButton, deleteButton, detailsButton;
     @FXML
     private TextArea textField;
     @FXML
-    private TableColumn <Employee, String> addressField, nameField, lastNameField, birthDateField, cellNumberField;
+    private TableColumn <Employee, String> addressField, nameField, lastNameField, cellNumberField;
+    @FXML
+    private TableColumn <Employee, LocalDate> birthDateField;
     @FXML
     private TableView<Employee> mainTable;
     @FXML
@@ -37,20 +55,20 @@ public class MenuController implements Initializable {
     private Parent root;
     private JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
-    public MenuController() {
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         detailsButton.setDisable(true);
         deleteButton.setDisable(true);
         editButton.setDisable(true);
+        ORenable.setSelected(true);
+
+        birthFromDate.setDisable(false);
+        birthIntervalEnable.setDisable(true);
 
         mainTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!=null)
             {
-                System.out.print("evento tabella click\n");
                 detailsButton.setDisable(false);
                 deleteButton.setDisable(false);
                 editButton.setDisable(false);
@@ -58,22 +76,9 @@ public class MenuController implements Initializable {
 
         });
 
-        try {
-            Employee manto1 = new Employee("Franci", "Manto", "a casa sua", new Date(100, 7, 16), "casa sua", "@", "234", false, new Person("Giacomo", "Bosco", "478294", "a@b"));
-
-            manto1.setSpokenLanguage(Employee.Language.ITALIAN);
-            manto1.setSpokenLanguage(Employee.Language.ENGLISH);
-
-            data.write(manto1);
-            Employee manto2 = new Employee("Franci", "Mano", "a casa sua", new Date(100, 7, 16), "casa sua", "@", "234", true,null);
-            data.write(manto2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         nameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         lastNameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        birthDateField.setCellValueFactory(new PropertyValueFactory<Employee, String>("birthDateString"));
+        birthDateField.setCellValueFactory(new PropertyValueFactory<Employee, LocalDate>("birthDate"));
         cellNumberField.setCellValueFactory(new PropertyValueFactory<Employee, String>("cellNumber"));
         addressField.setCellValueFactory(new PropertyValueFactory<Employee, String>("address"));
 
@@ -86,6 +91,7 @@ public class MenuController implements Initializable {
 
     @FXML
     public void textAreaClicked(MouseEvent mouseEvent) {
+
         mainTable.getSelectionModel().clearSelection();
         detailsButton.setDisable(true);
         deleteButton.setDisable(true);
@@ -159,4 +165,148 @@ public class MenuController implements Initializable {
         people = FXCollections.observableArrayList(data.readJSON());
         mainTable.setItems(people);
     }
+
+    //metodi usati per la ricerca
+    //------------------------------------------------------------------------
+
+    TreeSet<Employee> result= new TreeSet<>();
+    TreeSet<Employee> hasCarResult = new TreeSet<>();
+    TreeSet<Employee> hasLicenseResult = new TreeSet<>();
+    TreeSet<Employee> birthDateResult = new TreeSet<>();
+
+    public void ORbuttonPress(ActionEvent actionEvent) {
+
+        ANDenable.setSelected(false);
+        searchButton.setDisable(false);
+    }
+
+    public void ANDbuttonPress(ActionEvent actionEvent) {
+
+        ORenable.setSelected(false);
+        searchButton.setDisable(false);
+    }
+
+    public void searchButtonPress(ActionEvent actionEvent) {
+
+        if(this.result!=null)
+            result.clear();
+
+        //ricerca in or: aggiungo al treeset risultato, tutti i treeset delle ricerche singole
+        //il treeset si occuperà di non avere ripetizioni (vedi compareTo di Person)
+        if(ORenable.isSelected())
+        {
+            result.addAll(hasCarResult);
+            result.addAll(hasLicenseResult);
+            result.addAll(birthDateResult);
+
+        }
+
+        //ricerca in AND: aggiungo al treeset risultato, tutti i treeset delle ricerche singole
+        //infine elimino dal risultato tutti gli elementi che non sono in comune con ogni treeset di singola ricerca
+        //difatto eseguendo un intersezione, quindi un AND
+        if(ANDenable.isSelected())
+        {
+            result.addAll(hasCarResult);
+            result.addAll(hasLicenseResult);
+            result.addAll(birthDateResult);
+
+            if(hasCarEnable.isSelected())
+                result.retainAll(hasCarResult);
+            if(hasLicenseEnable.isSelected())
+                result.retainAll(hasLicenseResult);
+            if(birthIntervalEnable.isSelected())
+                result.retainAll(birthDateResult);
+        }
+
+        people= FXCollections.observableArrayList(result);
+        mainTable.setItems(people);
+
+
+    }
+
+    public void restoreButtonPress(ActionEvent actionEvent) throws IOException {
+        updateTable();
+        result.clear();
+
+        hasCarResult.clear();
+        hasLicenseResult.clear();
+        birthDateResult.clear();
+        hasCarEnable.setSelected(false);
+        hasLicenseEnable.setSelected(false);
+        birthIntervalEnable.setSelected(false);
+    }
+
+    //stream di employee, filtro quelli che non hanno il set licenze vuoto
+    //quindi li aggiungo al set risultato di questa ricerca
+    public void hasLicenseEnablePress(ActionEvent actionEvent) {
+
+        if(hasLicenseResult!=null)
+            hasLicenseResult.clear();
+
+        people.stream()
+                .filter(p -> !p.getLicenses().isEmpty())
+                .forEach(p->hasLicenseResult.add(p));
+    }
+
+    //stream di employee, filtro quelli che hanno una macchina
+    //quindi li aggiungo al set risultato di questa ricerca
+    public void hasCarEnablePress(ActionEvent actionEvent) {
+
+        if(hasCarResult!=null)
+            hasCarResult.clear();
+
+        people.stream()
+                .filter(p -> p.hasCar())
+                .forEach(p-> hasCarResult.add(p));
+
+    }
+
+
+    public void birthIntervalEnablePress(ActionEvent actionEvent) {
+
+        if(birthDateResult!=null)
+            birthDateResult.clear();
+
+        //se la data di fine e di inizio contengono data valida
+        if(birthFromDate!=null&&birthToDate!=null)
+        {
+            System.out.print("\nsearching from: "+birthFromDate.getValue());
+            System.out.print("\nto              "+birthToDate.getValue());
+
+            people.stream()
+                    .filter(p->p.getBirthDate().isAfter(birthFromDate.getValue())&&p.getBirthDate().isBefore(birthToDate.getValue()))
+                    .forEach(p->birthDateResult.add(p));
+
+        }
+
+        System.out.print("\ndate stream result:");
+        for (Employee d:birthDateResult
+        ) {
+            System.out.print("\n"+d.getBirthDate()+" "+d.getFirstName());
+        }
+
+        System.out.print("\n");
+
+    }
+
+
+
+    //permetto di abilitare le date solo se hanno un valore dentro
+    public void birthFromDatePress(ActionEvent actionEvent) {
+
+        if(birthFromDate.getValue()!=null&&birthToDate.getValue()!=null)
+            birthIntervalEnable.setDisable(false);
+        else
+            birthIntervalEnable.setDisable(true);
+
+
+    }
+    public void birthToDatePress(ActionEvent actionEvent) {
+        if(birthToDate.getValue()!=null&&birthFromDate.getValue()!=null)
+            birthIntervalEnable.setDisable(false);
+        else
+            birthIntervalEnable.setDisable(true);
+
+    }
+
 }

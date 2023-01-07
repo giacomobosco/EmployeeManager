@@ -1,7 +1,5 @@
 package com.univr.employeemanager;
-import javafx.beans.property.SimpleStringProperty;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
@@ -25,7 +23,7 @@ public class Employee extends Person {
     };
 
     private String birthPlace = null;
-    private Date birthDate;
+    private LocalDate birthDate, periodFrom, periodTo;
     private String birthDateString;
     private String address;
     private TreeSet<Job> formerJobs = new TreeSet<>();
@@ -33,11 +31,12 @@ public class Employee extends Person {
     private TreeSet<License> licenses = new TreeSet<>();
     private Boolean car = false;
     private Person emergency = null;
+    private boolean considerYear;
 
     public Employee(String firstName,
                     String lastName,
                     String birthPlace,
-                    Date birthDate,
+                    LocalDate birthDate,
                     String address,
                     String email,
                     String cellNumber,
@@ -47,9 +46,7 @@ public class Employee extends Person {
         super(firstName, lastName, cellNumber, email);
         this.birthPlace = birthPlace;
         this.birthDate = birthDate;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        this.birthDateString = formatter.format(birthDate);
-        System.out.println(birthDateString);
+
         this.address = address;
         this.car = car;
         this.emergency = emergency;
@@ -59,7 +56,7 @@ public class Employee extends Person {
         return birthPlace;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -87,8 +84,25 @@ public class Employee extends Person {
         return car;
     }
 
+    public Boolean getConsiderYear(){return this.considerYear;}
+
     public Person getEmergency() {
         return emergency;
+    }
+
+    public LocalDate[] getAvailablePeriod()
+    {
+        return new LocalDate[]{periodFrom,periodTo};
+    }
+
+
+    public void setAvailablePeriod(LocalDate l1,LocalDate l2)
+    {
+        if(l1.isAfter(l2))
+            throw new IllegalArgumentException("period from is grater than period to");
+
+        this.periodFrom=l1;
+        this.periodTo=l2;
     }
 
     public void setBirthPlace(String birthPlace) {
@@ -99,10 +113,14 @@ public class Employee extends Person {
         this.address = address;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
+
+        for(Job job : formerJobs){
+            if (job.getBegin().compareTo(birthDate) < 0)
+                throw new IllegalArgumentException("Job begin date is grater then birth date");
+        }
+
         this.birthDate = birthDate;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        this.birthDateString = formatter.format(birthDate);
     }
 
     public void setFormerJob(Job formerJob) {
@@ -130,5 +148,9 @@ public class Employee extends Person {
 
     public void setCar(Boolean car) {
         this.car = car;
+    }
+
+    public void setConsiderYear(Boolean year){
+        this.considerYear=year;
     }
 }

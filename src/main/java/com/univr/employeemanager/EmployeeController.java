@@ -1,5 +1,8 @@
 package com.univr.employeemanager;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,9 +29,9 @@ import java.util.ResourceBundle;
 public class EmployeeController implements Initializable {
 
     @FXML
-    public TableView jobTable;
+    private TableView<Job> jobTable;
     @FXML
-    public Label errorField;
+    private Label errorField;
     @FXML
     private TextField firstNameField, lastNameField, addressField, birthPlaceField, emailField, cellNumberField, emergencyEmailField, emergencyCellNumberField, emergencyLastNameField, emergencyFirstNameField;
     @FXML
@@ -35,34 +39,27 @@ public class EmployeeController implements Initializable {
     @FXML
     private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german;
     @FXML
-    private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
-
+    private Button addJobButton, removeJobButton, saveButton, cancelButton;
     @FXML
-    private TableColumn<Job,String> taskField,endField,companyField,payField,jobPlaceField;
+    private TableColumn<Job,String> taskField,companyField,payField,jobPlaceField;
     @FXML
-    private TableColumn<Job, Date> beginField;
-
+    private TableColumn<Job, Date> beginField, endField;
     private ObservableList<Job> jobs;
-    private Employee previousEmployee = null;
+    private Employee employee, previousEmployee = null;
     private Stage stage;
     private Scene scene;
-
+    private Parent root;
 
     JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
-    public EmployeeController() throws IOException {
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
-        beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
-
     }
 
-    public void updateField(Employee e, boolean editable) {
+    public void updateField(Employee e,  boolean editable) {
 
-        previousEmployee = e;
+        employee = e;
+        this.previousEmployee = previousEmployee;
 
         cellNumberField.setText(e.getCellNumber());
         emailField.setText(e.getEmail());
@@ -70,10 +67,7 @@ public class EmployeeController implements Initializable {
         firstNameField.setText(e.getFirstName());
         lastNameField.setText(e.getLastName());
         addressField.setText(e.getAddress());
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(e.getBirthDateString(), formatter);
-        birthDateField.setValue(localDate);
+        birthDateField.setValue(e.getBirthDate());
 
         if (e.getEmergency() != null) {
             emergencyFirstNameField.setText(e.getEmergency().getFirstName());
@@ -100,13 +94,14 @@ public class EmployeeController implements Initializable {
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
-        jobs = FXCollections.observableArrayList(e.getFormerJobs());
-        System.out.print("\n"+e.getFormerJobs().toString());
-        jobTable.setItems(jobs);
+        taskField.setCellValueFactory(new PropertyValueFactory<Job,String>("companyName"));
+        beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
+
+        updateTable();
 
         //se sono arrivato a questa finestra tramite detailButton o tramite editButton
         //disabilito o no i campi e il tasto salva
-        if(editable==true)
+        if(editable)
         {
             saveButton.setDisable(false);
             saveButton.setDisable(false);
@@ -134,15 +129,44 @@ public class EmployeeController implements Initializable {
 
     @FXML
     public void AddJobButtonPress(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("AddJob.fxml"));
-        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
+        root = loader.load();
+
+        JobController jobController = loader.getController();
+        jobController.updateField(null, employee, previousEmployee);
+
+        stage = new Stage();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Add Job");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 
     @FXML
     public void RemoveJobButtonPress(ActionEvent actionEvent) {
+    }
+
+    public void EditJobButtonPress(ActionEvent actionEvent) throws IOException {
+
+        Job selected = jobTable.getSelectionModel().getSelectedItem();
+
+        if(selected != null) {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
+            root = loader.load();
+
+            JobController jobController = loader.getController();
+            jobController.updateField(selected, employee, previousEmployee);
+
+            stage = new Stage();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Edit Job");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }
     }
 
     @FXML
@@ -167,7 +191,7 @@ public class EmployeeController implements Initializable {
                     firstNameField.getText(),
                     lastNameField.getText(),
                     birthPlaceField.getText(),
-                    new Date(),
+                    birthDateField.getValue(),
                     addressField.getText(),
                     emailField.getText(),
                     cellNumberField.getText(),
@@ -177,9 +201,6 @@ public class EmployeeController implements Initializable {
                             emergencyCellNumberField.getText(),
                             emergencyEmailField.getText()));
 
-            LocalDate localDate = birthDateField.getValue();
-            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-            person.setBirthDate(Date.from(instant));
 
             if(italian.isSelected()) person.setSpokenLanguage(Employee.Language.ITALIAN);
             if(english.isSelected()) person.setSpokenLanguage(Employee.Language.ENGLISH);
@@ -211,6 +232,27 @@ public class EmployeeController implements Initializable {
                 data.remove(previousEmployee);
                 data.write(person);
             }
+        }
+    }
+
+    private void updateTable(){
+        jobs = FXCollections.observableArrayList(employee.getFormerJobs());
+        jobTable.setItems(jobs);
+    }
+
+    public class SharedJob {
+        private final ObjectProperty<Job> sharedJob = new SimpleObjectProperty<>();
+
+        public Job getSharedJob() {
+            return sharedJob.get();
+        }
+
+        public void setSharedJob(Job value) {
+            sharedJob.set(value);
+        }
+
+        public ObjectProperty<Job> sharedJobProperty() {
+            return sharedJob;
         }
     }
 }
