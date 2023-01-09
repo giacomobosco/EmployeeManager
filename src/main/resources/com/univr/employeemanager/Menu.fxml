@@ -32,49 +32,105 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.MenuController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.MenuController">
     <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="New" />
+                        <MenuItem mnemonicParsing="false" text="Open…" />
+                        <Menu mnemonicParsing="false" text="Open Recent" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="Save As…" />
+                        <MenuItem mnemonicParsing="false" text="Revert" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Preferences…" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Undo" />
+                        <MenuItem mnemonicParsing="false" text="Redo" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Cut" />
+                        <MenuItem mnemonicParsing="false" text="Copy" />
+                        <MenuItem mnemonicParsing="false" text="Paste" />
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Select All" />
+                        <MenuItem mnemonicParsing="false" text="Unselect All" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
         <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <items>
                 <AnchorPane>
-                    <children>
-                        <RadioButton fx:id="ORenable" layoutX="24.0" layoutY="46.0" mnemonicParsing="false" onAction="#ORbuttonPress" text="OR" />
-                        <RadioButton fx:id="ANDenable" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#ANDbuttonPress" text="AND" />
-                        <CheckBox fx:id="hasLicenseEnable" layoutX="26.0" layoutY="91.0" mnemonicParsing="false" onAction="#hasLicenseEnablePress" text="Has License" />
-                        <CheckBox fx:id="hasCarEnable" layoutX="27.0" layoutY="126.0" mnemonicParsing="false" onAction="#hasCarEnablePress" text="Has Car" />
-                        <DatePicker fx:id="birthFromDate" layoutX="47.0" layoutY="165.0" onAction="#birthFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth from" />
-                        <CheckBox fx:id="birthIntervalEnable" layoutX="19.0" layoutY="188.0" mnemonicParsing="false" onAction="#birthIntervalEnablePress" />
-                        <DatePicker fx:id="birthToDate" layoutX="47.0" layoutY="202.0" onAction="#birthToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth to" />
-                        <Button fx:id="searchButton" layoutX="32.0" layoutY="500.0" mnemonicParsing="false" onAction="#searchButtonPress" style="-fx-background-color: green;" text="search" textAlignment="CENTER" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="13.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="restoreButton" layoutX="133.0" layoutY="500.0" mnemonicParsing="false" onAction="#restoreButtonPress" text="restore">
-                            <font>
-                                <Font size="13.0" />
-                            </font>
-                        </Button>
-                    </children>
+               <children>
+                  <RadioButton fx:id="ANDenable" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#ANDbuttonPress" text="AND" />
+                  <RadioButton fx:id="ORenable" layoutX="24.0" layoutY="46.0" mnemonicParsing="false" onAction="#ORbuttonPress" text="OR" />
+                  <CheckBox fx:id="hasLicenseEnable" layoutX="26.0" layoutY="91.0" mnemonicParsing="false" onAction="#hasLicenseEnablePress" text="Has License" />
+                  <CheckBox fx:id="hasCarEnable" layoutX="27.0" layoutY="126.0" mnemonicParsing="false" onAction="#hasCarEnablePress" text="Has Car" />
+                  <DatePicker fx:id="birthFromDate" layoutX="47.0" layoutY="165.0" onAction="#birthFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth from" />
+                  <DatePicker fx:id="birthToDate" layoutX="47.0" layoutY="202.0" onAction="#birthToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth to" />
+                  <CheckBox fx:id="birthIntervalEnable" layoutX="19.0" layoutY="188.0" mnemonicParsing="false" onAction="#birthIntervalEnablePress" />
+                  <DatePicker fx:id="periodFromDate" layoutX="47.0" layoutY="249.0" onAction="#periodFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="period from" />
+                  <DatePicker fx:id="periodToDate" layoutX="47.0" layoutY="289.0" onAction="#periodToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="period to" />
+                  <CheckBox fx:id="periodIntervalEnable" layoutX="19.0" layoutY="274.0" mnemonicParsing="false" onAction="#periodIntervalEnablePress" />
+                  <ChoiceBox fx:id="language1" layoutX="18.0" layoutY="375.0" prefWidth="80.0" value="none" />
+                  <ChoiceBox fx:id="language2" layoutX="120.0" layoutY="375.0" prefWidth="80.0" value="none" />
+                  <Button fx:id="restoreButton" layoutX="138.0" layoutY="490.0" mnemonicParsing="false" onAction="#restoreButtonPress" text="restore">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="searchButton" layoutX="22.0" layoutY="490.0" mnemonicParsing="false" onAction="#searchButtonPress" style="-fx-background-color: green;" text="search" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label focusTraversable="false" layoutX="64.0" layoutY="342.0" text="languages spocken" />
+                  <Label focusTraversable="false" layoutX="130.0" layoutY="415.0" text="language 2" />
+                  <Label focusTraversable="false" layoutX="28.0" layoutY="415.0" text="language 1" />
+               </children>
                 </AnchorPane>
                 <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
                     <content>
                         <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
                             <children>
-                                <TableView fx:id="mainTable" layoutX="6.0" layoutY="-2.0" prefHeight="584.0" prefWidth="443.0">
+                                <TableView fx:id="mainTable" layoutX="6.0" layoutY="-2.0" prefHeight="546.0" prefWidth="443.0">
                                     <columns>
                                         <TableColumn fx:id="nameField" prefWidth="75.0" text="Name" />
                                         <TableColumn fx:id="lastNameField" prefWidth="75.0" text="Last Name" />
@@ -97,10 +153,22 @@
                 </AnchorPane>
             </items>
         </SplitPane>
-      <Label fx:id="errorField" textFill="RED">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+            <children>
+                <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="11.0" fx:id="x3" />
+                    </font>
+                    <textFill>
+                        <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
+                    </textFill>
+                </Label>
+                <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+                <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+            </children>
+            <padding>
+                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+            </padding>
+        </HBox>
     </children>
 </VBox>
