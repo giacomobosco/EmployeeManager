@@ -53,7 +53,7 @@
         "begin": "9-gen-2023",
         "end": "29-gen-2023",
         "companyName": "mauoro",
-        "tasks": "bene dai",
+        "tasks": "bene daiok",
         "jobPlace": "acslmclsa",
         "dailyPay": 21434
       }
@@ -81,7 +81,16 @@
     "periodFrom": "2-gen-2023",
     "periodTo": "15-gen-2023",
     "address": "ergre",
-    "formerJobs": [],
+    "formerJobs": [
+      {
+        "begin": "12-gen-2023",
+        "end": "22-gen-2023",
+        "companyName": "ciaoo",
+        "tasks": "dwqwqwx",
+        "jobPlace": "ascscs",
+        "dailyPay": 2142
+      }
+    ],
     "spokenLanguage": [],
     "licenses": [],
     "car": true,
@@ -95,6 +104,30 @@
     "lastName": "casseruoli",
     "cellNumber": "39476",
     "email": "@"
+  },
+  {
+    "birthPlace": "hiuhji",
+    "birthDate": "9-gen-2007",
+    "periodFrom": "9-gen-2023",
+    "periodTo": "30-dic-2023",
+    "address": "ccccedcde",
+    "formerJobs": [],
+    "spokenLanguage": [
+      "ENGLISH",
+      "ITALIAN"
+    ],
+    "licenses": [],
+    "car": false,
+    "emergency": {
+      "firstName": "jhwxhxw",
+      "lastName": "ksjnxkjnk",
+      "cellNumber": "7947",
+      "email": "jkxqjkxn@"
+    },
+    "firstName": "Alberto",
+    "lastName": "hhx",
+    "cellNumber": "98721",
+    "email": "joxksajo@@"
   },
   {
     "birthPlace": "kllkdqlkdj",
@@ -120,7 +153,7 @@
   {
     "birthPlace": "uqi",
     "birthDate": "7-gen-2016",
-    "periodFrom": "2-gen-2015",
+    "periodFrom": "4-gen-2017",
     "periodTo": "22-gen-2023",
     "address": "er",
     "formerJobs": [

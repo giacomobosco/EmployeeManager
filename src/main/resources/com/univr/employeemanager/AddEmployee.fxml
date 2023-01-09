@@ -81,8 +81,8 @@
                 <AnchorPane layoutX="370.0" layoutY="18.0" prefHeight="306.0" prefWidth="506.0">
                     <children>
                         <Button fx:id="addJobButton" layoutX="229.0" layoutY="14.0" mnemonicParsing="false" onAction="#AddJobButtonPress" text="Add Job" />
-                        <Button fx:id="removeJobButton" layoutX="402.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveJobButtonPress" text="Remove Job" />
-                        <Button fx:id="editJobButton" layoutX="319.0" layoutY="14.0" mnemonicParsing="false" onAction="#EditJobButtonPress" text="Edit Job" />
+                        <Button fx:id="removeJobButton" disable="true" layoutX="402.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveJobButtonPress" text="Remove Job" />
+                        <Button fx:id="editJobButton" disable="true" layoutX="319.0" layoutY="14.0" mnemonicParsing="false" onAction="#EditJobButtonPress" text="Edit Job" />
                         <TableView fx:id="jobTable" layoutX="18.0" layoutY="53.0" prefHeight="290.0" prefWidth="475.0">
                             <columns>
                                 <TableColumn fx:id="taskField" prefWidth="75.0" text="Tasks" />

@@ -32,7 +32,7 @@ public class AddEmployeeController implements Initializable {
     @FXML
     private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german;
     @FXML
-    private Button addJobButton, removeJobButton, saveButton, cancelButton;
+    private Button addJobButton, removeJobButton, saveButton, cancelButton, editJobButton;
 
     @FXML
     private TableColumn<Job,String> taskField;
@@ -61,12 +61,21 @@ public class AddEmployeeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        taskField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
+        taskField.setCellValueFactory(new PropertyValueFactory<>("tasks"));
         beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
         endField.setCellValueFactory(new PropertyValueFactory<Job,Date>("end"));
         companyField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         jobPlaceField.setCellValueFactory(new PropertyValueFactory<>("jobPlace"));
         payField.setCellValueFactory(new PropertyValueFactory<>("DailyPay"));
+
+        jobTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue!=null)
+            {
+                editJobButton.setDisable(false);
+                removeJobButton.setDisable(false);
+            }
+
+        });
 
     }
 
@@ -118,20 +127,7 @@ public class AddEmployeeController implements Initializable {
 
         //se sono arrivato a questa finestra tramite detailButton o tramite editButton
         //disabilito o no i campi e il tasto salva
-        if(editable==true)
-        {
-            saveButton.setDisable(false);
-            saveButton.setDisable(false);
-            cellNumberField.setDisable(false);
-            emailField.setDisable(false);
-            birthPlaceField.setDisable(false);
-            birthDateField.setDisable(false);
-            addressField.setDisable(false);
-            firstNameField.setDisable(false);
-            lastNameField.setDisable(false);
-        }
-        else
-        {
+        if(!editable) {
             saveButton.setDisable(true);
             cellNumberField.setDisable(true);
             emailField.setDisable(true);
@@ -140,8 +136,32 @@ public class AddEmployeeController implements Initializable {
             addressField.setDisable(true);
             firstNameField.setDisable(true);
             lastNameField.setDisable(true);
+            addJobButton.setVisible(false);
+            removeJobButton.setVisible(false);
+            editJobButton.setVisible(false);
+            saveButton.setVisible(false);
+            periodFromField.setDisable(true);
+            periodToField.setDisable(true);
+            licenseA.setDisable(true);
+            licenseB.setDisable(true);
+            licenseC.setDisable(true);
+            licenseD.setDisable(true);
+            licenseE.setDisable(true);
+            hasCar.setDisable(true);
+            italian.setDisable(true);
+            english.setDisable(true);
+            french.setDisable(true);
+            spanish.setDisable(true);
+            arabic.setDisable(true);
+            chinese.setDisable(true);
+            portoguese.setDisable(true);
+            japanese.setDisable(true);
+            german.setDisable(true);
+            emergencyCellNumberField.setDisable(true);
+            emergencyEmailField.setDisable(true);
+            emergencyFirstNameField.setDisable(true);
+            emergencyLastNameField.setDisable(true);
         }
-
     }
 
     @FXML
@@ -165,7 +185,7 @@ public class AddEmployeeController implements Initializable {
             stage.show();
         }
 
-        else errorField.setText("Employee must be saved before");
+        else if (errorField.getText() == "") errorField.setText("Employee must be saved before");
     }
 
     public void EditJobButtonPress(ActionEvent actionEvent) throws IOException {
@@ -190,7 +210,7 @@ public class AddEmployeeController implements Initializable {
                 stage.show();
             }
 
-            else errorField.setText("Employee must be saved before");
+            else if (errorField.getText() == "") errorField.setText("Employee must be saved before");
         }
         else errorField.setText("Please select a job");
     }
@@ -208,7 +228,7 @@ public class AddEmployeeController implements Initializable {
             jobTable.setItems(jobs);
         }
 
-        else errorField.setText("Employee must be saved before");
+        else if (errorField.getText() == "") errorField.setText("Employee must be saved before");
     }
 
     @FXML

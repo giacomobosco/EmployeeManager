@@ -78,7 +78,6 @@ public class MenuController implements Initializable {
         mainTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!=null)
             {
-                System.out.print("evento tabella click\n");
                 detailsButton.setDisable(false);
                 deleteButton.setDisable(false);
                 editButton.setDisable(false);
@@ -250,9 +249,9 @@ public class MenuController implements Initializable {
                 result.retainAll(birthDateResult);
             if(periodIntervalEnable.isSelected())
                 result.retainAll(periodDateResult);
-            if(!language1.getValue().equalsIgnoreCase("none"))
+            if(!language1.getValue().equalsIgnoreCase("None"))
                 result.retainAll(language1Result);
-            if(!language2.getValue().equalsIgnoreCase("none"))
+            if(!language2.getValue().equalsIgnoreCase("None"))
                 result.retainAll(language2Result);
         }
 
@@ -263,10 +262,10 @@ public class MenuController implements Initializable {
     }
 
     public void restoreButtonPress(ActionEvent actionEvent) throws IOException {
+
         updateTable();
         result.clear();
         clearFields();
-
     }
     private void clearFields()
     {
