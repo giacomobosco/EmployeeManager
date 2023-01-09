@@ -2,16 +2,24 @@
   {
     "birthPlace": "Isola della Scala",
     "birthDate": "2-gen-2013",
-    "periodFrom": "16-gen-2023",
+    "periodFrom": "12-gen-2011",
     "periodTo": "29-gen-2023",
     "address": "via risaie 14 Isola della Scala(VR)",
-    "formerJobs": [],
+    "formerJobs": [
+      {
+        "begin": "2-gen-2023",
+        "end": "22-gen-2023",
+        "companyName": "ciccio enterprise",
+        "tasks": "operaio",
+        "jobPlace": "isola",
+        "dailyPay": 45
+      }
+    ],
     "spokenLanguage": [
       "ENGLISH",
       "ITALIAN"
     ],
     "licenses": [
-      "A",
       "B"
     ],
     "car": true,
@@ -89,12 +97,42 @@
     "email": "@"
   },
   {
+    "birthPlace": "kllkdqlkdj",
+    "birthDate": "9-gen-2018",
+    "periodFrom": "2-gen-2023",
+    "periodTo": "22-gen-2023",
+    "address": "qlkxmqw",
+    "formerJobs": [],
+    "spokenLanguage": [],
+    "licenses": [],
+    "car": false,
+    "emergency": {
+      "firstName": "mclkmaslkm",
+      "lastName": "sanknx",
+      "cellNumber": "782397",
+      "email": "@@"
+    },
+    "firstName": "jalksjc",
+    "lastName": "lksanknls",
+    "cellNumber": "24847",
+    "email": "@@"
+  },
+  {
     "birthPlace": "uqi",
     "birthDate": "7-gen-2016",
-    "periodFrom": "9-gen-2023",
+    "periodFrom": "2-gen-2015",
     "periodTo": "22-gen-2023",
     "address": "er",
-    "formerJobs": [],
+    "formerJobs": [
+      {
+        "begin": "26-dic-2016",
+        "end": "15-gen-2023",
+        "companyName": "La mia",
+        "tasks": "banda suona il rock",
+        "jobPlace": "dvcdscc",
+        "dailyPay": 24442
+      }
+    ],
     "spokenLanguage": [],
     "licenses": [
       "A",

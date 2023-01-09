@@ -286,7 +286,7 @@ public class AddEmployeeController implements Initializable {
 
             person.setAvailablePeriod(periodFromField.getValue(),periodToField.getValue());
 
-            if(!jobs.isEmpty())
+            if(jobs != null)
                 for (Job job:jobs) {
                     person.setFormerJob(job);
                 }

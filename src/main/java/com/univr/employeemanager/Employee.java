@@ -85,6 +85,9 @@ public class Employee extends Person {
         if(l1.isAfter(l2))
             throw new IllegalArgumentException("period from is grater than period to");
 
+        if(l1.isBefore(this.birthDate))
+            throw new IllegalArgumentException("Period from must be after birth date");
+
         this.periodFrom = l1;
         this.periodTo = l2;
     }
@@ -100,9 +103,16 @@ public class Employee extends Person {
     public void setBirthDate(LocalDate birthDate) {
 
         if(birthDate != null){
+
+            /*if(this.formerJobs != null){
+                for (Job job:formerJobs) {
+                    if (job.getBegin().isBefore(birthDate)) throw new IllegalArgumentException("Birth date must be before a job begin");
+                }
+            }*/
+
             this.birthDate = birthDate;
         }
-        else throw new IllegalArgumentException("BirthDate can't be empty");
+        else throw new IllegalArgumentException("Birth date can't be empty");
     }
 
     public void setFormerJob(Job formerJob) {

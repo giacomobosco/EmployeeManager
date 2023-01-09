@@ -55,7 +55,7 @@ public class AddJobController implements Initializable {
             dailyPayField.setText(job.getDailyPay().toString());
             jobPlaceField.setText(job.getJobPlace());
             companyNameField.setText(job.getCompanyName());
-
+            tasks.setText(job.getTasks());
             beginJobField.setValue(job.getBegin());
             endJobField.setValue(job.getEnd());
         }
