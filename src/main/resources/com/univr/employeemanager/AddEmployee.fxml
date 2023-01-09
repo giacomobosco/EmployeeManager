@@ -100,7 +100,7 @@
             <TextField fx:id="emergencyCellNumberField" layoutX="641.0" layoutY="381.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Cell Number" />
             <TextField fx:id="emergencyEmailField" layoutX="641.0" layoutY="432.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Email" />
             <Label layoutX="413.0" layoutY="351.0" prefHeight="18.0" prefWidth="125.0" text="Emergency person" />
-            <VBox layoutX="22.0" layoutY="392.0" prefHeight="134.0" prefWidth="100.0">
+            <VBox layoutX="22.0" layoutY="392.0" prefHeight="134.0" prefWidth="100.0" spacing="1.0">
                <children>
                   <Label text="Languages" />
                   <CheckBox fx:id="italian" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Italian" />
@@ -110,7 +110,7 @@
                   <CheckBox fx:id="arabic" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Arabic" />
                </children>
             </VBox>
-            <VBox layoutX="96.0" layoutY="407.0" prefHeight="104.0" prefWidth="100.0">
+            <VBox layoutX="96.0" layoutY="407.0" prefHeight="104.0" prefWidth="100.0" spacing="1.0">
                <children>
                   <CheckBox fx:id="chinese" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Chinese" />
                   <CheckBox fx:id="portoguese" mnemonicParsing="false" prefHeight="19.0" prefWidth="94.0" text="Portoguese" />
@@ -122,8 +122,8 @@
     </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="cancelButton" layoutX="814.0" layoutY="4.0" mnemonicParsing="false" onAction="#CancelButtonPress" text="Cancel" />
-            <Button fx:id="saveButton" layoutX="742.0" layoutY="4.0" mnemonicParsing="false" onAction="#SaveButtonPress" text="Save" />
+            <Button fx:id="cancelButton" layoutX="814.0" mnemonicParsing="false" onAction="#CancelButtonPress" text="Cancel" />
+            <Button fx:id="saveButton" layoutX="742.0" mnemonicParsing="false" onAction="#SaveButtonPress" text="Save" />
             <Label fx:id="errorField" layoutX="12.0" layoutY="17.0" prefHeight="18.0" prefWidth="671.0" textFill="RED" />
          </children>
       </AnchorPane>

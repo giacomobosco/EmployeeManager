@@ -33,8 +33,9 @@ public class Employee extends Person {
     private Boolean car = false;
     private Person emergency = null;
 
+    //#####################################################
     private LocalDate periodFrom,periodTo;
-
+    //#####################################################
     public Employee(String firstName,
                     String lastName,
                     String birthPlace,
@@ -50,8 +51,7 @@ public class Employee extends Person {
         this.birthPlace = birthPlace;
         this.birthDate = birthDate;
 
-        //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        //this.birthDateString = formatter.format(birthDate);
+
         this.address = address;
         this.car = car;
         this.emergency = emergency;
@@ -96,13 +96,11 @@ public class Employee extends Person {
         return emergency;
     }
 
+    //#####################################################
     public LocalDate[] getAvailablePeriod()
     {
         return new LocalDate[]{periodFrom,periodTo};
     }
-
-
-
 
     public void setAvailablePeriod(LocalDate l1,LocalDate l2)
     {
@@ -116,6 +114,7 @@ public class Employee extends Person {
         this.periodFrom=l1;
         this.periodTo=l2;
     }
+    //#####################################################
 
     public void setBirthPlace(String birthPlace) {
         this.birthPlace = birthPlace;
@@ -127,8 +126,6 @@ public class Employee extends Person {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-       // SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        //this.birthDateString = formatter.format(birthDate);
     }
 
     public void setFormerJob(Job formerJob) {
