@@ -95,7 +95,10 @@ public class Job implements Comparable<Job>{
 
     @Override
     public int compareTo(Job job) {
-        return this.begin.compareTo(job.begin);
+        int ret = this.companyName.compareTo(job.getCompanyName());
+        if(ret == 0)
+            ret = this.getBegin().compareTo(job.getBegin());
+        return ret;
     }
 
 }

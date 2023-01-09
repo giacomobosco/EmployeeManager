@@ -1,49 +1,52 @@
 package com.univr.employeemanager;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.value.ObservableObjectValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class JobController implements Initializable {
+public class AddJobController implements Initializable {
 
     @FXML
     private Label jobEndLabel;
     @FXML
     private TextArea tasks;
     @FXML
-    private TextField dailyPayField, jobPlaceField, companyNameField, taskDescription;
+    private TextField dailyPayField, jobPlaceField, companyNameField;
     @FXML
     private DatePicker beginJobField, endJobField;
     @FXML
     private Button addTaskButton, removeTaskButton, cancelButton, saveButton;
     @FXML
-    private Label errorField;
+    private Label errorField, savedLabel;
     @FXML
     private CheckBox inProgress;
-    private Employee previousEmployee, employee;
+    private Employee employee;
     private Job previousJob;
     private JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-    public void updateField(Job job, Employee employee, Employee previousEmployee){
+    public void updateField(Job job, Employee employee){
 
-        this.previousEmployee = previousEmployee;
         this.employee = employee;
         this.previousJob = job;
 
@@ -69,18 +72,27 @@ public class JobController implements Initializable {
             jobEndLabel.setVisible(true);
         }
     }
-    public void CancelButtonPress(ActionEvent actionEvent) {
+    public void CancelButtonPress(ActionEvent actionEvent) throws IOException {
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
+        root = loader.load();
+
+        AddEmployeeController employeeController = loader.getController();
+        employeeController.updateField(employee, true);
+
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("Edit Employee");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void SaveButtonPress(ActionEvent actionEvent) throws IOException {
 
         errorField.setText("");
 
-        boolean exceptions = false;
-        Job job = null;
-
-        try {
+        try{
+            Job job = null;
             job = new Job(
                     beginJobField.getValue(),
                     endJobField.getValue(),
@@ -91,24 +103,28 @@ public class JobController implements Initializable {
             );
 
 
-        } catch (IllegalArgumentException e){
-            errorField.setText(e.getMessage());
-            exceptions = true;
-        }
-
-        if(!exceptions){
-
             if(previousJob == null) {
-                data.remove(previousEmployee);
+                data.remove(employee);
                 employee.setFormerJob(job);
                 data.write(employee);
+                this.previousJob = job;
             }
             else {
-                data.remove(previousEmployee);
+                data.remove(employee);
                 employee.removeFormerJob(previousJob);
                 employee.setFormerJob(job);
                 data.write(employee);
+                this.previousJob = job;
             }
+            savedLabel.setVisible(true);
         }
+        catch (IllegalArgumentException e){
+            errorField.setText(e.getMessage());
+        }
+    }
+
+    public void SaveLabelDisappear(){
+
+        savedLabel.setVisible(false);
     }
 }

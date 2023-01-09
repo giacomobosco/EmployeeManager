@@ -2,7 +2,6 @@ package com.univr.employeemanager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +17,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
@@ -48,7 +45,7 @@ public class MenuController implements Initializable {
     @FXML
     private TableView<Employee> mainTable;
     @FXML
-    private Label display;
+    private Label errorField;
     private ObservableList<Employee> people;
     private Stage stage;
     private Scene scene;
@@ -119,7 +116,7 @@ public class MenuController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
             root = loader.load();
 
-            EmployeeController employeeController = loader.getController();
+            AddEmployeeController employeeController = loader.getController();
             employeeController.updateField(selected, true);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -127,15 +124,12 @@ public class MenuController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
-
     }
     @FXML
     protected void deleteButtonPress(ActionEvent e) throws IOException {
 
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
         if (selected != null){
-            //il messaggio di errore viene rimosso
-            display.setVisible(false);
 
             data.remove(selected);
             updateTable();
@@ -151,7 +145,7 @@ public class MenuController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
             root = loader.load();
 
-            EmployeeController employeeController = loader.getController();
+            AddEmployeeController employeeController = loader.getController();
             employeeController.updateField(selected,false);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();

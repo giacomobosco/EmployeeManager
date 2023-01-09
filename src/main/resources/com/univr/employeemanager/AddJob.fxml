@@ -40,10 +40,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="388.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.JobController">
+<VBox prefHeight="388.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.AddJobController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="399.0" prefWidth="639.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" onMouseMoved="#SaveLabelDisappear" prefHeight="399.0" prefWidth="639.0" VBox.vgrow="ALWAYS">
       <children>
             <TextField fx:id="dailyPayField" layoutX="33.0" layoutY="96.0" prefHeight="27.0" prefWidth="218.0" promptText="Daily Pay" />
             <TextField fx:id="jobPlaceField" layoutX="33.0" layoutY="152.0" prefHeight="27.0" prefWidth="218.0" promptText="Job Place" />
@@ -64,7 +65,12 @@
          <children>
             <Button fx:id="cancelButton" layoutX="748.0" layoutY="3.0" mnemonicParsing="false" onAction="#CancelButtonPress" text="Cancel" />
             <Button fx:id="saveButton" layoutX="689.0" layoutY="3.0" mnemonicParsing="false" onAction="#SaveButtonPress" text="Save" />
-            <Label fx:id="errorField" layoutX="12.0" layoutY="17.0" prefHeight="18.0" prefWidth="641.0" textFill="RED" />
+            <Label fx:id="errorField" layoutX="12.0" layoutY="17.0" prefHeight="18.0" prefWidth="558.0" textFill="RED" />
+            <Label fx:id="savedLabel" layoutX="623.0" layoutY="8.0" prefHeight="18.0" prefWidth="89.0" text="SAVED" textFill="#30a530" visible="false">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
   </children>

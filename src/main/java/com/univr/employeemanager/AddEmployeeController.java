@@ -11,31 +11,28 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class EmployeeController implements Initializable {
+public class AddEmployeeController implements Initializable {
 
     @FXML
-    public TableView jobTable;
+    public TableView<Job> jobTable;
     @FXML
-    public Label errorField;
+    public Label errorField, savedLabel;
     @FXML
     private TextField firstNameField, lastNameField, addressField, birthPlaceField, emailField, cellNumberField, emergencyEmailField, emergencyCellNumberField, emergencyLastNameField, emergencyFirstNameField;
     @FXML
     private DatePicker birthDateField,periodFromField,periodToField;
     @FXML
-    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german,yearConsidered;
+    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german;
     @FXML
-    private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
+    private Button addJobButton, removeJobButton, saveButton, cancelButton;
 
     @FXML
     private TableColumn<Job,String> taskField;
@@ -54,11 +51,12 @@ public class EmployeeController implements Initializable {
     private Employee previousEmployee = null;
     private Stage stage;
     private Scene scene;
+    private Parent root;
 
 
     JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
-    public EmployeeController() throws IOException {
+    public AddEmployeeController() throws IOException {
     }
 
     @Override
@@ -109,11 +107,10 @@ public class EmployeeController implements Initializable {
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
-        if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
-        {
-            periodFromField.setValue(e.getAvailablePeriod()[0]);
-            periodToField.setValue(e.getAvailablePeriod()[1]);
-        }
+
+        periodFromField.setValue(e.getAvailablePeriod()[0]);
+        periodToField.setValue(e.getAvailablePeriod()[1]);
+
 
         jobs = FXCollections.observableArrayList(e.getFormerJobs());
         //System.out.print("\n"+e.getFormerJobs().toString());
@@ -149,22 +146,78 @@ public class EmployeeController implements Initializable {
 
     @FXML
     public void AddJobButtonPress(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("AddJob.fxml"));
-        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+        errorField.setText("");
+        Employee employee = getEmployee();
+
+        if (employee != null && employee.compareTo(previousEmployee) == 0){
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
+            root = loader.load();
+
+            AddJobController addJobController = loader.getController();
+            addJobController.updateField(null, employee);
+
+            stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setTitle("Edit Job");
+            stage.setScene(scene);
+            stage.show();
+        }
+
+        else errorField.setText("Employee must be saved before");
+    }
+
+    public void EditJobButtonPress(ActionEvent actionEvent) throws IOException {
+
+        errorField.setText("");
+        Job selected = jobTable.getSelectionModel().getSelectedItem();
+        Employee employee = getEmployee();
+
+        if (selected != null){
+
+            if (employee != null && employee.compareTo(previousEmployee) == 0){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
+                root = loader.load();
+
+                AddJobController addJobController = loader.getController();
+                addJobController.updateField(selected, employee);
+
+                stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setTitle("Edit Job");
+                stage.setScene(scene);
+                stage.show();
+            }
+
+            else errorField.setText("Employee must be saved before");
+        }
+        else errorField.setText("Please select a job");
     }
 
     @FXML
     public void RemoveJobButtonPress(ActionEvent actionEvent) {
+
+        Job selected = jobTable.getSelectionModel().getSelectedItem();
+        Employee employee = getEmployee();
+
+        if (selected != null && employee.compareTo(previousEmployee) == 0){
+
+            jobs.remove(selected);
+
+            jobTable.setItems(jobs);
+        }
+
+        else errorField.setText("Employee must be saved before");
     }
 
     @FXML
     public void CancelButtonPress(ActionEvent actionEvent) throws IOException {
+
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        stage.setTitle("Menu");
         stage.setScene(scene);
         stage.show();
     }
@@ -172,29 +225,48 @@ public class EmployeeController implements Initializable {
     @FXML
     public void SaveButtonPress(ActionEvent actionEvent) throws IOException {
 
+        Employee employee = getEmployee();
+
+        if (employee != null){
+
+            if(previousEmployee == null) {
+                data.write(employee);
+            }
+            else {
+                data.remove(previousEmployee);
+                data.write(employee);
+            }
+            previousEmployee = employee;
+            savedLabel.setVisible(true);
+        }
+    }
+
+    public void saveLabelDisappear(){
+        savedLabel.setVisible(false);
+    }
+
+    private Employee getEmployee(){
+
         errorField.setText("");
 
-        boolean exceptions = false;
-        Employee person = null;
+        Employee returnEmployee = null;
 
         try{
+            Employee person;
             person = new Employee(
                     firstNameField.getText(),
                     lastNameField.getText(),
-                    birthPlaceField.getText(),
-                    birthDateField.getValue(),
-                    addressField.getText(),
                     emailField.getText(),
-                    cellNumberField.getText(),
-                    hasCar.isSelected(),
-                    new Person(emergencyFirstNameField.getText(),
-                            emergencyLastNameField.getText(),
-                            emergencyCellNumberField.getText(),
-                            emergencyEmailField.getText()));
+                    cellNumberField.getText());
 
-            //LocalDate localDate = birthDateField.getValue();
-            //Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-            //person.setBirthDate(Date.from(instant));
+            person.setBirthPlace(birthPlaceField.getText());
+            person.setBirthDate(birthDateField.getValue());
+            person.setAddress(addressField.getText());
+            person.setCar(hasCar.isSelected());
+            person.setEmergency(new Person(emergencyFirstNameField.getText(),
+                    emergencyLastNameField.getText(),
+                    emergencyCellNumberField.getText(),
+                    emergencyEmailField.getText()));
 
             if(italian.isSelected()) person.setSpokenLanguage(Employee.Language.ITALIAN);
             if(english.isSelected()) person.setSpokenLanguage(Employee.Language.ENGLISH);
@@ -212,26 +284,20 @@ public class EmployeeController implements Initializable {
             if(licenseD.isSelected()) person.setLicense(Employee.License.D);
             if(licenseE.isSelected()) person.setLicense(Employee.License.E);
 
-            if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
-                person.setAvailablePeriod(periodFromField.getValue(),periodToField.getValue());
+            person.setAvailablePeriod(periodFromField.getValue(),periodToField.getValue());
 
-        } catch (IllegalArgumentException e){
+            if(!jobs.isEmpty())
+                for (Job job:jobs) {
+                    person.setFormerJob(job);
+                }
+
+            returnEmployee = person;
+
+        } catch (IllegalArgumentException | NullPointerException e){
             errorField.setText(e.getMessage());
             e.printStackTrace();
-            exceptions = true;
         }
 
-        if(!exceptions){
-
-            System.out.print("SAVED "+person.toString());
-
-            if(previousEmployee == null) {
-                data.write(person);
-            }
-            else {
-                data.remove(previousEmployee);
-                data.write(person);
-            }
-        }
+        return returnEmployee;
     }
 }

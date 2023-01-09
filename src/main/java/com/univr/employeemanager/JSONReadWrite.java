@@ -78,6 +78,12 @@ public class JSONReadWrite{
         fileWriter.close();
     }
 
+    public boolean contains(Employee employee) throws IOException {
+
+        TreeSet<Employee> previousSet = readJSON();
+        return  previousSet.contains(employee);
+    }
+
     public void eraseJSON() throws IOException {
 
         fileWriter = new FileWriter(path);

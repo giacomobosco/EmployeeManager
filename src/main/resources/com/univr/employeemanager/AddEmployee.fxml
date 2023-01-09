@@ -44,29 +44,33 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="533.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.EmployeeController">
+<VBox prefHeight="533.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.AddEmployeeController">
     <children>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="399.0" prefWidth="639.0" VBox.vgrow="ALWAYS">
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" onMouseMoved="#saveLabelDisappear" prefHeight="565.0" prefWidth="902.0" VBox.vgrow="ALWAYS">
             <children>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6f3ff" height="323.0" layoutX="361.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" width="519.0" />
-                <TextField fx:id="firstNameField" layoutX="14.0" layoutY="18.0" prefHeight="27.0" prefWidth="218.0" promptText="First Name" />
-                <TextField fx:id="lastNameField" layoutX="14.0" layoutY="63.0" prefHeight="27.0" prefWidth="218.0" promptText="Last Name" />
-                <TextField fx:id="cellNumberField" layoutX="13.0" layoutY="105.0" prefHeight="27.0" prefWidth="218.0" promptText="Cell Number" />
-                <TextField fx:id="emailField" layoutX="14.0" layoutY="147.0" prefHeight="27.0" prefWidth="218.0" promptText="Email" />
-                <TextField fx:id="birthPlaceField" layoutX="14.0" layoutY="190.0" prefHeight="27.0" prefWidth="218.0" promptText="Birth Place" />
-                <DatePicker fx:id="birthDateField" layoutX="14.0" layoutY="232.0" prefHeight="27.0" prefWidth="218.0" promptText="Birth Date" />
-                <TextField fx:id="addressField" layoutX="14.0" layoutY="272.0" prefHeight="27.0" prefWidth="218.0" promptText="Address" />
-                <Label layoutX="64.0" layoutY="314.0" text="availability period">
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6f3ff" height="375.0" layoutX="361.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" width="519.0" />
+            <Label layoutX="21.0" layoutY="9.0" text="First name" />
+                <TextField fx:id="firstNameField" layoutX="14.0" layoutY="27.0" prefHeight="27.0" prefWidth="218.0" promptText="First Name" />
+                <TextField fx:id="lastNameField" layoutX="14.0" layoutY="84.0" prefHeight="27.0" prefWidth="218.0" promptText="Last Name" />
+                <TextField fx:id="cellNumberField" layoutX="14.0" layoutY="138.0" prefHeight="27.0" prefWidth="218.0" promptText="Cell Number" />
+                <TextField fx:id="emailField" layoutX="14.0" layoutY="191.0" prefHeight="27.0" prefWidth="218.0" promptText="Email" />
+                <TextField fx:id="birthPlaceField" layoutX="14.0" layoutY="247.0" prefHeight="27.0" prefWidth="218.0" promptText="Birth Place" />
+                <DatePicker fx:id="birthDateField" layoutX="14.0" layoutY="310.0" prefHeight="27.0" prefWidth="218.0" promptText="Birth Date" />
+                <TextField fx:id="addressField" layoutX="14.0" layoutY="369.0" prefHeight="27.0" prefWidth="218.0" promptText="Address" />
+                <Label layoutX="22.0" layoutY="408.0" text="Availability period">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <DatePicker fx:id="periodToField" layoutX="146.0" layoutY="347.0" prefHeight="25.0" prefWidth="100.0" promptText="to" />
-                <DatePicker fx:id="periodFromField" layoutX="14.0" layoutY="347.0" prefHeight="25.0" prefWidth="100.0" promptText="from" />
+                <DatePicker fx:id="periodToField" layoutX="142.0" layoutY="432.0" prefHeight="25.0" prefWidth="100.0" promptText="to" />
+                <DatePicker fx:id="periodFromField" layoutX="18.0" layoutY="432.0" prefHeight="25.0" prefWidth="100.0" promptText="from" />
                 <CheckBox fx:id="hasCar" layoutX="261.0" layoutY="194.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Has car?" />
                 <VBox layoutX="261.0" layoutY="18.0" prefHeight="131.0" prefWidth="100.0">
                     <children>
-                        <Label text="Licenses" />
+                        <Label text="Licenses">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
                         <CheckBox fx:id="licenseA" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="A" />
                         <CheckBox fx:id="licenseB" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="B" />
                         <CheckBox fx:id="licenseC" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="C" />
@@ -76,9 +80,10 @@
                 </VBox>
                 <AnchorPane layoutX="370.0" layoutY="18.0" prefHeight="306.0" prefWidth="506.0">
                     <children>
-                        <Button fx:id="addJobButton" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#AddJobButtonPress" text="Add Job" />
+                        <Button fx:id="addJobButton" layoutX="229.0" layoutY="14.0" mnemonicParsing="false" onAction="#AddJobButtonPress" text="Add Job" />
                         <Button fx:id="removeJobButton" layoutX="402.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveJobButtonPress" text="Remove Job" />
-                        <TableView fx:id="jobTable" layoutX="18.0" layoutY="53.0" prefHeight="245.0" prefWidth="474.0">
+                        <Button fx:id="editJobButton" layoutX="319.0" layoutY="14.0" mnemonicParsing="false" onAction="#EditJobButtonPress" text="Edit Job" />
+                        <TableView fx:id="jobTable" layoutX="18.0" layoutY="53.0" prefHeight="290.0" prefWidth="475.0">
                             <columns>
                                 <TableColumn fx:id="taskField" prefWidth="75.0" text="Tasks" />
                                 <TableColumn fx:id="beginField" prefWidth="75.0" text="Begin" />
@@ -95,22 +100,15 @@
                         </Label>
                     </children>
                 </AnchorPane>
-                <TextField fx:id="emergencyFirstNameField" layoutX="391.0" layoutY="381.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency First Name" />
-                <TextField fx:id="emergencyLastNameField" layoutX="391.0" layoutY="432.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Last Name" />
-                <TextField fx:id="emergencyCellNumberField" layoutX="641.0" layoutY="381.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Cell Number" />
-                <TextField fx:id="emergencyEmailField" layoutX="641.0" layoutY="432.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Email" />
-                <Label layoutX="413.0" layoutY="351.0" prefHeight="18.0" prefWidth="125.0" text="Emergency person" />
-                <VBox layoutX="22.0" layoutY="392.0" prefHeight="134.0" prefWidth="100.0">
-                    <children>
-                        <Label text="Languages" />
-                        <CheckBox fx:id="italian" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Italian" />
-                        <CheckBox fx:id="english" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="English" />
-                        <CheckBox fx:id="french" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="French" />
-                        <CheckBox fx:id="spanish" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Spanish" />
-                        <CheckBox fx:id="arabic" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Arabic" />
-                    </children>
-                </VBox>
-                <VBox layoutX="96.0" layoutY="407.0" prefHeight="104.0" prefWidth="100.0">
+                <TextField fx:id="emergencyFirstNameField" layoutX="391.0" layoutY="477.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency First Name" />
+                <TextField fx:id="emergencyLastNameField" layoutX="391.0" layoutY="543.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Last Name" />
+                <TextField fx:id="emergencyCellNumberField" layoutX="641.0" layoutY="477.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Cell Number" />
+                <TextField fx:id="emergencyEmailField" layoutX="641.0" layoutY="543.0" prefHeight="27.0" prefWidth="218.0" promptText="Emergency Email" />
+                <Label layoutX="391.0" layoutY="409.0" prefHeight="20.0" prefWidth="149.0" text="Emergency person">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+                <VBox layoutX="160.0" layoutY="491.0" prefHeight="104.0" prefWidth="100.0">
                     <children>
                         <CheckBox fx:id="chinese" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Chinese" />
                         <CheckBox fx:id="portoguese" mnemonicParsing="false" prefHeight="19.0" prefWidth="94.0" text="Portoguese" />
@@ -118,15 +116,42 @@
                         <CheckBox fx:id="german" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="German" />
                     </children>
                 </VBox>
-                <CheckBox fx:id="yearConsidered" contentDisplay="TOP" graphicTextGap="5.0" layoutX="261.0" layoutY="351.0" mnemonicParsing="false" textFill="RED" />
-                <Label layoutX="234.0" layoutY="315.0" text="consider years" />
+            <Label layoutX="16.0" layoutY="120.0" text="Cell number" />
+            <Label layoutX="22.0" layoutY="63.0" text="Last name" />
+            <Label layoutX="19.0" layoutY="173.0" text="Email" />
+            <Label layoutX="18.0" layoutY="228.0" text="Birth place" />
+            <Label layoutX="18.0" layoutY="289.0" text="Birth date" />
+            <Label layoutX="18.0" layoutY="351.0" text="Address" />
+                <VBox layoutX="36.0" layoutY="476.0" prefHeight="134.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Languages">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                        <CheckBox fx:id="italian" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Italian" />
+                        <CheckBox fx:id="english" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="English" />
+                        <CheckBox fx:id="french" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="French" />
+                        <CheckBox fx:id="spanish" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Spanish" />
+                        <CheckBox fx:id="arabic" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="Arabic" />
+                    </children>
+                </VBox>
+            <Label layoutX="394.0" layoutY="452.0" text="Emergency first name" />
+            <Label layoutX="641.0" layoutY="452.0" text="Emergency cell number" />
+            <Label layoutX="394.0" layoutY="515.0" text="Emergency last name" />
+            <Label layoutX="641.0" layoutY="515.0" text="Emergecy email" />
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
                 <Button fx:id="cancelButton" layoutX="814.0" layoutY="4.0" mnemonicParsing="false" onAction="#CancelButtonPress" text="Cancel" />
                 <Button fx:id="saveButton" layoutX="742.0" layoutY="4.0" mnemonicParsing="false" onAction="#SaveButtonPress" text="Save" />
-                <Label fx:id="errorField" layoutX="12.0" layoutY="17.0" prefHeight="18.0" prefWidth="671.0" textFill="RED" />
+                <Label fx:id="errorField" layoutX="14.0" layoutY="8.0" prefHeight="33.0" prefWidth="606.0" textFill="RED" />
+            <Label fx:id="savedLabel" layoutX="640.0" layoutY="9.0" prefHeight="18.0" prefWidth="110.0" text="SAVED" textAlignment="CENTER" textFill="#14b51e" visible="false">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </children>
