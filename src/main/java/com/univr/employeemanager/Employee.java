@@ -26,7 +26,6 @@ public class Employee extends Person {
 
     private String birthPlace = null;
     private LocalDate birthDate;
-    //private String birthDateString;
     private String address;
     private TreeSet<Job> formerJobs = new TreeSet<>();
     private TreeSet<Language> spokenLanguage = new TreeSet<>();
@@ -35,7 +34,6 @@ public class Employee extends Person {
     private Person emergency = null;
 
     private LocalDate periodFrom,periodTo;
-    private boolean considerYear;
 
     public Employee(String firstName,
                     String lastName,
@@ -93,7 +91,6 @@ public class Employee extends Person {
     public Boolean hasCar() {
         return car;
     }
-    public Boolean considerYear(){return this.considerYear;}
 
     public Person getEmergency() {
         return emergency;
@@ -111,6 +108,10 @@ public class Employee extends Person {
     {
         if(l1.isAfter(l2))
             throw new IllegalArgumentException("period from is grater than period to");
+        else if (l1.isBefore(birthDate)) {
+            throw new IllegalArgumentException("period from is before birthdate");
+
+        }
 
         this.periodFrom=l1;
         this.periodTo=l2;
@@ -157,7 +158,4 @@ public class Employee extends Person {
         this.car = car;
     }
 
-    public void setConsiderYear(Boolean year){
-        this.considerYear=year;
-    }
 }

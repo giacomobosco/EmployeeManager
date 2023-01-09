@@ -118,8 +118,6 @@
                   <CheckBox fx:id="german" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="84.0" text="German" />
                </children>
             </VBox>
-            <CheckBox fx:id="yearConsidered" contentDisplay="TOP" graphicTextGap="5.0" layoutX="261.0" layoutY="351.0" mnemonicParsing="false" textFill="RED" />
-            <Label layoutX="234.0" layoutY="315.0" text="consider years" />
       </children>
     </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
