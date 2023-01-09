@@ -67,6 +67,11 @@ public class Person implements Comparable<Person>{
         int ret = this.lastName.compareTo(person.lastName);
         if (ret == 0)
             ret = this.firstName.compareTo(person.firstName);
+        if (ret == 0)
+            ret = this.email.compareTo(person.email);
+        if (ret == 0)
+            ret = this.cellNumber.compareTo(person.cellNumber);
+
         return ret;
     }
 

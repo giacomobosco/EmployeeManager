@@ -17,12 +17,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class MenuController implements Initializable {
 
@@ -38,28 +34,23 @@ public class MenuController implements Initializable {
     private DatePicker birthToDate;
     @FXML
     private Button searchButton,restoreButton;
-    //----------------------------------------------------
-
     @FXML
     private Button newButton, editButton, deleteButton, detailsButton;
     @FXML
+    private TextArea textField;
+    @FXML
     private TableColumn <Employee, String> addressField, nameField, lastNameField, cellNumberField;
     @FXML
-    private TableColumn<Employee,LocalDate>birthDateField;
+    private TableColumn <Employee, LocalDate> birthDateField;
     @FXML
     private TableView<Employee> mainTable;
     @FXML
-    private Label display;
+    private Label errorField;
     private ObservableList<Employee> people;
-
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     private JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
-    private JSONReadWrite temp = new JSONReadWrite("src/main/java/com/univr/employeemanager/temp.json");
-    public MenuController() {
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,18 +63,15 @@ public class MenuController implements Initializable {
         birthFromDate.setDisable(false);
         birthIntervalEnable.setDisable(true);
 
-
         mainTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!=null)
             {
-                System.out.print("evento tabella click\n");
                 detailsButton.setDisable(false);
                 deleteButton.setDisable(false);
                 editButton.setDisable(false);
             }
 
         });
-
 
         nameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         lastNameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
@@ -100,6 +88,7 @@ public class MenuController implements Initializable {
 
     @FXML
     public void textAreaClicked(MouseEvent mouseEvent) {
+
         mainTable.getSelectionModel().clearSelection();
         detailsButton.setDisable(true);
         deleteButton.setDisable(true);
@@ -109,8 +98,6 @@ public class MenuController implements Initializable {
     @FXML
     protected void newButtonPress(ActionEvent e) throws IOException {
 
-        temp.eraseJSON();
-
         Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -118,6 +105,7 @@ public class MenuController implements Initializable {
         stage.show();
 
     }
+
     @FXML
     protected void editButtonPress(ActionEvent e) throws IOException {
 
@@ -128,23 +116,20 @@ public class MenuController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
             root = loader.load();
 
-            EmployeeController employeeController = loader.getController();
-            employeeController.updateField(selected,true);
+            AddEmployeeController employeeController = loader.getController();
+            employeeController.updateField(selected, true);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         }
-
     }
     @FXML
     protected void deleteButtonPress(ActionEvent e) throws IOException {
 
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
         if (selected != null){
-            //il messaggio di errore viene rimosso
-            //display.setVisible(false);
 
             data.remove(selected);
             updateTable();
@@ -155,12 +140,12 @@ public class MenuController implements Initializable {
 
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
 
-        if(selected != null)
-        {
+        if (selected != null){
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
             root = loader.load();
 
-            EmployeeController employeeController = loader.getController();
+            AddEmployeeController employeeController = loader.getController();
             employeeController.updateField(selected,false);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -168,9 +153,8 @@ public class MenuController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
-
-
     }
+
     private void updateTable() throws IOException {
 
         people = FXCollections.observableArrayList(data.readJSON());
@@ -180,10 +164,10 @@ public class MenuController implements Initializable {
     //metodi usati per la ricerca
     //------------------------------------------------------------------------
 
-    TreeSet<Employee> result=new TreeSet<>();
-    TreeSet<Employee> hasCarResult =new TreeSet<>();
-    TreeSet<Employee> hasLicenseResult=new TreeSet<>();
-    TreeSet<Employee> birthDateResult=new TreeSet<>();
+    TreeSet<Employee> result= new TreeSet<>();
+    TreeSet<Employee> hasCarResult = new TreeSet<>();
+    TreeSet<Employee> hasLicenseResult = new TreeSet<>();
+    TreeSet<Employee> birthDateResult = new TreeSet<>();
 
     public void ORbuttonPress(ActionEvent actionEvent) {
 
@@ -256,7 +240,7 @@ public class MenuController implements Initializable {
 
         people.stream()
                 .filter(p -> !p.getLicenses().isEmpty())
-                    .forEach(p->hasLicenseResult.add(p));
+                .forEach(p->hasLicenseResult.add(p));
     }
 
     //stream di employee, filtro quelli che hanno una macchina
@@ -268,7 +252,7 @@ public class MenuController implements Initializable {
 
         people.stream()
                 .filter(p -> p.hasCar())
-                    .forEach(p-> hasCarResult.add(p));
+                .forEach(p-> hasCarResult.add(p));
 
     }
 

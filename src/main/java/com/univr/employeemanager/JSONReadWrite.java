@@ -45,20 +45,9 @@ public class JSONReadWrite{
 
         previousSet.add(employee);
 
-        fileReader=new FileReader(path);
-        char[] buffer=new char[100];
-
-        if(fileReader.read(buffer)==-1)                            //se il file json è vuoto
-        {
-            fileWriter = new FileWriter(path);
-            gson.toJson(previousSet, fileWriter);
-            fileWriter.close();
-        }
-        else
-        {
-
-        }
-
+        fileWriter = new FileWriter(path);
+        gson.toJson(previousSet, fileWriter);
+        fileWriter.close();
     }
 
     public TreeSet<Employee> readJSON() throws IOException {
@@ -89,6 +78,12 @@ public class JSONReadWrite{
         fileWriter.close();
     }
 
+    public boolean contains(Employee employee) throws IOException {
+
+        TreeSet<Employee> previousSet = readJSON();
+        return  previousSet.contains(employee);
+    }
+
     public void eraseJSON() throws IOException {
 
         fileWriter = new FileWriter(path);
@@ -112,7 +107,7 @@ class LocalDateDeserializer implements JsonDeserializer < LocalDate > {
     @Override
     public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext context)
             throws JsonParseException {
-                return LocalDate.parse(json.getAsString(), DateTimeFormatter.ofPattern("d-MMM-yyyy").withLocale(Locale.ITALIAN));
+        return LocalDate.parse(json.getAsString(), DateTimeFormatter.ofPattern("d-MMM-yyyy").withLocale(Locale.ITALIAN));
     }
 }
 
