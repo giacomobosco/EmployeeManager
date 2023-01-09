@@ -33,7 +33,7 @@ public class EmployeeController implements Initializable {
     @FXML
     private DatePicker birthDateField,periodFromField,periodToField;
     @FXML
-    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german,yearConsidered;
+    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german;
     @FXML
     private Button spokenLanguageAddButton, spokenLanguageRemoveButton, addJobButton, removeJobButton, saveButton, cancelButton;
 
@@ -109,11 +109,9 @@ public class EmployeeController implements Initializable {
         licenseD.setSelected(e.getLicenses().contains(Employee.License.D));
         licenseE.setSelected(e.getLicenses().contains(Employee.License.E));
 
-        if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
-        {
-            periodFromField.setValue(e.getAvailablePeriod()[0]);
-            periodToField.setValue(e.getAvailablePeriod()[1]);
-        }
+        periodFromField.setValue(e.getAvailablePeriod()[0]);
+        periodToField.setValue(e.getAvailablePeriod()[1]);
+
 
         jobs = FXCollections.observableArrayList(e.getFormerJobs());
         //System.out.print("\n"+e.getFormerJobs().toString());
@@ -192,9 +190,6 @@ public class EmployeeController implements Initializable {
                             emergencyCellNumberField.getText(),
                             emergencyEmailField.getText()));
 
-            //LocalDate localDate = birthDateField.getValue();
-            //Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-            //person.setBirthDate(Date.from(instant));
 
             if(italian.isSelected()) person.setSpokenLanguage(Employee.Language.ITALIAN);
             if(english.isSelected()) person.setSpokenLanguage(Employee.Language.ENGLISH);
@@ -214,7 +209,8 @@ public class EmployeeController implements Initializable {
 
             if(periodFromField.getValue()!=null && periodToField.getValue()!=null)
                 person.setAvailablePeriod(periodFromField.getValue(),periodToField.getValue());
-            if(yearConsidered.isSelected()) person.setConsiderYear(true);
+            else
+                throw new IllegalArgumentException("both period field to compile");
 
         } catch (IllegalArgumentException e){
             errorField.setText(e.getMessage());

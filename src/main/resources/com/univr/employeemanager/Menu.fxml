@@ -115,6 +115,9 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
+                  <DatePicker fx:id="periodFromDate" layoutX="47.0" layoutY="249.0" onAction="#periodFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="period from" />
+                  <DatePicker fx:id="periodToDate" layoutX="47.0" layoutY="289.0" onAction="#periodToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="period to" />
+                  <CheckBox fx:id="periodIntervalEnable" layoutX="19.0" layoutY="274.0" mnemonicParsing="false" onAction="#periodIntervalEnablePress" />
                </children>
                 </AnchorPane>
                 <ScrollPane prefHeight="-1.0" prefWidth="-1.0">

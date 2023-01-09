@@ -26,16 +26,15 @@ import java.util.stream.Collectors;
 
 public class MenuController implements Initializable {
 
+
     //oggetti usati per la ricerca
     //---------------------------------------------------
     @FXML
     private RadioButton ORenable,ANDenable;
     @FXML
-    private CheckBox hasLicenseEnable,hasCarEnable,birthIntervalEnable;
+    private CheckBox hasLicenseEnable,hasCarEnable,birthIntervalEnable,periodIntervalEnable;
     @FXML
-    private DatePicker birthFromDate;
-    @FXML
-    private DatePicker birthToDate;
+    private DatePicker birthFromDate,birthToDate,periodFromDate,periodToDate;
     @FXML
     private Button searchButton,restoreButton;
     //----------------------------------------------------
@@ -56,8 +55,7 @@ public class MenuController implements Initializable {
     private Scene scene;
     private Parent root;
 
-    private JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
-    private JSONReadWrite temp = new JSONReadWrite("src/main/java/com/univr/employeemanager/temp.json");
+    private final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
     public MenuController() {
     }
 
@@ -71,6 +69,7 @@ public class MenuController implements Initializable {
 
         birthFromDate.setDisable(false);
         birthIntervalEnable.setDisable(true);
+        periodIntervalEnable.setDisable(true);
 
 
         mainTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -85,11 +84,11 @@ public class MenuController implements Initializable {
         });
 
 
-        nameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
-        lastNameField.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        birthDateField.setCellValueFactory(new PropertyValueFactory<Employee, LocalDate>("birthDate"));
-        cellNumberField.setCellValueFactory(new PropertyValueFactory<Employee, String>("cellNumber"));
-        addressField.setCellValueFactory(new PropertyValueFactory<Employee, String>("address"));
+        nameField.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameField.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        birthDateField.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+        cellNumberField.setCellValueFactory(new PropertyValueFactory<>("cellNumber"));
+        addressField.setCellValueFactory(new PropertyValueFactory<>("address"));
 
         try {
             updateTable();
@@ -109,7 +108,6 @@ public class MenuController implements Initializable {
     @FXML
     protected void newButtonPress(ActionEvent e) throws IOException {
 
-        temp.eraseJSON();
 
         Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -178,12 +176,14 @@ public class MenuController implements Initializable {
     }
 
     //metodi usati per la ricerca
-    //------------------------------------------------------------------------
+    //----------------------------------------------------------------------------
 
     TreeSet<Employee> result=new TreeSet<>();
     TreeSet<Employee> hasCarResult =new TreeSet<>();
     TreeSet<Employee> hasLicenseResult=new TreeSet<>();
     TreeSet<Employee> birthDateResult=new TreeSet<>();
+
+    TreeSet<Employee> periodDateResult=new TreeSet<>();
 
     public void ORbuttonPress(ActionEvent actionEvent) {
 
@@ -284,9 +284,12 @@ public class MenuController implements Initializable {
             System.out.print("\nsearching from: "+birthFromDate.getValue());
             System.out.print("\nto              "+birthToDate.getValue());
 
-            people.stream()
-                    .filter(p->p.getBirthDate().isAfter(birthFromDate.getValue())&&p.getBirthDate().isBefore(birthToDate.getValue()))
-                    .forEach(p->birthDateResult.add(p));
+
+                people.stream()
+                        .filter(p->p.getBirthDate().isAfter(birthFromDate.getValue())&&p.getBirthDate().isBefore(birthToDate.getValue()))
+                        .forEach(p->birthDateResult.add(p));
+
+
 
         }
 
@@ -300,24 +303,53 @@ public class MenuController implements Initializable {
 
     }
 
-
-
-    //permetto di abilitare le date solo se hanno un valore dentro
+    //permetto di abilitare il checkbox date solo se hanno entrambe un valore dentro
     public void birthFromDatePress(ActionEvent actionEvent) {
-
-        if(birthFromDate.getValue()!=null&&birthToDate.getValue()!=null)
-            birthIntervalEnable.setDisable(false);
-        else
-            birthIntervalEnable.setDisable(true);
-
+        birthIntervalEnable.setDisable(birthFromDate.getValue() == null || birthToDate.getValue() == null);
 
     }
     public void birthToDatePress(ActionEvent actionEvent) {
-        if(birthToDate.getValue()!=null&&birthFromDate.getValue()!=null)
-            birthIntervalEnable.setDisable(false);
-        else
-            birthIntervalEnable.setDisable(true);
+        birthIntervalEnable.setDisable(birthToDate.getValue() == null || birthFromDate.getValue() == null);
+    }
+
+
+
+    public void periodIntervalEnablePress(ActionEvent actionEvent) {
+
+        if(periodDateResult!=null)
+            periodDateResult.clear();
+
+        //se la data di fine e di inizio contengono data valida
+        if(periodFromDate!=null&&periodToDate!=null)
+        {
+            System.out.print("\nsearching period from: "+periodFromDate.getValue());
+            System.out.print("\nto                     "+periodToDate.getValue());
+
+            people.stream()
+                    .filter(p->p.getAvailablePeriod()[0]!=null)
+                    .filter(p->p.getAvailablePeriod()[0].isAfter(periodFromDate.getValue())&&p.getAvailablePeriod()[1].isBefore(periodToDate.getValue()))
+                    .forEach(p->periodDateResult.add(p));
+
+        }
+
+        System.out.print("\nperiod date stream result:");
+        for (Employee d:periodDateResult
+        ) {
+            System.out.print("\n"+d.getAvailablePeriod()[0]+d.getAvailablePeriod()[1]+" "+d.getFirstName());
+        }
+
+        System.out.print("\n");
 
     }
+
+    //date ricerca periodo di lavoro
+    public void periodFromDatePress(ActionEvent actionEvent) {
+        periodIntervalEnable.setDisable(periodFromDate.getValue() == null || periodToDate.getValue() == null);
+    }
+
+    public void periodToDatePress(ActionEvent actionEvent) {
+        periodIntervalEnable.setDisable(periodFromDate.getValue() == null || periodToDate.getValue() == null);
+    }
+
 
 }
