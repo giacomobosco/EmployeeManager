@@ -34,6 +34,8 @@ public class MenuController implements Initializable {
     private DatePicker birthFromDate,birthToDate,periodFromDate,periodToDate;
     @FXML
     private Button searchButton,restoreButton;
+    @FXML
+    public TextField residenceField;
 
     //#####################################################
     @FXML
@@ -413,6 +415,5 @@ public class MenuController implements Initializable {
         System.out.print("\n");
 
     }
-
 
 }
