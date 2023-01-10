@@ -1,9 +1,7 @@
 package com.univr.employeemanager;
-import javafx.beans.property.SimpleStringProperty;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class Employee extends Person {
@@ -24,38 +22,21 @@ public class Employee extends Person {
         A, B, C, D, E, NONE
     };
 
-    private String birthPlace = null;
-    private LocalDate birthDate;
+    private String birthPlace;
+    private LocalDate birthDate, periodFrom, periodTo;
     private String address;
     private TreeSet<Job> formerJobs = new TreeSet<>();
     private TreeSet<Language> spokenLanguage = new TreeSet<>();
     private TreeSet<License> licenses = new TreeSet<>();
-    private Boolean car = false;
-    private Person emergency = null;
+    private Boolean car;
+    private Person emergency;
 
-    //#####################################################
-    private LocalDate periodFrom,periodTo;
-    //#####################################################
     public Employee(String firstName,
                     String lastName,
-                    String birthPlace,
-                    LocalDate birthDate,
-                    String address,
                     String email,
-                    String cellNumber,
-                    Boolean car,
-                    Person emergency) {
-
+                    String cellNumber) {
 
         super(firstName, lastName, cellNumber, email);
-        this.birthPlace = birthPlace;
-        this.birthDate = birthDate;
-
-
-        this.address = address;
-        this.car = car;
-        this.emergency = emergency;
-
     }
 
     public String getBirthplace() {
@@ -70,14 +51,8 @@ public class Employee extends Person {
         return address;
     }
 
-   /* public String getBirthDateString() {
-        return birthDateString;
-    }*/
-
     public TreeSet<Job> getFormerJobs() {
-
         return formerJobs;
-
     }
 
     public TreeSet<Language> getSpokenLanguage() {
@@ -96,43 +71,57 @@ public class Employee extends Person {
         return emergency;
     }
 
-    //#####################################################
     public LocalDate[] getAvailablePeriod()
     {
         return new LocalDate[]{periodFrom,periodTo};
     }
 
-    public void setAvailablePeriod(LocalDate l1,LocalDate l2)
+
+    public void setAvailablePeriod(LocalDate l1, LocalDate l2)
     {
+        if(l1 == null || l2 == null)
+            throw new IllegalArgumentException("Period can't be blank");
+
         if(l1.isAfter(l2))
             throw new IllegalArgumentException("period from is grater than period to");
-        else if (l1.isBefore(birthDate)) {
-            throw new IllegalArgumentException("period from is before birthdate");
 
-        }
+        if(l1.isBefore(this.birthDate))
+            throw new IllegalArgumentException("Period from must be after birth date");
 
-        this.periodFrom=l1;
-        this.periodTo=l2;
+        this.periodFrom = l1;
+        this.periodTo = l2;
     }
-    //#####################################################
 
     public void setBirthPlace(String birthPlace) {
-        this.birthPlace = birthPlace;
+        if (checkIsBlank(birthPlace)) this.birthPlace = birthPlace;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        if (checkIsBlank(address)) this.address = address;
     }
 
     public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+
+        if(birthDate != null){
+
+            /*if(this.formerJobs != null){
+                for (Job job:formerJobs) {
+                    if (job.getBegin().isBefore(birthDate)) throw new IllegalArgumentException("Birth date must be before a job begin");
+                }
+            }*/
+
+            this.birthDate = birthDate;
+        }
+        else throw new IllegalArgumentException("Birth date can't be empty");
     }
 
     public void setFormerJob(Job formerJob) {
 
-        if (formerJob.getBegin().compareTo(birthDate) < 0)
-            throw new IllegalArgumentException("Job begin date is grater than birth date");
-        this.formerJobs.add(formerJob);
+
+        if (formerJob.getBegin().isBefore(birthDate))
+            throw new IllegalArgumentException("Job begin date is grater then birth date");
+
+        if (!this.formerJobs.add(formerJob)) throw new IllegalArgumentException("This job already exits");
 
     }
 
@@ -152,7 +141,42 @@ public class Employee extends Person {
     }
 
     public void setCar(Boolean car) {
+
         this.car = car;
     }
 
+    public void setEmergency(Person person){
+
+        this.emergency = person;
+    }
+
+    private boolean checkIsBlank(String string){
+        if (string != null && string != "")
+            return true;
+        else throw new IllegalArgumentException("There are blank fields");
+    }
+
+    public int compareTo(Employee person) {
+
+        int ret = super.compareTo((Person)person );
+        if (ret == 0)
+            ret = this.birthDate.compareTo(person.birthDate);
+        if (ret == 0)
+            ret = this.birthPlace.compareTo(person.birthPlace);
+        if (ret == 0)
+            ret = this.periodFrom.compareTo(person.periodFrom);
+        if (ret == 0)
+            ret = this.periodTo.compareTo(person.periodTo);
+        if (ret == 0)
+            ret = this.address.compareTo(person.address);
+        if (ret == 0)
+            ret = this.car.compareTo(person.car);
+        if (ret == 0)
+            ret = this.spokenLanguage.equals(person.spokenLanguage)? 0 : 1;
+        if (ret == 0)
+            ret = this.licenses.equals(person.licenses)? 0 : 1;
+        if (ret == 0)
+            ret = this.emergency.compareTo(person.emergency);
+        return ret;
+    }
 }

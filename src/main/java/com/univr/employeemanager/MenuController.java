@@ -17,11 +17,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.TreeSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MenuController implements Initializable {
@@ -56,12 +54,11 @@ public class MenuController implements Initializable {
     @FXML
     private Label display;
     private ObservableList<Employee> people;
-
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
-    private final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
     public MenuController() {
     }
 
@@ -81,7 +78,6 @@ public class MenuController implements Initializable {
         mainTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!=null)
             {
-                System.out.print("evento tabella click\n");
                 detailsButton.setDisable(false);
                 deleteButton.setDisable(false);
                 editButton.setDisable(false);
@@ -112,9 +108,6 @@ public class MenuController implements Initializable {
         //#####################################################
     }
 
-
-
-
     @FXML
     public void textAreaClicked(MouseEvent mouseEvent) {
         mainTable.getSelectionModel().clearSelection();
@@ -125,7 +118,6 @@ public class MenuController implements Initializable {
 
     @FXML
     protected void newButtonPress(ActionEvent e) throws IOException {
-
 
         Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -144,8 +136,8 @@ public class MenuController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
             root = loader.load();
 
-            EmployeeController employeeController = loader.getController();
-            employeeController.updateField(selected,true);
+            AddEmployeeController employeeController = loader.getController();
+            employeeController.updateField(selected, true);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -159,8 +151,6 @@ public class MenuController implements Initializable {
 
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
         if (selected != null){
-            //il messaggio di errore viene rimosso
-            //display.setVisible(false);
 
             data.remove(selected);
             updateTable();
@@ -171,12 +161,12 @@ public class MenuController implements Initializable {
 
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
 
-        if(selected != null)
-        {
+        if (selected != null){
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
             root = loader.load();
 
-            EmployeeController employeeController = loader.getController();
+            AddEmployeeController employeeController = loader.getController();
             employeeController.updateField(selected,false);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -184,9 +174,8 @@ public class MenuController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
-
-
     }
+
     private void updateTable() throws IOException {
 
         people = FXCollections.observableArrayList(data.readJSON());
@@ -260,9 +249,9 @@ public class MenuController implements Initializable {
                 result.retainAll(birthDateResult);
             if(periodIntervalEnable.isSelected())
                 result.retainAll(periodDateResult);
-            if(!language1.getValue().equalsIgnoreCase("none"))
+            if(!language1.getValue().equalsIgnoreCase("None"))
                 result.retainAll(language1Result);
-            if(!language2.getValue().equalsIgnoreCase("none"))
+            if(!language2.getValue().equalsIgnoreCase("None"))
                 result.retainAll(language2Result);
         }
 
@@ -273,10 +262,10 @@ public class MenuController implements Initializable {
     }
 
     public void restoreButtonPress(ActionEvent actionEvent) throws IOException {
+
         updateTable();
         result.clear();
         clearFields();
-
     }
     private void clearFields()
     {

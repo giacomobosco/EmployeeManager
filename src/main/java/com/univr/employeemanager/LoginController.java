@@ -32,6 +32,7 @@ public class LoginController {
             Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
+            stage.setTitle("Menu");
             stage.setScene(scene);
             stage.show();
 
