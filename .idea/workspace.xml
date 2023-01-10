@@ -89,6 +89,8 @@
       <workItem from="1672418874704" duration="199000" />
       <workItem from="1673079380699" duration="2460000" />
       <workItem from="1673260241823" duration="157000" />
+      <workItem from="1673276910450" duration="66000" />
+      <workItem from="1673288811951" duration="51000" />
     </task>
     <task id="LOCAL-00001" summary="tabella jobs">
       <created>1671702992826</created>
@@ -111,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673079525735</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update">
+      <created>1673276935019</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1673276935019</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
