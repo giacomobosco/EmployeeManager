@@ -34,6 +34,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
@@ -50,31 +51,41 @@
         <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <items>
                 <AnchorPane>
-                    <children>
-                        <RadioButton fx:id="ORenable" layoutX="24.0" layoutY="46.0" mnemonicParsing="false" onAction="#ORbuttonPress" text="OR" />
-                        <RadioButton fx:id="ANDenable" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#ANDbuttonPress" text="AND" />
-                        <CheckBox fx:id="hasLicenseEnable" layoutX="26.0" layoutY="91.0" mnemonicParsing="false" onAction="#hasLicenseEnablePress" text="Has License" />
-                        <CheckBox fx:id="hasCarEnable" layoutX="27.0" layoutY="126.0" mnemonicParsing="false" onAction="#hasCarEnablePress" text="Has Car" />
-                        <DatePicker fx:id="birthFromDate" layoutX="47.0" layoutY="165.0" onAction="#birthFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth from" />
-                        <CheckBox fx:id="birthIntervalEnable" layoutX="19.0" layoutY="188.0" mnemonicParsing="false" onAction="#birthIntervalEnablePress" />
-                        <DatePicker fx:id="birthToDate" layoutX="47.0" layoutY="202.0" onAction="#birthToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth to" />
-                        <Button fx:id="searchButton" layoutX="32.0" layoutY="500.0" mnemonicParsing="false" onAction="#searchButtonPress" style="-fx-background-color: green;" text="search" textAlignment="CENTER" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="13.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="restoreButton" layoutX="133.0" layoutY="500.0" mnemonicParsing="false" onAction="#restoreButtonPress" text="restore">
-                            <font>
-                                <Font size="13.0" />
-                            </font>
-                        </Button>
-                    </children>
+               <children>
+                  <RadioButton fx:id="ANDenable" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#ANDbuttonPress" text="AND" />
+                  <RadioButton fx:id="ORenable" layoutX="24.0" layoutY="46.0" mnemonicParsing="false" onAction="#ORbuttonPress" text="OR" />
+                  <CheckBox fx:id="hasLicenseEnable" layoutX="26.0" layoutY="91.0" mnemonicParsing="false" onAction="#hasLicenseEnablePress" text="Has License" />
+                  <CheckBox fx:id="hasCarEnable" layoutX="27.0" layoutY="126.0" mnemonicParsing="false" onAction="#hasCarEnablePress" text="Has Car" />
+                  <DatePicker fx:id="birthFromDate" layoutX="47.0" layoutY="184.0" onAction="#birthFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth from" />
+                  <DatePicker fx:id="birthToDate" layoutX="47.0" layoutY="231.0" onAction="#birthToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="birth to" />
+                  <CheckBox fx:id="birthIntervalEnable" layoutX="19.0" layoutY="211.0" mnemonicParsing="false" onAction="#birthIntervalEnablePress" />
+                  <DatePicker fx:id="periodFromDate" layoutX="47.0" layoutY="299.0" onAction="#periodFromDatePress" prefHeight="25.0" prefWidth="158.0" promptText="period from" />
+                  <DatePicker fx:id="periodToDate" layoutX="47.0" layoutY="346.0" onAction="#periodToDatePress" prefHeight="25.0" prefWidth="158.0" promptText="period to" />
+                  <CheckBox fx:id="periodIntervalEnable" layoutX="19.0" layoutY="326.0" mnemonicParsing="false" onAction="#periodIntervalEnablePress" />
+                  <ChoiceBox fx:id="language1" layoutX="17.0" layoutY="424.0" prefWidth="80.0" value="none" />
+                  <ChoiceBox fx:id="language2" layoutX="119.0" layoutY="424.0" prefWidth="80.0" value="none" />
+                  <Button fx:id="restoreButton" layoutX="133.0" layoutY="541.0" mnemonicParsing="false" onAction="#restoreButtonPress" text="Restore">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="searchButton" layoutX="27.0" layoutY="541.0" mnemonicParsing="false" onAction="#searchButtonPress" style="-fx-background-color: green;" text="Search" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label focusTraversable="false" layoutX="53.0" layoutY="394.0" text="Languages spoken" />
+                  <Label focusTraversable="false" layoutX="124.0" layoutY="462.0" text="Language 2" />
+                  <Label focusTraversable="false" layoutX="22.0" layoutY="462.0" text="Language 1" />
+                  <Label focusTraversable="false" layoutX="90.0" layoutY="270.0" text="Period" />
+                  <Label focusTraversable="false" layoutX="80.0" layoutY="155.0" text="Birth date" />
+               </children>
                 </AnchorPane>
                 <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
                     <content>
                         <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
                             <children>
-                                <TableView fx:id="mainTable" layoutX="6.0" layoutY="-2.0" prefHeight="584.0" prefWidth="443.0">
+                                <TableView fx:id="mainTable" layoutX="6.0" layoutY="-2.0" prefHeight="598.0" prefWidth="444.0">
                                     <columns>
                                         <TableColumn fx:id="nameField" prefWidth="75.0" text="Name" />
                                         <TableColumn fx:id="lastNameField" prefWidth="75.0" text="Last Name" />
@@ -97,10 +108,5 @@
                 </AnchorPane>
             </items>
         </SplitPane>
-      <Label fx:id="errorField" textFill="RED">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
     </children>
 </VBox>

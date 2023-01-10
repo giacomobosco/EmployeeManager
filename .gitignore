@@ -4,10 +4,11 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea
+*.idea
 *.iws
 *.iml
 *.ipr
+.idea/workspace.xml
 
 ### Eclipse ###
 .apt_generated
@@ -17,6 +18,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
 
 ### NetBeans ###
 /nbproject/private/
