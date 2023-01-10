@@ -17,10 +17,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class MenuController implements Initializable {
 
@@ -39,7 +38,7 @@ public class MenuController implements Initializable {
     //#####################################################
     @FXML
     private ChoiceBox<String> language1,language2;
-    private static String[] languages= { "English","Italian","French","Spanish","Arabic","Chinese","Portoguese","Japanese","German","none"};
+    private static final String[] languages= { "English","Italian","French","Spanish","Arabic","Chinese","Portoguese","Japanese","German","none"};
     //#####################################################
     //----------------------------------------------------
 
@@ -51,13 +50,13 @@ public class MenuController implements Initializable {
     private TableColumn<Employee,LocalDate>birthDateField;
     @FXML
     private TableView<Employee> mainTable;
-    @FXML
-    private Label display;
+
+
     private ObservableList<Employee> people;
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
+    private static final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
     public MenuController() {
     }
@@ -119,7 +118,7 @@ public class MenuController implements Initializable {
     @FXML
     protected void newButtonPress(ActionEvent e) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("AddEmployee.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AddEmployee.fxml")));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -147,7 +146,7 @@ public class MenuController implements Initializable {
 
     }
     @FXML
-    protected void deleteButtonPress(ActionEvent e) throws IOException {
+    protected void deleteButtonPress() throws IOException {
 
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
         if (selected != null){
@@ -199,13 +198,13 @@ public class MenuController implements Initializable {
         searchButton.setDisable(false);
     }
 
-    public void ANDbuttonPress(ActionEvent actionEvent) {
+    public void ANDbuttonPress() {
 
         ORenable.setSelected(false);
         searchButton.setDisable(false);
     }
 
-    public void searchButtonPress(ActionEvent actionEvent) {
+    public void searchButtonPress() {
 
         //questi 2 simpatici signori li faccio partire anche se premo il tasto search, così
         //possono fare la ricerca con l'ultimo valore assegnato, senza dover ripremere sul box
@@ -261,7 +260,7 @@ public class MenuController implements Initializable {
 
     }
 
-    public void restoreButtonPress(ActionEvent actionEvent) throws IOException {
+    public void restoreButtonPress() throws IOException {
 
         updateTable();
         result.clear();
@@ -281,7 +280,7 @@ public class MenuController implements Initializable {
 
     //stream di employee, filtro quelli che non hanno il set licenze vuoto
     //quindi li aggiungo al set risultato di questa ricerca
-    public void hasLicenseEnablePress(ActionEvent actionEvent) {
+    public void hasLicenseEnablePress() {
 
         if(hasLicenseResult!=null)
             hasLicenseResult.clear();
@@ -293,7 +292,7 @@ public class MenuController implements Initializable {
 
     //stream di employee, filtro quelli che hanno una macchina
     //quindi li aggiungo al set risultato di questa ricerca
-    public void hasCarEnablePress(ActionEvent actionEvent) {
+    public void hasCarEnablePress() {
 
         if(hasCarResult!=null)
             hasCarResult.clear();
@@ -334,17 +333,17 @@ public class MenuController implements Initializable {
     }
 
     //permetto di abilitare il checkbox date solo se hanno entrambe un valore dentro
-    public void birthFromDatePress(ActionEvent actionEvent) {
+    public void birthFromDatePress() {
         birthIntervalEnable.setDisable(birthFromDate.getValue() == null || birthToDate.getValue() == null);
 
     }
-    public void birthToDatePress(ActionEvent actionEvent) {
+    public void birthToDatePress() {
         birthIntervalEnable.setDisable(birthToDate.getValue() == null || birthFromDate.getValue() == null);
     }
 
 
     //ricerca per periodo di disponibilità
-    public void periodIntervalEnablePress(ActionEvent actionEvent) {
+    public void periodIntervalEnablePress() {
 
         if(periodDateResult!=null)
             periodDateResult.clear();
@@ -370,11 +369,11 @@ public class MenuController implements Initializable {
     }
 
     //permetto di abilitare il checkbox date solo se hanno entrambe un valore dentro
-    public void periodFromDatePress(ActionEvent actionEvent) {
+    public void periodFromDatePress() {
         periodIntervalEnable.setDisable(periodFromDate.getValue() == null || periodToDate.getValue() == null);
     }
 
-    public void periodToDatePress(ActionEvent actionEvent) {
+    public void periodToDatePress() {
         periodIntervalEnable.setDisable(periodFromDate.getValue() == null || periodToDate.getValue() == null);
     }
 

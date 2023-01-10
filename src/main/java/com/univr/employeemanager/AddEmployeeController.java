@@ -11,12 +11,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddEmployeeController implements Initializable {
@@ -62,8 +62,8 @@ public class AddEmployeeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         taskField.setCellValueFactory(new PropertyValueFactory<>("tasks"));
-        beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
-        endField.setCellValueFactory(new PropertyValueFactory<Job,Date>("end"));
+        beginField.setCellValueFactory(new PropertyValueFactory<>("begin"));
+        endField.setCellValueFactory(new PropertyValueFactory<>("end"));
         companyField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         jobPlaceField.setCellValueFactory(new PropertyValueFactory<>("jobPlace"));
         payField.setCellValueFactory(new PropertyValueFactory<>("DailyPay"));
@@ -170,7 +170,7 @@ public class AddEmployeeController implements Initializable {
         errorField.setText("");
         Employee employee = getEmployee();
 
-        if (employee != null && employee.compareTo(previousEmployee) == 0){
+        if (previousEmployee != null && employee.compareTo(previousEmployee) == 0){
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
             root = loader.load();
@@ -185,7 +185,7 @@ public class AddEmployeeController implements Initializable {
             stage.show();
         }
 
-        else if (errorField.getText() == "") errorField.setText("Employee must be saved before");
+        else if (Objects.equals(errorField.getText(), "")) errorField.setText("Employee must be saved before");
     }
 
     public void EditJobButtonPress(ActionEvent actionEvent) throws IOException {
@@ -210,13 +210,13 @@ public class AddEmployeeController implements Initializable {
                 stage.show();
             }
 
-            else if (errorField.getText() == "") errorField.setText("Employee must be saved before");
+            else if (Objects.equals(errorField.getText(), "")) errorField.setText("Employee must be saved before");
         }
         else errorField.setText("Please select a job");
     }
 
     @FXML
-    public void RemoveJobButtonPress(ActionEvent actionEvent) {
+    public void RemoveJobButtonPress() {
 
         Job selected = jobTable.getSelectionModel().getSelectedItem();
         Employee employee = getEmployee();
@@ -315,7 +315,7 @@ public class AddEmployeeController implements Initializable {
 
         } catch (IllegalArgumentException | NullPointerException e){
             errorField.setText(e.getMessage());
-            e.printStackTrace();
+           // e.printStackTrace();
         }
 
         return returnEmployee;

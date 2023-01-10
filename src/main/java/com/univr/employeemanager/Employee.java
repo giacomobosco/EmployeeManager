@@ -1,7 +1,6 @@
 package com.univr.employeemanager;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 public class Employee extends Person {
@@ -16,11 +15,11 @@ public class Employee extends Person {
         PORTOGUESE,
         JAPANESE,
         GERMAN
-    };
+    }
 
     enum License {
-        A, B, C, D, E, NONE
-    };
+        A, B, C, D, E
+    }
 
     private String birthPlace;
     private LocalDate birthDate, periodFrom, periodTo;
@@ -117,7 +116,6 @@ public class Employee extends Person {
 
     public void setFormerJob(Job formerJob) {
 
-
         if (formerJob.getBegin().isBefore(birthDate))
             throw new IllegalArgumentException("Job begin date is grater then birth date");
 
@@ -151,14 +149,14 @@ public class Employee extends Person {
     }
 
     private boolean checkIsBlank(String string){
-        if (string != null && string != "")
+        if (string != null && !string.equals(""))
             return true;
         else throw new IllegalArgumentException("There are blank fields");
     }
 
     public int compareTo(Employee person) {
 
-        int ret = super.compareTo((Person)person );
+        int ret = super.compareTo(person);
         if (ret == 0)
             ret = this.birthDate.compareTo(person.birthDate);
         if (ret == 0)

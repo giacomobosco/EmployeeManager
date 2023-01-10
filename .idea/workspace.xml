@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddEmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Job.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +98,9 @@
       <workItem from="1673260241823" duration="157000" />
       <workItem from="1673276910450" duration="66000" />
       <workItem from="1673288811951" duration="51000" />
+      <workItem from="1673339731322" duration="230000" />
+      <workItem from="1673344792808" duration="2612000" />
+      <workItem from="1673347764927" duration="894000" />
     </task>
     <task id="LOCAL-00001" summary="tabella jobs">
       <created>1671702992826</created>
@@ -120,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673276935019</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update">
+      <created>1673339859180</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1673339859181</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,5 +159,10 @@
     <MESSAGE value="tabella jobs" />
     <MESSAGE value="update" />
     <option name="LAST_COMMIT_MESSAGE" value="update" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/employee_manager$Main.ic" NAME="Main Coverage Results" MODIFIED="1673346408474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.univr.employeemanager.*</FILTER>
+    </SUITE>
   </component>
 </project>

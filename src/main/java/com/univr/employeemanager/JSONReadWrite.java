@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.TreeSet;
@@ -17,7 +16,6 @@ public class JSONReadWrite{
 
     private final Gson gson;
     private FileWriter fileWriter = null;
-    private FileReader fileReader = null;
     private final String path;
 
 
@@ -52,7 +50,7 @@ public class JSONReadWrite{
 
     public TreeSet<Employee> readJSON() throws IOException {
 
-        fileReader = new FileReader(path);
+        FileReader fileReader = new FileReader(path);
         Type type = new TypeToken<TreeSet<Employee>>() {
         }.getType();
 
@@ -76,12 +74,6 @@ public class JSONReadWrite{
         fileWriter = new FileWriter(path);
         gson.toJson(previousSet, fileWriter);
         fileWriter.close();
-    }
-
-    public boolean contains(Employee employee) throws IOException {
-
-        TreeSet<Employee> previousSet = readJSON();
-        return  previousSet.contains(employee);
     }
 
     public void eraseJSON() throws IOException {
