@@ -4,19 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="">
+    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="manca solo la ricerca">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWriteLogin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/LoginManagerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/LoginPerson.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/login.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddEmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddJobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddJobController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/AddEmployee.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/AddEmployee.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="origin/francesco" />
@@ -25,6 +40,11 @@
     <option name="NEW_BASE" value="master" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -78,6 +98,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
