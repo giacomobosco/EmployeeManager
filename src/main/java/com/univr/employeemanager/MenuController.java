@@ -18,8 +18,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MenuController implements Initializable {
 
@@ -151,10 +154,20 @@ public class MenuController implements Initializable {
     protected void deleteButtonPress() throws IOException {
 
         Employee selected = mainTable.getSelectionModel().getSelectedItem();
-        if (selected != null){
 
-            data.remove(selected);
-            updateTable();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Employee delete");
+        alert.setContentText("Are you ok with this?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK){
+            if (selected != null){
+
+                data.remove(selected);
+                updateTable();
+            }
         }
     }
     @FXML
@@ -415,5 +428,14 @@ public class MenuController implements Initializable {
         System.out.print("\n");
 
     }
+    @FXML
+    protected void logoutButtonPress(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        root = loader.load();
 
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

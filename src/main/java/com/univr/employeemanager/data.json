@@ -1,8 +1,8 @@
 [
   {
     "birthPlace": "Isola della Scala",
-    "birthDate": "5-gen-2006",
-    "periodFrom": "12-gen-2011",
+    "birthDate": "2-gen-2013",
+    "periodFrom": "27-gen-2013",
     "periodTo": "29-gen-2023",
     "address": "via risaie 14 Isola della Scala(VR)",
     "formerJobs": [
@@ -53,7 +53,7 @@
         "begin": "9-gen-2023",
         "end": "29-gen-2023",
         "companyName": "mauoro",
-        "tasks": "bene daiok spojgoi",
+        "tasks": "bene daiok",
         "jobPlace": "acslmclsa",
         "dailyPay": 21434
       }
@@ -89,14 +89,6 @@
         "tasks": "dwqwqwx",
         "jobPlace": "ascscs",
         "dailyPay": 2142
-      },
-      {
-        "begin": "7-gen-2023",
-        "end": null,
-        "companyName": "ggtf",
-        "tasks": "ed",
-        "jobPlace": "qui",
-        "dailyPay": 456
       }
     ],
     "spokenLanguage": [],
@@ -112,51 +104,6 @@
     "lastName": "casseruoli",
     "cellNumber": "39476",
     "email": "@"
-  },
-  {
-    "birthPlace": "hiuhji",
-    "birthDate": "9-gen-2007",
-    "periodFrom": "9-gen-2023",
-    "periodTo": "30-dic-2023",
-    "address": "ccccedcde",
-    "formerJobs": [],
-    "spokenLanguage": [
-      "ENGLISH",
-      "ITALIAN"
-    ],
-    "licenses": [],
-    "car": false,
-    "emergency": {
-      "firstName": "jhwxhxw",
-      "lastName": "ksjnxkjnk",
-      "cellNumber": "7947",
-      "email": "jkxqjkxn@"
-    },
-    "firstName": "Albertoy",
-    "lastName": "hhx",
-    "cellNumber": "98721",
-    "email": "joxksajo@@"
-  },
-  {
-    "birthPlace": "kllkdqlkdj",
-    "birthDate": "9-gen-2018",
-    "periodFrom": "2-gen-2023",
-    "periodTo": "22-gen-2023",
-    "address": "qlkxmqw",
-    "formerJobs": [],
-    "spokenLanguage": [],
-    "licenses": [],
-    "car": false,
-    "emergency": {
-      "firstName": "mclkmaslkm",
-      "lastName": "sanknx",
-      "cellNumber": "782397",
-      "email": "@@"
-    },
-    "firstName": "jalksjc",
-    "lastName": "lksanknls",
-    "cellNumber": "2484700",
-    "email": "@@"
   },
   {
     "birthPlace": "uqi",
@@ -186,47 +133,10 @@
       "cellNumber": "2345",
       "email": "@"
     },
-    "firstName": "frencioooo",
+    "firstName": "frenci",
     "lastName": "manto",
     "cellNumber": "232",
     "email": "@@@"
-  },
-  {
-    "birthPlace": "qui",
-    "birthDate": "7-gen-2021",
-    "periodFrom": "4-gen-2023",
-    "periodTo": "27-gen-2023",
-    "address": "fghhb",
-    "formerJobs": [
-      {
-        "begin": "16-gen-2021",
-        "end": "8-gen-2022",
-        "companyName": "itn",
-        "tasks": "non fare un dannato cazzo di nulla",
-        "jobPlace": "tiyiy",
-        "dailyPay": 45
-      }
-    ],
-    "spokenLanguage": [
-      "ENGLISH",
-      "ITALIAN",
-      "FRENCH",
-      "JAPANESE"
-    ],
-    "licenses": [
-      "C"
-    ],
-    "car": false,
-    "emergency": {
-      "firstName": "aa",
-      "lastName": "bbb",
-      "cellNumber": "598589589",
-      "email": "@@"
-    },
-    "firstName": "ciccio",
-    "lastName": "pasticcio",
-    "cellNumber": "04968469",
-    "email": "@"
   },
   {
     "birthPlace": "dkkdk",
@@ -234,7 +144,16 @@
     "periodFrom": "9-gen-2023",
     "periodTo": "22-gen-2023",
     "address": "knsn",
-    "formerJobs": [],
+    "formerJobs": [
+      {
+        "begin": "13-gen-2023",
+        "end": "15-gen-2023",
+        "companyName": "carta",
+        "tasks": "ff",
+        "jobPlace": "bagno",
+        "dailyPay": 45
+      }
+    ],
     "spokenLanguage": [
       "ITALIAN"
     ],

@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddEmployeeController implements Initializable {
@@ -54,7 +55,7 @@ public class AddEmployeeController implements Initializable {
     private Parent root;
 
 
-    JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
+    private final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
     public AddEmployeeController() throws IOException {
     }
@@ -170,7 +171,7 @@ public class AddEmployeeController implements Initializable {
         errorField.setText("");
         Employee employee = getEmployee();
 
-        if (previousEmployee != null && employee.compareTo(previousEmployee) == 0){
+        if (employee != null && employee.compareTo(previousEmployee) == 0){
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
             root = loader.load();
@@ -221,14 +222,23 @@ public class AddEmployeeController implements Initializable {
         Job selected = jobTable.getSelectionModel().getSelectedItem();
         Employee employee = getEmployee();
 
-        if (selected != null && employee.compareTo(previousEmployee) == 0){
+        if (selected != null && employee.compareTo(previousEmployee) == 0) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Job delete");
+            alert.setContentText("Are you ok with this?");
 
-            jobs.remove(selected);
+            Optional<ButtonType> result = alert.showAndWait();
 
-            jobTable.setItems(jobs);
+            if (result.get() == ButtonType.OK) {
+
+                jobs.remove(selected);
+
+                jobTable.setItems(jobs);
+            }
         }
 
-        else if (errorField.getText() == "") errorField.setText("Employee must be saved before");
+        else if (Objects.equals(errorField.getText(), "")) errorField.setText("Employee must be saved before");
     }
 
     @FXML
