@@ -104,6 +104,7 @@
                         <Button fx:id="editButton" disable="true" layoutX="62.0" layoutY="87.0" mnemonicParsing="false" onAction="#editButtonPress" prefHeight="27.0" prefWidth="95.0" text="Edit" />
                         <Button fx:id="deleteButton" disable="true" layoutX="63.0" layoutY="142.0" mnemonicParsing="false" onAction="#deleteButtonPress" prefHeight="27.0" prefWidth="95.0" text="Delete" />
                         <Button fx:id="detailsButton" disable="true" layoutX="62.0" layoutY="195.0" mnemonicParsing="false" onAction="#detailsButtonPress" text="Show details" />
+                        <Button layoutX="76.0" layoutY="524.0" mnemonicParsing="false" onAction="#logoutButtonPress" text="Log Out" />
                     </children>
                 </AnchorPane>
             </items>

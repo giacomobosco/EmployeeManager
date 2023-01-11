@@ -2,7 +2,7 @@
   {
     "birthPlace": "Isola della Scala",
     "birthDate": "2-gen-2013",
-    "periodFrom": "12-gen-2011",
+    "periodFrom": "27-gen-2013",
     "periodTo": "29-gen-2023",
     "address": "via risaie 14 Isola della Scala(VR)",
     "formerJobs": [
@@ -106,51 +106,6 @@
     "email": "@"
   },
   {
-    "birthPlace": "hiuhji",
-    "birthDate": "9-gen-2007",
-    "periodFrom": "9-gen-2023",
-    "periodTo": "30-dic-2023",
-    "address": "ccccedcde",
-    "formerJobs": [],
-    "spokenLanguage": [
-      "ENGLISH",
-      "ITALIAN"
-    ],
-    "licenses": [],
-    "car": false,
-    "emergency": {
-      "firstName": "jhwxhxw",
-      "lastName": "ksjnxkjnk",
-      "cellNumber": "7947",
-      "email": "jkxqjkxn@"
-    },
-    "firstName": "Alberto",
-    "lastName": "hhx",
-    "cellNumber": "98721",
-    "email": "joxksajo@@"
-  },
-  {
-    "birthPlace": "kllkdqlkdj",
-    "birthDate": "9-gen-2018",
-    "periodFrom": "2-gen-2023",
-    "periodTo": "22-gen-2023",
-    "address": "qlkxmqw",
-    "formerJobs": [],
-    "spokenLanguage": [],
-    "licenses": [],
-    "car": false,
-    "emergency": {
-      "firstName": "mclkmaslkm",
-      "lastName": "sanknx",
-      "cellNumber": "782397",
-      "email": "@@"
-    },
-    "firstName": "jalksjc",
-    "lastName": "lksanknls",
-    "cellNumber": "24847",
-    "email": "@@"
-  },
-  {
     "birthPlace": "uqi",
     "birthDate": "7-gen-2016",
     "periodFrom": "4-gen-2017",
@@ -189,7 +144,16 @@
     "periodFrom": "9-gen-2023",
     "periodTo": "22-gen-2023",
     "address": "knsn",
-    "formerJobs": [],
+    "formerJobs": [
+      {
+        "begin": "13-gen-2023",
+        "end": "15-gen-2023",
+        "companyName": "carta",
+        "tasks": "ff",
+        "jobPlace": "bagno",
+        "dailyPay": 45
+      }
+    ],
     "spokenLanguage": [
       "ITALIAN"
     ],
