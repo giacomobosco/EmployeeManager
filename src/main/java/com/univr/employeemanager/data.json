@@ -144,7 +144,16 @@
     "periodFrom": "9-gen-2023",
     "periodTo": "22-gen-2023",
     "address": "knsn",
-    "formerJobs": [],
+    "formerJobs": [
+      {
+        "begin": "13-gen-2023",
+        "end": "15-gen-2023",
+        "companyName": "carta",
+        "tasks": "ff",
+        "jobPlace": "bagno",
+        "dailyPay": 45
+      }
+    ],
     "spokenLanguage": [
       "ITALIAN"
     ],

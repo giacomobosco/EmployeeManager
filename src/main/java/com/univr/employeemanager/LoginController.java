@@ -11,8 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -94,7 +96,6 @@ public class LoginController implements Initializable {
                         display.setTextFill(Color.rgb(50,200,0));
                         display.setText("Saved");
                         login.write(loginPerson);
-
                     }
                     else display.setText("This account already exists");
                 } catch (IllegalArgumentException exception){
@@ -137,7 +138,30 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    protected void accountManageButtonPress(ActionEvent e) {
+    protected void accountManageButtonPress(ActionEvent e) throws IOException {
 
+        if (username.getText().isBlank() || password.getText().isBlank())
+            display.setText("Admin can't be blank");
+
+        for (LoginPerson loginPerson : loginPeople) {
+
+            if (username.getText().equals(loginPerson.getUsername())
+                    && password.getText().equals(loginPerson.getPassword())
+                    && loginPerson.getAdmin() == true) {
+
+                Parent root = FXMLLoader.load(getClass().getResource("LoginManager.fxml"));
+                stage = new Stage();
+                scene = new Scene(root);
+                stage.setTitle("Menu");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(scene);
+                stage.show();
+            }
+        }
+        display.setText("Wrong admin user or password");
+    }
+    @FXML
+    private void labelDisappear(MouseEvent mouseEvent) {
+        display.setText("");
     }
 }

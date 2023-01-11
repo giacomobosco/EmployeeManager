@@ -39,21 +39,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="663.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="663.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.LoginManagerController">
    <children>
       <ScrollPane prefHeight="426.0" prefWidth="537.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="538.0">
                <children>
-                  <TableView prefHeight="400.0" prefWidth="537.0">
+                  <TableView fx:id="mainTable" prefHeight="400.0" prefWidth="537.0">
                     <columns>
-                      <TableColumn prefWidth="93.63672029972076" text="First Name" />
-                      <TableColumn prefWidth="79.09125518798828" text="Last Name" />
-                        <TableColumn prefWidth="100.00035095214844" text="Cell Number" />
-                        <TableColumn prefWidth="70.9093017578125" text="Email" />
-                        <TableColumn prefWidth="80.0003662109375" text="User" />
-                        <TableColumn prefWidth="80.0003662109375" text="Password" />
+                      <TableColumn fx:id="firstNameColoumn" prefWidth="93.63672029972076" text="First Name" />
+                      <TableColumn fx:id="lastNameColoumn" prefWidth="79.09125518798828" text="Last Name" />
+                        <TableColumn fx:id="cellNumberColoumn" prefWidth="100.00035095214844" text="Cell Number" />
+                        <TableColumn fx:id="emailColoumn" prefWidth="70.9093017578125" text="Email" />
+                        <TableColumn fx:id="userColoumn" prefWidth="80.0003662109375" text="User" />
+                        <TableColumn fx:id="passwordColoumn" prefWidth="80.0003662109375" text="Password" />
                     </columns>
                   </TableView>
                </children>
@@ -62,7 +61,7 @@
       </ScrollPane>
       <AnchorPane prefHeight="426.0" prefWidth="128.0">
          <children>
-            <Button disable="true" layoutX="33.0" layoutY="26.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="deleteButton" disable="true" layoutX="33.0" layoutY="26.0" mnemonicParsing="false" onAction="#deleteButtonPress" text="Delete" />
          </children>
       </AnchorPane>
    </children>

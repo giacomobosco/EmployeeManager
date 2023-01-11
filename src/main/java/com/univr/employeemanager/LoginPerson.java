@@ -2,6 +2,7 @@ package com.univr.employeemanager;
 
 public class LoginPerson extends Person{
     private String username, password;
+    private boolean admin = false;
 
     public LoginPerson(String firstName, String lastName, String cellNumber, String email, String username, String password) {
         super(firstName, lastName, cellNumber, email);
@@ -23,5 +24,9 @@ public class LoginPerson extends Person{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean getAdmin(){
+        return admin;
     }
 }

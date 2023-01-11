@@ -423,6 +423,14 @@ public class MenuController implements Initializable {
         System.out.print("\n");
 
     }
+    @FXML
+    protected void logoutButtonPress(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        root = loader.load();
 
-
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
