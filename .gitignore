@@ -8,7 +8,7 @@ target/
 *.iws
 *.iml
 *.ipr
-.idea/workspace.xml
+.idea
 
 ### Eclipse ###
 .apt_generated

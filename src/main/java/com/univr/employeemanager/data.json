@@ -76,6 +76,40 @@
     "email": "@@"
   },
   {
+    "birthPlace": "romania",
+    "birthDate": "10-gen-1998",
+    "periodFrom": "1-gen-2023",
+    "periodTo": "7-gen-2024",
+    "address": "romania",
+    "formerJobs": [
+      {
+        "begin": "4-gen-2020",
+        "end": "1-gen-2023",
+        "companyName": "rostev",
+        "tasks": "facevo qualcosa di bello",
+        "jobPlace": "street",
+        "dailyPay": 45
+      }
+    ],
+    "spokenLanguage": [
+      "ENGLISH",
+      "ITALIAN",
+      "FRENCH"
+    ],
+    "licenses": [],
+    "car": true,
+    "emergency": {
+      "firstName": "aedfeFfeafaefaef",
+      "lastName": "stefan",
+      "cellNumber": "323232323",
+      "email": "razvan891@gmail.com"
+    },
+    "firstName": "Stefan",
+    "lastName": "Manole",
+    "cellNumber": "1234",
+    "email": "razvan@891"
+  },
+  {
     "birthPlace": "li",
     "birthDate": "6-lug-2022",
     "periodFrom": "2-gen-2023",
@@ -149,6 +183,39 @@
     "lastName": "lksanknls",
     "cellNumber": "24847",
     "email": "@@"
+  },
+  {
+    "birthPlace": "romania",
+    "birthDate": "31-gen-2003",
+    "periodFrom": "1-gen-2023",
+    "periodTo": "7-giu-2023",
+    "address": "wdwdwdwdwd",
+    "formerJobs": [
+      {
+        "begin": "1-gen-2023",
+        "end": "8-gen-2023",
+        "companyName": "wdwdd",
+        "tasks": "wdwdwdwdwdwdwd",
+        "jobPlace": "street",
+        "dailyPay": 30
+      }
+    ],
+    "spokenLanguage": [
+      "ENGLISH",
+      "ITALIAN"
+    ],
+    "licenses": [],
+    "car": false,
+    "emergency": {
+      "firstName": "wddwdwdwd",
+      "lastName": "wdwdwdwddw",
+      "cellNumber": "222222",
+      "email": "wdwdw@wdwdw"
+    },
+    "firstName": "stefan",
+    "lastName": "manole",
+    "cellNumber": "1234",
+    "email": "eee@eee"
   },
   {
     "birthPlace": "uqi",
