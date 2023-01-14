@@ -11,12 +11,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddEmployeeController implements Initializable {
@@ -54,7 +55,7 @@ public class AddEmployeeController implements Initializable {
     private Parent root;
 
 
-    JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
+    private final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
     public AddEmployeeController() throws IOException {
     }
@@ -62,8 +63,8 @@ public class AddEmployeeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         taskField.setCellValueFactory(new PropertyValueFactory<>("tasks"));
-        beginField.setCellValueFactory(new PropertyValueFactory<Job,Date>("begin"));
-        endField.setCellValueFactory(new PropertyValueFactory<Job,Date>("end"));
+        beginField.setCellValueFactory(new PropertyValueFactory<>("begin"));
+        endField.setCellValueFactory(new PropertyValueFactory<>("end"));
         companyField.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         jobPlaceField.setCellValueFactory(new PropertyValueFactory<>("jobPlace"));
         payField.setCellValueFactory(new PropertyValueFactory<>("DailyPay"));
@@ -185,7 +186,7 @@ public class AddEmployeeController implements Initializable {
             stage.show();
         }
 
-        else if (errorField.getText() == "") errorField.setText("Employee must be saved before");
+        else if (Objects.equals(errorField.getText(), "")) errorField.setText("Employee must be saved before");
     }
 
     public void EditJobButtonPress(ActionEvent actionEvent) throws IOException {
@@ -210,25 +211,34 @@ public class AddEmployeeController implements Initializable {
                 stage.show();
             }
 
-            else if (errorField.getText() == "") errorField.setText("Employee must be saved before");
+            else if (Objects.equals(errorField.getText(), "")) errorField.setText("Employee must be saved before");
         }
         else errorField.setText("Please select a job");
     }
 
     @FXML
-    public void RemoveJobButtonPress(ActionEvent actionEvent) {
+    public void RemoveJobButtonPress() {
 
         Job selected = jobTable.getSelectionModel().getSelectedItem();
         Employee employee = getEmployee();
 
-        if (selected != null && employee.compareTo(previousEmployee) == 0){
+        if (selected != null && employee.compareTo(previousEmployee) == 0) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Job delete");
+            alert.setContentText("Are you ok with this?");
 
-            jobs.remove(selected);
+            Optional<ButtonType> result = alert.showAndWait();
 
-            jobTable.setItems(jobs);
+            if (result.get() == ButtonType.OK) {
+
+                jobs.remove(selected);
+
+                jobTable.setItems(jobs);
+            }
         }
 
-        else if (errorField.getText() == "") errorField.setText("Employee must be saved before");
+        else if (Objects.equals(errorField.getText(), "")) errorField.setText("Employee must be saved before");
     }
 
     @FXML
@@ -315,7 +325,7 @@ public class AddEmployeeController implements Initializable {
 
         } catch (IllegalArgumentException | NullPointerException e){
             errorField.setText(e.getMessage());
-            e.printStackTrace();
+           // e.printStackTrace();
         }
 
         return returnEmployee;
