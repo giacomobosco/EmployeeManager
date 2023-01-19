@@ -1,52 +1,49 @@
 package com.univr.employeemanager;
 
-import java.util.ArrayList;
-import java.util.Date;
-
+import java.time.LocalDate;
 public class Job implements Comparable<Job>{
 
-    private Date begin;
-    private Date end;
+    private LocalDate begin;
+    private LocalDate end;
     private String companyName;
-    private ArrayList<String> tasks = new ArrayList<>();
+    private String tasks;
     private String jobPlace;
     private Integer dailyPay;
 
-    public Job(Date begin, Date end, String companyName, ArrayList<String> tasks, String jobPlace, Integer dailyPay) {
-        this.begin = begin;
+    public Job(LocalDate begin, LocalDate end, String companyName, String tasks, String jobPlace, Integer dailyPay) {
 
-        if(this.begin.compareTo(end) < 0) this.end = end;
-        else throw new IllegalArgumentException("End date must be after begin date");
+
+        this.begin = begin;
+        this.end=end;
+
+        if(this.begin!=null&&this.end!=null)
+        {
+            if(this.begin.isAfter(end))
+                throw new IllegalArgumentException("End date must be after begin date");
+        }
+
+
 
         this.companyName = companyName;
         this.tasks = tasks;
         this.jobPlace = jobPlace;
+
+        if(dailyPay < 0) throw new IllegalArgumentException("Daily pay must be greater or equal to 0");
         this.dailyPay = dailyPay;
     }
 
-    public Job(Date begin, Date end, String companyName, String job, String jobPlace, Integer dailyPay){
-        this(begin, end, companyName, new ArrayList<String>(), jobPlace, dailyPay);
-        this.tasks.add(job);
+    public LocalDate getBegin() {
+        if(this.begin!=null)
+            return begin;
+        else throw new IllegalArgumentException("job begin is blank");
     }
 
-    public Date getBegin() {
-        return begin;
-    }
-
-    public Date getEnd() {
+    public LocalDate getEnd() {
         return end;
     }
 
     public Integer getDailyPay() {
         return dailyPay;
-    }
-
-    public Integer getDuration() {
-        if(end != null) {
-            Integer duration = (int)(end.getTime() - begin.getTime());
-            return duration;
-        }
-        else return -1;
     }
 
     public String getCompanyName() {
@@ -57,7 +54,7 @@ public class Job implements Comparable<Job>{
         return jobPlace;
     }
 
-    public ArrayList<String> getJobs() {
+    public String getTasks() {
         return tasks;
     }
 
@@ -65,10 +62,16 @@ public class Job implements Comparable<Job>{
         this.companyName = companyName;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(LocalDate end) {
 
-        if(this.begin.compareTo(end) > 0) throw new IllegalArgumentException("End date must be after begin date");
-        this.end = end;
+        if(this.begin.isBefore(end)) this.end = end;
+        else throw new IllegalArgumentException("End date must be after begin date");
+
+    }
+
+    public void setBegin(LocalDate begin) {
+
+        this.begin = begin;
     }
 
     public void setJobPlace(String jobPlace) {
@@ -76,14 +79,9 @@ public class Job implements Comparable<Job>{
     }
 
     public void setDailyPay(Integer dailyPay) {
-        if(dailyPay < 0) throw new IllegalArgumentException("daily pay must be greater or equal to 0");
+        if(dailyPay < 0) throw new IllegalArgumentException("Daily pay must be greater or equal to 0");
         this.dailyPay = dailyPay;
     }
-
-    public void setJob(String job) {
-        this.tasks.add(job);
-    }
-
 
     @Override
     public int hashCode() {
@@ -92,6 +90,10 @@ public class Job implements Comparable<Job>{
 
     @Override
     public int compareTo(Job job) {
-        return this.begin.compareTo(job.begin);
+        int ret = this.companyName.compareTo(job.getCompanyName());
+        if(ret == 0)
+            ret = this.getBegin().compareTo(job.getBegin());
+        return ret;
     }
+
 }

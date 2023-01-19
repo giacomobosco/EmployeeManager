@@ -1,7 +1,5 @@
 package com.univr.employeemanager;
 
-import javafx.beans.property.SimpleStringProperty;
-
 public class Person implements Comparable<Person>{
 
     private String firstName;
@@ -36,10 +34,6 @@ public class Person implements Comparable<Person>{
         return email;
     }
 
-    public void setCellNumber(String cellNumber) {
-        if(checkCell(cellNumber)) this.cellNumber = cellNumber;
-    }
-
     public void setEmail(String email) {
 
         if(checkEmail(email)) this.email = email;
@@ -67,6 +61,12 @@ public class Person implements Comparable<Person>{
         int ret = this.lastName.compareTo(person.lastName);
         if (ret == 0)
             ret = this.firstName.compareTo(person.firstName);
+        if (ret == 0)
+            ret = this.email.compareTo(person.email);
+        if (ret == 0)
+            ret = this.cellNumber.compareTo(person.cellNumber);
+
         return ret;
     }
+
 }

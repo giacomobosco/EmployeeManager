@@ -1,0 +1,11 @@
+[
+  {
+    "username": "root",
+    "password": "password",
+    "admin": true,
+    "firstName": "Giacomo",
+    "lastName": "Bosco",
+    "cellNumber": "30000000",
+    "email": "myemail@email.com"
+  }
+]
