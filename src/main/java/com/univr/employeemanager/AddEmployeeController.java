@@ -53,8 +53,6 @@ public class AddEmployeeController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-
     private final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
 
     public AddEmployeeController() throws IOException {
@@ -80,7 +78,11 @@ public class AddEmployeeController implements Initializable {
 
     }
 
-    public void updateField(Employee e, boolean editable) {
+    public void updateField(boolean editable) {
+
+        EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+
+        Employee e = employeeSingleton.getEmployee();
 
         previousEmployee = e;
 
@@ -173,11 +175,14 @@ public class AddEmployeeController implements Initializable {
 
         if (employee != null && employee.compareTo(previousEmployee) == 0){
 
+            EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+            employeeSingleton.setEmployee(employee);
+            employeeSingleton.setJob(null);
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
             root = loader.load();
 
             AddJobController addJobController = loader.getController();
-            addJobController.updateField(null, employee);
 
             stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -198,11 +203,15 @@ public class AddEmployeeController implements Initializable {
         if (selected != null){
 
             if (employee != null && employee.compareTo(previousEmployee) == 0){
+
+                EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+                employeeSingleton.setEmployee(employee);
+                employeeSingleton.setJob(selected);
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
                 root = loader.load();
 
                 AddJobController addJobController = loader.getController();
-                addJobController.updateField(selected, employee);
 
                 stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 scene = new Scene(root);

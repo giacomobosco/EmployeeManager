@@ -108,13 +108,31 @@ public class LoginController implements Initializable {
     @FXML
     protected void accountRegisterButtonPress(ActionEvent e){
 
-        if (isLogin) {
-            registerFields.setVisible(true);
-            accountManageButton.setVisible(false);
-            loginButton.setText("Register");
-            accountRegisterButton.setText("Login with an account");
-            isLogin = false;
 
+        if (isLogin) {
+            if (username.getText().isBlank() || password.getText().isBlank())
+                display.setText("Admin can't be blank");
+
+            boolean find = false;
+
+            for (LoginPerson loginPerson : loginPeople) {
+
+                if (username.getText().equals(loginPerson.getUsername())
+                        && password.getText().equals(loginPerson.getPassword())
+                        && loginPerson.getAdmin() == true) {
+
+                    find = true;
+                    registerFields.setVisible(true);
+                    accountManageButton.setVisible(false);
+                    loginButton.setText("Register");
+                    accountRegisterButton.setText("Login with an account");
+                    isLogin = false;
+
+                    break;
+                }
+            }
+
+            if (find == false) display.setText("Wrong admin user or password");
 
         } else {
 

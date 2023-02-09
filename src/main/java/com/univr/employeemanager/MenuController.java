@@ -141,7 +141,11 @@ public class MenuController implements Initializable {
             root = loader.load();
 
             AddEmployeeController employeeController = loader.getController();
-            employeeController.updateField(selected, true);
+
+            EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+            employeeSingleton.setEmployee(selected);
+
+            employeeController.updateField(true);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -181,7 +185,11 @@ public class MenuController implements Initializable {
             root = loader.load();
 
             AddEmployeeController employeeController = loader.getController();
-            employeeController.updateField(selected,false);
+
+            EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+            employeeSingleton.setEmployee(selected);
+
+            employeeController.updateField(false);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);

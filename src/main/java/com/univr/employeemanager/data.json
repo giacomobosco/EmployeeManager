@@ -13,6 +13,14 @@
         "tasks": "operaio",
         "jobPlace": "isola",
         "dailyPay": 45
+      },
+      {
+        "begin": "1-feb-2023",
+        "end": "9-feb-2023",
+        "companyName": "compagnia",
+        "tasks": "niente",
+        "jobPlace": "qua",
+        "dailyPay": 13
       }
     ],
     "spokenLanguage": [
@@ -170,6 +178,6 @@
     "firstName": "cacca",
     "lastName": "pupu",
     "cellNumber": "214",
-    "email": "@@"
+    "email": "@"
   }
 ]
