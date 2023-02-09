@@ -7,5 +7,14 @@
     "lastName": "Bosco",
     "cellNumber": "30000000",
     "email": "myemail@email.com"
+  },
+  {
+    "username": "manole",
+    "password": "manole",
+    "admin": false,
+    "firstName": "manole",
+    "lastName": "stefan",
+    "cellNumber": "676823",
+    "email": "@@"
   }
 ]
