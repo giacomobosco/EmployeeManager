@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="ottimizzazione codice">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/EmployeeSingleton.java" afterDir="false" />
+    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="singleton v 1.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddEmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddJobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddJobController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/login.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/login.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/univr/employeemanager/Login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +16,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -160,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673348723040</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="singleton v 1.1">
+      <created>1675940196389</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1675940196390</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,7 +194,8 @@
     <MESSAGE value="tabella jobs" />
     <MESSAGE value="update" />
     <MESSAGE value="ottimizzazione codice" />
-    <option name="LAST_COMMIT_MESSAGE" value="ottimizzazione codice" />
+    <MESSAGE value="singleton v 1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="singleton v 1.1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
