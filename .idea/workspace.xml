@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b25a8c9c-add4-43bb-ba55-f0941eb826bf" name="Changes" comment="documantation" />
+    <list default="true" id="b25a8c9c-add4-43bb-ba55-f0941eb826bf" name="Changes" comment="documantation">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -76,6 +81,7 @@
       <workItem from="1671703572047" duration="931000" />
       <workItem from="1671706338865" duration="2989000" />
       <workItem from="1671798416946" duration="674000" />
+      <workItem from="1674199910630" duration="4103000" />
     </task>
     <task id="LOCAL-00001" summary="fixing">
       <created>1671707088706</created>
