@@ -42,11 +42,10 @@ public class AddJobController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    }
+        EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+        this.employee = employeeSingleton.getEmployee();
 
-    public void updateField(Job job, Employee employee){
-
-        this.employee = employee;
+        Job job = employeeSingleton.getJob();
         this.previousJob = job;
 
         if(job != null) {
@@ -83,7 +82,11 @@ public class AddJobController implements Initializable {
         root = loader.load();
 
         AddEmployeeController employeeController = loader.getController();
-        employeeController.updateField(employee, true);
+
+        EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+        employeeSingleton.setEmployee(employee);
+
+        employeeController.updateField(true);
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
