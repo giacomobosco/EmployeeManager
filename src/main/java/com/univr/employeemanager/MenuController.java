@@ -61,7 +61,7 @@ public class MenuController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private static final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
+    private static final JSONReadWriteEmployee data = new JSONReadWriteEmployee("src/main/java/com/univr/employeemanager/data.json");
 
     public MenuController() {
     }
