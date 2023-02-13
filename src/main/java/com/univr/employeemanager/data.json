@@ -282,5 +282,28 @@
     "lastName": "pupu",
     "cellNumber": "214",
     "email": "@"
+  },
+  {
+    "birthPlace": "dwdw",
+    "birthDate": "13-feb-2019",
+    "periodFrom": "7-feb-2023",
+    "periodTo": "12-mar-2023",
+    "address": "wdwddwdwd",
+    "formerJobs": [],
+    "spokenLanguage": [
+      "CHINESE"
+    ],
+    "licenses": [],
+    "car": false,
+    "emergency": {
+      "firstName": "wdwdw",
+      "lastName": "dwdwdwd",
+      "cellNumber": "23232323",
+      "email": "dwdwd!@"
+    },
+    "firstName": "wdww",
+    "lastName": "wddwdwdwdwdwd",
+    "cellNumber": "2433434",
+    "email": "dwdwd@"
   }
 ]

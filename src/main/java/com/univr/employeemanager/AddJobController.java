@@ -32,7 +32,7 @@ public class AddJobController implements Initializable {
     private CheckBox inProgress;
     private Employee employee;
     private Job previousJob;
-    private final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
+    private final JSONReadWriteEmployee data = new JSONReadWriteEmployee("src/main/java/com/univr/employeemanager/data.json");
 
     private Stage stage;
     private Scene scene;
