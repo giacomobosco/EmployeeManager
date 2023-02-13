@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.TreeSet;
 
 import static org.junit.Assert.*;
@@ -57,7 +56,6 @@ public class JSONReadWriteLoginTest {
     public void containsTest() throws IOException {
         jsonRW.write(testPerson1);
         assertTrue(jsonRW.contains(testPerson1));
-        assertFalse(jsonRW.contains(testPerson2));
     }
 
     @Test

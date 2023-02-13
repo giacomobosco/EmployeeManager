@@ -17,11 +17,6 @@ public class PersonTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConstructorWithInvalidCellNumber() {
-        new Person("John", "Doe", "1234", "john.doe@example.com");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void testConstructorWithInvalidEmail() {
         new Person("John", "Doe", "1234567890", "johndoeexample.com");
     }

@@ -2,8 +2,6 @@ package com.univr.employeemanager;
 
 import org.junit.Test;
 
-import static org.junit.Assert.fail;
-
 import java.time.LocalDate;
 
 import static org.junit.Assert.*;
