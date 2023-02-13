@@ -70,6 +70,12 @@ public class AddJobController implements Initializable {
             jobEndLabel.setVisible(true);
         }
     }
+    /**
+     * It loads the AddEmployee.fxml file, gets the controller for that file, and then calls the updateField function in
+     * the controller, passing in the employee object and a boolean value
+     *
+     * @param actionEvent This is the event that is triggered when the button is pressed.
+     */
     public void CancelButtonPress(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
