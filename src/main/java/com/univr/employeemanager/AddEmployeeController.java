@@ -27,37 +27,85 @@ public class AddEmployeeController implements Initializable {
     @FXML
     public Label errorField, savedLabel;
     @FXML
-    private TextField firstNameField, lastNameField, addressField, birthPlaceField, emailField, cellNumberField, emergencyEmailField, emergencyCellNumberField, emergencyLastNameField, emergencyFirstNameField;
+    public TextField firstNameField;
     @FXML
-    private DatePicker birthDateField,periodFromField,periodToField;
+    public TextField lastNameField;
     @FXML
-    private CheckBox hasCar, licenseA, licenseB, licenseC, licenseD, licenseE, italian, english, french, spanish, arabic, chinese, portoguese, japanese, german;
+    public TextField addressField;
+    @FXML
+    public TextField birthPlaceField;
+    @FXML
+    public TextField emailField;
+    @FXML
+    public TextField cellNumberField;
+    @FXML
+    public TextField emergencyEmailField;
+    @FXML
+    public TextField emergencyCellNumberField;
+    @FXML
+    public TextField emergencyLastNameField;
+    @FXML
+    public TextField emergencyFirstNameField;
+    @FXML
+    public DatePicker birthDateField;
+    @FXML
+    private DatePicker periodFromField;
+    @FXML
+    private DatePicker periodToField;
+    @FXML
+    public CheckBox hasCar;
+    @FXML
+    private CheckBox licenseA;
+    @FXML
+    private CheckBox licenseB;
+    @FXML
+    private CheckBox licenseC;
+    @FXML
+    private CheckBox licenseD;
+    @FXML
+    private CheckBox licenseE;
+    @FXML
+    public CheckBox italian;
+    @FXML
+    public CheckBox english;
+    @FXML
+    public CheckBox french;
+    @FXML
+    public CheckBox spanish;
+    @FXML
+    private CheckBox arabic;
+    @FXML
+    private CheckBox chinese;
+    @FXML
+    public CheckBox portoguese;
+    @FXML
+    private CheckBox japanese;
+    @FXML
+    private CheckBox german;
     @FXML
     private Button addJobButton, removeJobButton, saveButton, cancelButton, editJobButton;
 
     @FXML
-    private TableColumn<Job,String> taskField;
+    public TableColumn<Job,String> taskField;
     @FXML
-    private TableColumn<Job, Date> endField;
+    public TableColumn<Job, Date> endField;
     @FXML
-    private TableColumn<Job,String> companyField;
+    public TableColumn<Job,String> companyField;
     @FXML
-    private TableColumn<Job,String> payField;
+    public TableColumn<Job,String> payField;
     @FXML
-    private TableColumn<Job,String> jobPlaceField;
+    public TableColumn<Job,String> jobPlaceField;
     @FXML
-    private TableColumn<Job, Date> beginField;
+    public TableColumn<Job, Date> beginField;
 
     private ObservableList<Job> jobs;
     private Employee previousEmployee = null;
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private final JSONReadWriteEmployee data = new JSONReadWriteEmployee("src/main/java/com/univr/employeemanager/data.json");
 
-
-    private final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
-
-    public AddEmployeeController() throws IOException {
+    public AddEmployeeController() {
     }
 
     @Override
@@ -80,7 +128,11 @@ public class AddEmployeeController implements Initializable {
 
     }
 
-    public void updateField(Employee e, boolean editable) {
+    public void updateField(boolean editable) {
+
+        EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+
+        Employee e = employeeSingleton.getEmployee();
 
         previousEmployee = e;
 
@@ -173,11 +225,14 @@ public class AddEmployeeController implements Initializable {
 
         if (employee != null && employee.compareTo(previousEmployee) == 0){
 
+            EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+            employeeSingleton.setEmployee(employee);
+            employeeSingleton.setJob(null);
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
             root = loader.load();
 
             AddJobController addJobController = loader.getController();
-            addJobController.updateField(null, employee);
 
             stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -198,11 +253,15 @@ public class AddEmployeeController implements Initializable {
         if (selected != null){
 
             if (employee != null && employee.compareTo(previousEmployee) == 0){
+
+                EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+                employeeSingleton.setEmployee(employee);
+                employeeSingleton.setJob(selected);
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJob.fxml"));
                 root = loader.load();
 
                 AddJobController addJobController = loader.getController();
-                addJobController.updateField(selected, employee);
 
                 stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -230,7 +289,7 @@ public class AddEmployeeController implements Initializable {
 
             Optional<ButtonType> result = alert.showAndWait();
 
-            if (result.get() == ButtonType.OK) {
+            if (result.isPresent() && (result.get() == ButtonType.OK)) {
 
                 jobs.remove(selected);
 
@@ -244,7 +303,7 @@ public class AddEmployeeController implements Initializable {
     @FXML
     public void CancelButtonPress(ActionEvent actionEvent) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Menu.fxml")));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setTitle("Menu");

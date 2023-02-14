@@ -61,7 +61,7 @@ public class MenuController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private static final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
+    private static final JSONReadWriteEmployee data = new JSONReadWriteEmployee("src/main/java/com/univr/employeemanager/data.json");
 
     public MenuController() {
     }
@@ -141,7 +141,11 @@ public class MenuController implements Initializable {
             root = loader.load();
 
             AddEmployeeController employeeController = loader.getController();
-            employeeController.updateField(selected, true);
+
+            EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+            employeeSingleton.setEmployee(selected);
+
+            employeeController.updateField(true);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -181,7 +185,11 @@ public class MenuController implements Initializable {
             root = loader.load();
 
             AddEmployeeController employeeController = loader.getController();
-            employeeController.updateField(selected,false);
+
+            EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+            employeeSingleton.setEmployee(selected);
+
+            employeeController.updateField(false);
 
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);

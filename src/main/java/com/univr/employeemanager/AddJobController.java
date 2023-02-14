@@ -32,7 +32,7 @@ public class AddJobController implements Initializable {
     private CheckBox inProgress;
     private Employee employee;
     private Job previousJob;
-    private final JSONReadWrite data = new JSONReadWrite("src/main/java/com/univr/employeemanager/data.json");
+    private final JSONReadWriteEmployee data = new JSONReadWriteEmployee("src/main/java/com/univr/employeemanager/data.json");
 
     private Stage stage;
     private Scene scene;
@@ -42,11 +42,10 @@ public class AddJobController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    }
+        EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+        this.employee = employeeSingleton.getEmployee();
 
-    public void updateField(Job job, Employee employee){
-
-        this.employee = employee;
+        Job job = employeeSingleton.getJob();
         this.previousJob = job;
 
         if(job != null) {
@@ -71,13 +70,23 @@ public class AddJobController implements Initializable {
             jobEndLabel.setVisible(true);
         }
     }
+    /**
+     * It loads the AddEmployee.fxml file, gets the controller for that file, and then calls the updateField function in
+     * the controller, passing in the employee object and a boolean value
+     *
+     * @param actionEvent This is the event that is triggered when the button is pressed.
+     */
     public void CancelButtonPress(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployee.fxml"));
         root = loader.load();
 
         AddEmployeeController employeeController = loader.getController();
-        employeeController.updateField(employee, true);
+
+        EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
+        employeeSingleton.setEmployee(employee);
+
+        employeeController.updateField(true);
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);

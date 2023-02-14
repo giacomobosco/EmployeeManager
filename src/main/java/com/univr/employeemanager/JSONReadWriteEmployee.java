@@ -12,41 +12,49 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.TreeSet;
 
-public class JSONReadWriteLogin implements JSONReadWrite{
+public class JSONReadWriteEmployee implements JSONReadWrite{
 
     private final Gson gson;
     private FileWriter fileWriter = null;
-    private FileReader fileReader = null;
     private final String path;
 
 
-    public JSONReadWriteLogin(String filePath){
+
+
+    public JSONReadWriteEmployee(String filePath){
 
         GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls();
+
+        //inserisco questi decifratori per interpretare correttamente il formato LocalDate dal gson (sono implementati in fondo)
+
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
+        //gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
+        //gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
 
         gson=gsonBuilder.setPrettyPrinting().create();       //cosi il file non è solo su 1 riga
 
         this.path = filePath;
     }
 
-    public void write(LoginPerson person) throws IOException {
+    public void write(Employee employee) throws IOException {
 
-        TreeSet<LoginPerson> previousSet = readJSON();
+        TreeSet<Employee> previousSet = readJSON();
 
-        previousSet.add(person);
+        previousSet.add(employee);
 
         fileWriter = new FileWriter(path);
         gson.toJson(previousSet, fileWriter);
         fileWriter.close();
     }
 
-    public TreeSet<LoginPerson> readJSON() throws IOException {
+    public TreeSet<Employee> readJSON() throws IOException {
 
-        fileReader = new FileReader(path);
-        Type type = new TypeToken<TreeSet<LoginPerson>>() {
+        FileReader fileReader = new FileReader(path);
+        Type type = new TypeToken<TreeSet<Employee>>() {
         }.getType();
 
-        TreeSet<LoginPerson> result = gson.fromJson(fileReader, type);
+        TreeSet<Employee> result = gson.fromJson(fileReader, type);
 
         fileReader.close();
 
@@ -57,21 +65,15 @@ public class JSONReadWriteLogin implements JSONReadWrite{
     }
 
 
-    public void remove(LoginPerson person) throws IOException {
+    public void remove(Employee employee) throws IOException {
 
-        TreeSet<LoginPerson> previousSet = readJSON();
+        TreeSet<Employee> previousSet = readJSON();
 
-        previousSet.remove(person);
+        previousSet.remove(employee);
 
         fileWriter = new FileWriter(path);
         gson.toJson(previousSet, fileWriter);
         fileWriter.close();
-    }
-
-    public boolean contains(LoginPerson person) throws IOException {
-
-        TreeSet<LoginPerson> previousSet = readJSON();
-        return  previousSet.contains(person);
     }
 
     public void eraseJSON() throws IOException {
@@ -82,6 +84,26 @@ public class JSONReadWriteLogin implements JSONReadWrite{
 
 
 }
+
+
+//questa classi permettono al gson di scrivere e interpretare correttamente il formato LocalDate del DatePicker
+class LocalDateSerializer implements JsonSerializer <LocalDate> {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
+
+    @Override
+    public JsonElement serialize(LocalDate localDate, Type srcType, JsonSerializationContext context) {
+        return new JsonPrimitive(formatter.format(localDate));
+    }
+}
+class LocalDateDeserializer implements JsonDeserializer < LocalDate > {
+    @Override
+    public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext context)
+            throws JsonParseException {
+        return LocalDate.parse(json.getAsString(), DateTimeFormatter.ofPattern("d-MMM-yyyy").withLocale(Locale.ITALIAN));
+    }
+}
+
+
 /*
 class LocalDateTimeSerializer implements JsonSerializer <LocalDateTime> {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss");
