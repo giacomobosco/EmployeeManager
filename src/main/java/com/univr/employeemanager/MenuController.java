@@ -55,6 +55,8 @@ public class MenuController implements Initializable {
     private TableColumn<Employee,LocalDate>birthDateField;
     @FXML
     private TableView<Employee> mainTable;
+    @FXML
+    private TextField firstNameField, surnameNameField, tasksField, companyNameField;
 
 
     private ObservableList<Employee> people;
@@ -214,6 +216,8 @@ public class MenuController implements Initializable {
     TreeSet<Employee> periodDateResult=new TreeSet<>();
     TreeSet<Employee> language1Result=new TreeSet<>();
     TreeSet<Employee> language2Result=new TreeSet<>();
+    TreeSet<Employee> nameResult = new TreeSet<>();
+    TreeSet<Employee> jobsResult = new TreeSet<>();
 
     public void ORbuttonPress(ActionEvent actionEvent) {
 
@@ -234,6 +238,27 @@ public class MenuController implements Initializable {
         language1.fireEvent(new ActionEvent());
         language2.fireEvent(new ActionEvent());
 
+        if(surnameNameField.getText() != "") {
+            if (nameResult != null)
+                nameResult.clear();
+
+            people.stream()
+                    .filter(p-> p.getLastName().toLowerCase().contains(surnameNameField.getText().toLowerCase()))
+                    .forEach(p->nameResult.add(p));
+        }
+
+        if(tasksField.getText() != ""){
+            if (jobsResult != null)
+                jobsResult.clear();
+            for (Employee e: people
+                 ) {
+                for (Job j: e.getFormerJobs()
+                     ) {
+                    if(j.getTasks().toLowerCase().contains(tasksField.getText().toLowerCase()))
+                        jobsResult.add(e);
+                }
+            }
+        }
 
         if(this.result!=null)
             result.clear();
@@ -248,6 +273,8 @@ public class MenuController implements Initializable {
             result.addAll(periodDateResult);
             result.addAll(language1Result);
             result.addAll(language2Result);
+            result.addAll(nameResult);
+            result.addAll(jobsResult);
 
         }
 
@@ -262,6 +289,8 @@ public class MenuController implements Initializable {
             result.addAll(periodDateResult);
             result.addAll(language1Result);
             result.addAll(language2Result);
+            result.addAll(nameResult);
+            result.addAll(jobsResult);
 
             if(hasCarEnable.isSelected())
                 result.retainAll(hasCarResult);
@@ -275,6 +304,11 @@ public class MenuController implements Initializable {
                 result.retainAll(language1Result);
             if(!language2.getValue().equalsIgnoreCase("None"))
                 result.retainAll(language2Result);
+            if(surnameNameField.getText() != "")
+                result.retainAll(nameResult);
+            if(tasksField.getText() != "")
+                result.retainAll(jobsResult);
+
         }
 
         people= FXCollections.observableArrayList(result);
@@ -299,6 +333,8 @@ public class MenuController implements Initializable {
         hasLicenseEnable.setSelected(false);
         birthIntervalEnable.setSelected(false);
         periodIntervalEnable.setSelected(false);
+        surnameNameField.setText("");
+        tasksField.setText("");
     }
 
     //stream di employee, filtro quelli che non hanno il set licenze vuoto
