@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="singleton v 1.1">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWrite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWriteEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWriteEmployee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWriteLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/JSONReadWriteLogin.java" afterDir="false" />
+    <list default="true" id="cf7ef8de-f917-45ca-b9f8-861be83879c4" name="Changes" comment="JSONImplements">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/AddEmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/univr/employeemanager/data.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -119,7 +119,7 @@ public class LoginController implements Initializable {
 
                 if (username.getText().equals(loginPerson.getUsername())
                         && password.getText().equals(loginPerson.getPassword())
-                        && loginPerson.getAdmin() == true) {
+                        && loginPerson.getAdmin()) {
 
                     find = true;
                     registerFields.setVisible(true);
@@ -127,12 +127,14 @@ public class LoginController implements Initializable {
                     loginButton.setText("Register");
                     accountRegisterButton.setText("Login with an account");
                     isLogin = false;
+                    username.setText("");
+                    password.setText("");
 
                     break;
                 }
             }
 
-            if (find == false) display.setText("Wrong admin user or password");
+            if (!find) display.setText("Wrong admin user or password");
 
         } else {
 

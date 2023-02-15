@@ -223,7 +223,7 @@ public class AddEmployeeController implements Initializable {
         errorField.setText("");
         Employee employee = getEmployee();
 
-        if (employee != null && employee.compareTo(previousEmployee) == 0){
+        if (previousEmployee != null && employee != null && employee.compareTo(previousEmployee) == 0){
 
             EmployeeSingleton employeeSingleton = EmployeeSingleton.getInstance();
             employeeSingleton.setEmployee(employee);
@@ -241,7 +241,7 @@ public class AddEmployeeController implements Initializable {
             stage.show();
         }
 
-        else if (Objects.equals(errorField.getText(), "")) errorField.setText("Employee must be saved before");
+        else errorField.setText("Employee must be saved before");
     }
 
     public void EditJobButtonPress(ActionEvent actionEvent) throws IOException {
