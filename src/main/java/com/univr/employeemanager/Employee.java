@@ -87,6 +87,9 @@ public class Employee extends Person {
         if(l1.isBefore(this.birthDate))
             throw new IllegalArgumentException("Period from must be after birth date");
 
+        if(l1.isBefore(LocalDate.now()))
+            throw new IllegalArgumentException("Period from must be after today");
+
         this.periodFrom = l1;
         this.periodTo = l2;
     }

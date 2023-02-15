@@ -47,7 +47,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="675.0" prefWidth="1104.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.MenuController">
+<VBox prefHeight="675.0" prefWidth="1104.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.MenuController">
     <children>
         <SplitPane dividerPositions="0.2, 0.8" focusTraversable="true" prefHeight="599.0" prefWidth="1028.0" VBox.vgrow="ALWAYS">
             <items>

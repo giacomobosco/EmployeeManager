@@ -42,7 +42,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="388.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.AddJobController">
+<VBox prefHeight="388.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univr.employeemanager.AddJobController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" onMouseMoved="#SaveLabelDisappear" prefHeight="399.0" prefWidth="639.0" VBox.vgrow="ALWAYS">
       <children>
