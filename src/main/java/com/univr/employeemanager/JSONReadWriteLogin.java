@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.TreeSet;
 
-public class JSONReadWriteLogin implements JSONReadWrite{
+public class JSONReadWriteLogin implements JSONReadWrite<LoginPerson>{
 
     private final Gson gson;
     private FileWriter fileWriter = null;
